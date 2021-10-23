@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Book_Store.Models.Book>
+
+@{
+    ViewBag.Title = "ViewBooks";
+}
+    <div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="@Url.Content(item.image)" width="242" height="200" alt="...">
+                <div class="caption">
+                    <h3>@item.title</h3>
+                    <p>@item.description</p>
+                    <p><a href="@Url.Action("Details" , "Books" , new {id=item.ID})" class="btn btn-primary" role="button">View</a></p>
+                </div>
+            </div>
+        </div>
+    }   
+        </div>

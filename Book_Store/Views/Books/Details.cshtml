@@ -1,0 +1,27 @@
+﻿@model Book_Store.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <img src="@Url.Content(Model.image)" width="242" height="200" alt="...">
+            <div class="caption">
+                <h2>Author: @Html.DisplayFor(model=>model.Author.FName) @Html.DisplayFor(model=>model.Author.LName)</h2>
+                <h3>@Html.DisplayFor(model=>model.title)</h3>
+                <p>@Html.DisplayFor(model=>model.description)</p>
+                <p><a href="@Url.Action("AddToCart" , "Books" , new {id=Model.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span>Add To Cart</a></p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>

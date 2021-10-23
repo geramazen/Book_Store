@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Book_Store.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.image)
+        </th>
+        <th>
+            Author
+        </th>
+        <th>
+            Category
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            <img src="@Url.Content(item.image)" width="50" height="50" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author.FName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.CName)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit" , "Books" , new {id=item.ID})" class="btn btn-primary">Edit</a>
+            |
+            <a href="@Url.Action("Delete" , "Books" , new {id=item.ID})" class="btn btn-danger">Delete</a>
+            |
+            <a href="@Url.Action("Details" , "Books" , new {id=item.ID})" class="btn btn-info">Details</a>
+        </td>
+    </tr>
+}
+
+</table>
