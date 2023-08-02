@@ -13,7 +13,7 @@ namespace Book_Store.Controllers
 {
     public class BooksController : Controller
     {
-        private BookStoreEntities1 db = new BookStoreEntities1();
+        private BookContext db = new BookContext();
         public static List<Book> UserCart;
         public static int count=0;
 
@@ -52,7 +52,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,title,description,image,AID,CID")] Book book , HttpPostedFileBase imgfile)
+        public ActionResult Create(Book book , HttpPostedFileBase imgfile)
         {
             if (ModelState.IsValid)
             {
@@ -90,12 +90,10 @@ namespace Book_Store.Controllers
             return View(book);
         }
 
-        // POST: Books/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,title,description,image,AID,CID")] Book book)
+        public ActionResult Edit(Book book)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +106,7 @@ namespace Book_Store.Controllers
             return View(book);
         }
 
-        // GET: Books/Delete/5
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -145,7 +143,7 @@ namespace Book_Store.Controllers
 
         public ActionResult ViewBooks()
         {
-            var recs = db.Books.ToList();
+            var recs = db.Books.Where(c => c.AvailableCopies != 0).ToList();
             //if (Session["UserName"] != null)
             //{
                 return View(recs);

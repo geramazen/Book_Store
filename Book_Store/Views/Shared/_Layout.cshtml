@@ -3,7 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="~/Content/bootstrap.min.css" />*@
+    <title>الكتبي</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,47 +19,44 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("I-Book", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("الكتبي", "ViewBooks", "Books", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "ViewBooks", "Books")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-
+                    <li>@Html.ActionLink("المصنفين", "Index", "Authors")</li>
+                    <li>@Html.ActionLink("الأقسام", "Index", "Categories")</li>
+                    <li>@Html.ActionLink("الكتب", "Index", "Books")</li>
                     @if (Session["UserName"] == null)
                     {
                         <li>@Html.ActionLink("Login", "Login", "Users")</li>
                     }
                 </ul>
 
-                    @if (Session["UserName"]!=null)
-                    {
+                @if (Session["UserName"] != null)
+                {
             <ul class="nav navbar-nav navbar-right">
                 <li><a href=@Url.Action("ViewCart" , "Books")> <span class="glyphicon glyphicon-shopping-cart"> </span> <span class="badge">@Session["Cart"]</span></a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> @Session["UserName"] <span class="caret"></span></a>
+                    <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> @Session["UserName"] <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href=@Url.Action("Logout" , "Users")>Logout</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
                     </ul>
                 </li>
             </ul>
-                    }
-                     
+                }
 
 
-                
+
+
             </div>
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+           
         </footer>
     </div>
 

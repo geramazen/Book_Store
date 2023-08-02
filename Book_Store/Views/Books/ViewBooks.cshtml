@@ -3,19 +3,29 @@
 @{
     ViewBag.Title = "ViewBooks";
 }
-    <div class="row">
+<br />
+<h1 class="text-center">الكــــــتبي</h1>
+<h3 class="text-center">
+    متجر الكتبي لبيع الكتب الجديدة والمستعملة
+</h3>
+<br />
+<br />
+<div class="row">
     @foreach (var item in Model)
     {
-
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <img src="@Url.Content(item.image)" width="242" height="200" alt="...">
-                <div class="caption">
-                    <h3>@item.title</h3>
-                    <p>@item.description</p>
-                    <p><a href="@Url.Action("Details" , "Books" , new {id=item.ID})" class="btn btn-primary" role="button">View</a></p>
+        <div class="col-sm-4">
+            <div class="card" style="width: 20rem;">
+                <img class="card-img-top" src="@Url.Content(item.image)" alt="Card image cap" width="200" height="200">
+                <div class="card-body text-center">
+                    <h5 class="card-title">@item.title</h5>
+                    <p class="card-text">@item.Author.FName</p>
+                    <p class="card-text"> السعر: @item.Price</p>
+                    <a href="@Url.Action("Details" , "Books" , new {id=item.ID})" class="btn btn-primary" role="button">عرض التفاصيل</a>
                 </div>
             </div>
         </div>
-    }   
-        </div>
+
+
+    }
+
+</div>

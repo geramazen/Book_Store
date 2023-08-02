@@ -1,6 +1,9 @@
-﻿body {
+﻿@import url(https://fonts.googleapis.com/earlyaccess/amiri.css);
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: 'Amiri', serif;
 }
 
 /* Set padding to keep content from hitting the edges */

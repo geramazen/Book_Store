@@ -8,7 +8,7 @@ namespace Book_Store.Controllers
 {
     public class UsersController : Controller
     {
-        private BookStoreEntities1 db = new BookStoreEntities1();
+        private BookContext db = new BookContext();
 
         // GET: Users
         public ActionResult Index()
@@ -164,7 +164,6 @@ namespace Book_Store.Controllers
             if(rec != null)
             {
                 Session["UserName"] = rec.Name;
-                Session["UserType"] = rec.role;
                 Session["Cart"] = 0;
                 return RedirectToAction("ViewBooks", "Books");
             }
@@ -182,14 +181,14 @@ namespace Book_Store.Controllers
             return RedirectToAction("Login");
         }
    
-        public ActionResult MakeAdmin(int? id)
-        {
-            User user = db.Users.Find(id);
-            var Admin = "Admin";
-            user.role = Admin;
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //public ActionResult MakeAdmin(int? id)
+        //{
+        //    User user = db.Users.Find(id);
+        //    var Admin = "Admin";
+        //    user.role = Admin;
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
 
     }
