@@ -123,5 +123,20 @@ namespace Book_Store.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Authors/Edit/5
+        public ActionResult AllWork(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var books = db.Books.Where(b=>b.AID==id).ToList();
+            if (books == null)
+            {
+                return HttpNotFound();
+            }
+            return View("../Books/ViewBooks", books);
+        }
     }
 }

@@ -3,6 +3,19 @@
 @{
     ViewBag.Title = "ViewBooks";
 }
+<style>
+    .card:hover {
+        transform: scale(1.1);
+        z-index: 9;
+    }
+</style>
+
+<link href="~/Content/Site.css"/>
+
+
+
+
+
 <br />
 @if (ViewBag.message != null)
 {
@@ -10,37 +23,167 @@
         @ViewBag.Message
         @if (ViewBag.OrderID != null)
         {
-        <p>
-            كود طلبك: @ViewBag.OrderID <br />
-        </p>
+            <p>
+                كود طلبك: @ViewBag.OrderID <br />
+            </p>
         }
     </div>
 }
 <br />
 <h1 class="text-center">الكــــــتبي</h1>
-<h3 class="text-center">
+<h4 class="text-center">
     متجر الكتبي لبيع الكتب الجديدة والمستعملة
-</h3>
-<br />
+</h4>
+
 <hr />
 <div class="row">
     @foreach (var item in Model)
     {
+        @*<div class="col-sm-3" style="margin-top:10px">
+                <div class="card glass-effect"  style="padding:5px">
+                    <img class="card-img-top" src="@Url.Content(item.image)" alt="Card image cap" width="100%" height="200">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@item.title</h5>
+                        <p class="card-text"><a href="~/Authors/AllWork/@item.AID">@item.Author.FName</a></p>
+                        <p class="card-text"> السعر: @item.Price</p>
+                        <hr />
+                        <a href="@Url.Action("Details" , "Books" , new {id=item.ID})" class="btn btn-info" role="button">للمزيد</a>
+                        <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضف للسلة</a>
+                    </div>
+                </div>
+            </div>*@
+
+        @*<div class="col-sm-3" style="margin-top:10px">
+                <div class="card glass-effect">
+                    <div class="row no-gutters">
+                        <div class="col-md-6">
+                            <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
+                                <img src="@Url.Content(item.image)" class="card-img" alt="..." width="100%" height="200">
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body text-center" style="height:190px">
+                                <h5 class="card-title">@item.title</h5>
+                                <p class="card-text"><a href="~/Authors/AllWork/@item.AID">@item.Author.FName</a></p>
+                                <p class="card-text"><small class="text-muted">السعر: @item.Price</small></p>
+
+                                <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn btn-primary" style="position:fixed; bottom:1%; right:10%" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضف للسلة</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+
+
+
         <div class="col-sm-4">
-            <div class="card" style="width: 20rem;">
-                <img class="card-img-top" src="@Url.Content(item.image)" alt="Card image cap" width="200" height="200">
-                <div class="card-body text-center">
-                    <h5 class="card-title">@item.title</h5>
-                    <p class="card-text">@item.Author.FName</p>
-                    <p class="card-text"> السعر: @item.Price</p>
-                    <a href="@Url.Action("Details" , "Books" , new {id=item.ID})" class="btn btn-info" role="button">عرض التفاصيل</a>
-                    <hr />
-                    <p><a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضافة إلى سلة المشتريات</a></p>
+            <div class="product">
+                <div class="product__photo">
+                    <div class="photo-container">
+                        <div class="photo-main">
+                            <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
+                                <img src="@Url.Content(item.image)" alt="...">
+                            </a>                           
+                        </div>
+                    </div>
+                </div>
+                <div class="product__info">
+                    <div class="title">
+                        <h1>@item.title</h1>
+                        <span>@item.Author.FName</span>
+                    </div>
+                    <div class="price">
+                        <span>@item.Price</span> <br /> جنيه مصري
+                    </div>
+                    <div class="description">
+                        <h3>الوصف</h3>
+                        <ul>
+                            @*<li>@item.description</li>*@
+                            <li>دار النشر: @item.Publisher.PName</li>
+                            <li>الكاتب: @item.Author.FName</li>
+                            <li>عدد المجلدات: @item.VolumesNum</li>
+                            <li>عددالنسخ المتوفرة: @item.AvailableCopies</li>
+                        </ul>
+                    </div>
+                    <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn buy--btn" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضف للسلة</a>
                 </div>
             </div>
         </div>
 
 
+
     }
 
 </div>
+
+
+@*<div class="card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="..." class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<!--<div class="row">
+    <div class="col-sm-3">
+        <div class="product">
+            <div class="product__photo">
+                <div class="photo-container">
+                    <div class="photo-main">
+                        <div class="controls">
+                            <i class="material-icons">share</i>
+                            <i class="material-icons">favorite_border</i>
+                        </div>
+                        <img src="https://res.cloudinary.com/john-mantas/image/upload/v1537291846/codepen/delicious-apples/green-apple-with-slice.png" alt="green apple slice">
+                    </div>
+                    <div class="photo-album">
+                        <ul>
+                            <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302064/codepen/delicious-apples/green-apple2.png" alt="green apple"></li>
+                            <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537303532/codepen/delicious-apples/half-apple.png" alt="half apple"></li>
+                            <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537303160/codepen/delicious-apples/green-apple-flipped.png" alt="green apple"></li>
+                            <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537303708/codepen/delicious-apples/apple-top.png" alt="apple top"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="product__info">
+                <div class="title">
+                    <h1>Delicious Apples</h1>
+                    <span>COD: 45999</span>
+                </div>
+                <div class="price">
+                    R$ <span>7.93</span>
+                </div>-->
+                @*<div class="variant">
+                    <h3>SELECT A COLOR</h3>
+                    <ul>
+                        <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302064/codepen/delicious-apples/green-apple2.png" alt="green apple"></li>
+                        <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302752/codepen/delicious-apples/yellow-apple.png" alt="yellow apple"></li>
+                        <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302427/codepen/delicious-apples/orange-apple.png" alt="orange apple"></li>
+                        <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302285/codepen/delicious-apples/red-apple.png" alt="red apple"></li>
+                    </ul>
+                </div>*@
+                <!--<div class="description">
+                    <h3>BENEFITS</h3>
+                    <ul>
+                        <li>Apples are nutricious</li>
+                        <li>Apples may be good for weight loss</li>
+                        <li>Apples may be good for bone health</li>
+                        <li>They're linked to a lowest risk of diabetes</li>
+                    </ul>
+                </div>
+                <button class="buy--btn">ADD TO CART</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+

@@ -61,11 +61,18 @@ namespace Book_Store.Controllers
                 {
                     path = "~/images/" + Path.GetFileName(imgfile.FileName);
                     imgfile.SaveAs(Server.MapPath(path));
+
+                    book.image = path;
+                    db.Books.Add(book);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                book.image = path;
-                db.Books.Add(book);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                else
+                {
+                    ModelState.AddModelError("img", "Please Select an Image For the book");
+                }
+                
+               
             }
 
             ViewBag.AID = new SelectList(db.Authors, "AID", "FName", book.AID);
@@ -95,8 +102,21 @@ namespace Book_Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Book book)
+        public ActionResult Edit(Book book, HttpPostedFileBase imgfile)
         {
+            string path = "";
+            if (imgfile.FileName.Length > 0)
+            {
+                path = "~/images/" + Path.GetFileName(imgfile.FileName);
+                imgfile.SaveAs(Server.MapPath(path));
+
+                book.image = path;
+            }
+            else
+            {
+                ModelState.AddModelError("img", "Please Select an Image For the book");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(book).State = EntityState.Modified;

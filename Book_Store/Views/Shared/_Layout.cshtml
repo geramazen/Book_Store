@@ -7,7 +7,7 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html dir="rtl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,20 @@
     <title>الكتبي</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        th{
+            text-align:right
+        }
+        .glass-effect{
+            background: linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0));
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
