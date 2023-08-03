@@ -4,12 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br />
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("إضافة مصنف جديد", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FName)
@@ -20,20 +20,20 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LName)
+            </td>
+            <td>
+                @Html.ActionLink("تعديل", "Edit", new { id = item.AID }, htmlAttributes: new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("حذف", "Delete", new { id = item.AID }, htmlAttributes: new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 
 </table>

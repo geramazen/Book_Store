@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Book_Store.Models.Order>
+
+@{
+    ViewBag.Title = "OrdersToShip";
+}
+<br />
+<h2>الطلبات المؤكدة</h2>
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MobileNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublisherName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobileNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublisherName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+            <td>
+                <a href="@Url.Action("OrderShiped" , "Orders" , new {OrderID=item.OrderID})" class="btn btn-success">تم الشحن</a> |
+                <a href="@Url.Action("Details" , "Orders" , new {id=item.OrderID})" class="btn btn-primary">عرض التفاصيل</a>
+            </td>
+        </tr>
+    }
+
+</table>

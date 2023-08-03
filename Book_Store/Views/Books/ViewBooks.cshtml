@@ -4,12 +4,25 @@
     ViewBag.Title = "ViewBooks";
 }
 <br />
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-success text-center" role="alert">
+        @ViewBag.Message
+        @if (ViewBag.OrderID != null)
+        {
+        <p>
+            كود طلبك: @ViewBag.OrderID <br />
+        </p>
+        }
+    </div>
+}
+<br />
 <h1 class="text-center">الكــــــتبي</h1>
 <h3 class="text-center">
     متجر الكتبي لبيع الكتب الجديدة والمستعملة
 </h3>
 <br />
-<br />
+<hr />
 <div class="row">
     @foreach (var item in Model)
     {
@@ -20,7 +33,9 @@
                     <h5 class="card-title">@item.title</h5>
                     <p class="card-text">@item.Author.FName</p>
                     <p class="card-text"> السعر: @item.Price</p>
-                    <a href="@Url.Action("Details" , "Books" , new {id=item.ID})" class="btn btn-primary" role="button">عرض التفاصيل</a>
+                    <a href="@Url.Action("Details" , "Books" , new {id=item.ID})" class="btn btn-info" role="button">عرض التفاصيل</a>
+                    <hr />
+                    <p><a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضافة إلى سلة المشتريات</a></p>
                 </div>
             </div>
         </div>

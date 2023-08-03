@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Book_Store.Models.Order>
+
+@{
+    ViewBag.Title = "OrdersToConfirm";
+    var TotalAmount = Model.Select(c => c.Amount).Sum();
+    var OrderID = Model.Select(c => c.OrderID).FirstOrDefault();
+    var OrderStatus = Model.Select(c => c.Order_Status).FirstOrDefault();
+}
+
+<h2>الطلبات المعلقة</h2>
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MobileNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublisherName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobileNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublisherName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+            @TotalAmount
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
+<div class="text-center">
+    @if (OrderStatus == 0)
+    {
+        <a href="@Url.Action("ConfirmOrder", "Orders", new { OrderID = @OrderID })" class="btn btn-success">تأكيد الطلب</a>
+    }
+    else
+    {
+        <a href="@Url.Action("OrderShiped", "Orders", new { OrderID = @OrderID })" class="btn btn-success">تم الشحن</a>
+    }
+</div>

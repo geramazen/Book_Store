@@ -2,14 +2,18 @@
 
 @{
     ViewBag.Title = "ViewCart";
+    var TotalAmount = Model.Select(c => c.Price).Sum() + 50;
 }
-
-<h2>ViewCart</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<br />
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-success text-center" role="alert">
+        @ViewBag.Message
+    </div>
+}
+<h2>سلة المشتريات</h2>
+<br />
+<table class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.title)
@@ -21,37 +25,48 @@
             @Html.DisplayNameFor(model => model.image)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Author.FName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.CName)
+            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                <img src="@Url.Content(item.image)" width="50" height="50" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("حذف من السلة", "DeleteFromCart", new { id = item.PID }, htmlAttributes: new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.title)
+            الإجمالي مع تكلفة التوصيل
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.image)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Author.FName)
+            @TotalAmount 
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category.CName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>
-}
 
 </table>
+<div class="text-center">
+    <a href="@Url.Action("Create" , "Orders")" class="btn btn-success">تأكيد الشراء</a>
+</div>

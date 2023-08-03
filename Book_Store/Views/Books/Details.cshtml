@@ -16,9 +16,12 @@
                 <div class="caption">
                     <h2>@Html.DisplayFor(model => model.title)</h2>
                     <h4>@Html.DisplayFor(model => model.Author.FName)</h4>
-                    <p>@Html.DisplayFor(model => model.Category.CName)</p>
+                    <h5>@Html.DisplayFor(model => model.Category.CName)</h5>
+                    <h6>الناشر:  @Html.DisplayFor(model => model.Publisher.PName)</h6>
+                    <p>عدد المجلدات:  @Html.DisplayFor(model => model.VolumesNum)<p />
                     <p>السعر:  @Html.DisplayFor(model => model.Price)</p>
-                    <p><a href="@Url.Action("AddToCart" , "Books" , new {id=Model.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span>إضافة إلى سلة المشتريات</a></p>
+                    <h2>@Html.DisplayFor(model => model.description)</h2>
+                    <p><a href="@Url.Action("AddToCart" , "Books" , new {id=Model.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضافة إلى سلة المشتريات</a></p>
                 </div>
             </div>
         </div>

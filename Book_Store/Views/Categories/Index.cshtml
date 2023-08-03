@@ -4,12 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br />
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("إضافة قسم جديد", "Create" ,null, htmlAttributes: new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.CName)
@@ -23,9 +23,8 @@
             @Html.DisplayFor(modelItem => item.CName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CID })
+            @Html.ActionLink("تعديل", "Edit", new { id = item.CID }, htmlAttributes: new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("حذف", "Delete", new { id = item.CID }, htmlAttributes: new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

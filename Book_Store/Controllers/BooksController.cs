@@ -14,8 +14,7 @@ namespace Book_Store.Controllers
     public class BooksController : Controller
     {
         private BookContext db = new BookContext();
-        public static List<Book> UserCart;
-        public static int count=0;
+        public static List<Book> UserCart = new List<Book>();
 
         // GET: Books
         public ActionResult Index()
@@ -44,6 +43,7 @@ namespace Book_Store.Controllers
         {
             ViewBag.AID = new SelectList(db.Authors, "AID", "FName");
             ViewBag.CID = new SelectList(db.Categories, "CID", "CName");
+            ViewBag.PID = new SelectList(db.publishers, "PID", "PName");
             return View();
         }
 
@@ -52,12 +52,12 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Book book , HttpPostedFileBase imgfile)
+        public ActionResult Create(Book book, HttpPostedFileBase imgfile)
         {
             if (ModelState.IsValid)
             {
                 string path = "";
-                if(imgfile.FileName.Length >0)
+                if (imgfile.FileName.Length > 0)
                 {
                     path = "~/images/" + Path.GetFileName(imgfile.FileName);
                     imgfile.SaveAs(Server.MapPath(path));
@@ -70,6 +70,7 @@ namespace Book_Store.Controllers
 
             ViewBag.AID = new SelectList(db.Authors, "AID", "FName", book.AID);
             ViewBag.CID = new SelectList(db.Categories, "CID", "CName", book.CID);
+            ViewBag.PID = new SelectList(db.publishers, "PID", "PName");
             return View(book);
         }
 
@@ -87,6 +88,7 @@ namespace Book_Store.Controllers
             }
             ViewBag.AID = new SelectList(db.Authors, "AID", "FName", book.AID);
             ViewBag.CID = new SelectList(db.Categories, "CID", "CName", book.CID);
+            ViewBag.PID = new SelectList(db.publishers, "PID", "PName");
             return View(book);
         }
 
@@ -103,6 +105,7 @@ namespace Book_Store.Controllers
             }
             ViewBag.AID = new SelectList(db.Authors, "AID", "FName", book.AID);
             ViewBag.CID = new SelectList(db.Categories, "CID", "CName", book.CID);
+            ViewBag.PID = new SelectList(db.publishers, "PID", "PName");
             return View(book);
         }
 
@@ -141,35 +144,92 @@ namespace Book_Store.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult ViewBooks()
+        public ActionResult ViewBooks(string Message, string OrderID)
         {
+            if (Message != null)
+            {
+                ViewBag.Message = Message;
+                ViewBag.OrderID = OrderID;
+            }
             var recs = db.Books.Where(c => c.AvailableCopies != 0).ToList();
-            //if (Session["UserName"] != null)
-            //{
-                return View(recs);
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Login", "Users");
-            //}
+            return View(recs);
+
         }
 
         public ActionResult AddToCart(int id)
         {
-            count++;
-            Session["Cart"] = count;
             Book book = db.Books.Find(id);
-            UserCart = new List<Book>()
+            UserCart.Add(new Book
             {
-                new Book() {ID= book.ID , title= book.title , AID=book.AID , description=book.description }
-            };
+                ID = book.ID,
+                title = book.title,
+                AID = book.AID,
+                description = book.description,
+                image = book.image,
+                Price = book.Price,
+                Publisher = book.Publisher
+            });
+            Session["Cart"] = UserCart.Count();
             return RedirectToAction("ViewBooks");
         }
 
-        public ActionResult ViewCart()
+        public ActionResult ViewCart(string Message)
         {
+            if (Message != null)
+            {
+                ViewBag.Message = Message;
+            }
             var books = UserCart;
             return View(books.ToList());
+        }
+
+        public ActionResult UserConfirmOrder(Order order)
+        {
+            var Books = UserCart;
+            return RedirectToAction("Create", "Orders", new { Books = Books, order = order });
+        }
+
+        public ActionResult DeleteFromCart(int id)
+        {
+            //var todelete = UserCart.Where(c => c.ID == id).FirstOrDefault();
+            UserCart.RemoveAt(id);
+            Session["Cart"] = UserCart.Count();
+            return RedirectToAction("ViewCart", new { Message = "تم الحذف من السلة" });
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateOrder(List<Book> Books, Order order)
+        {
+            Book book = new Book();
+            Books = UserCart;
+            var OrderId = 1;
+            if (db.Orders.Count() != 0)
+            {
+                OrderId = db.Orders.Select(c => c.OrderID).Max() + 1;
+            }
+            foreach (var item in Books)
+            {
+                book = db.Books.Where(b => b.ID == item.ID).FirstOrDefault();
+                book.AvailableCopies--;
+                Order DBorder = new Order
+                {
+                    Adress = order.Adress,
+                    Amount = item.Price,
+                    BookName = item.title,
+                    OrderID = OrderId,
+                    MobileNumber = order.MobileNumber,
+                    Name = order.Name,
+                    Order_Status = 0,
+                    PublisherName = item.Publisher.PName
+                };
+                db.Orders.Add(DBorder);
+            }
+            db.SaveChanges();
+            Session["Cart"] = 0;
+            UserCart = null;
+            return RedirectToAction("ViewBooks", "Books", new { Message = "تم إرسال طلبك", OrderID = OrderId.ToString() });
         }
     }
 }

@@ -8,7 +8,7 @@
 <p>
     @Html.ActionLink("إضافة كتاب", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.title)
@@ -20,39 +20,38 @@
             @Html.DisplayNameFor(model => model.image)
         </th>
         <th>
-            Author
+            @Html.DisplayNameFor(model => model.AID)
         </th>
         <th>
-            Category
+            @Html.DisplayNameFor(model => model.CID)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            <img src="@Url.Content(item.image)" width="50" height="50" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.FName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.CName)
-        </td>
-        <td>
-            <a href="@Url.Action("Edit" , "Books" , new {id=item.ID})" class="btn btn-primary">Edit</a>
-            |
-            <a href="@Url.Action("Delete" , "Books" , new {id=item.ID})" class="btn btn-danger">Delete</a>
-            |
-            <a href="@Url.Action("Details" , "Books" , new {id=item.ID})" class="btn btn-info">Details</a>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                <img src="@Url.Content(item.image)" width="50" height="50" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CName)
+            </td>
+            <td>
+                <a href="@Url.Action("edit" , "Books" , new {id=item.ID})" class="btn btn-primary">تعديل</a>     
+                |
+                <a href="@Url.Action("delete" , "Books" , new {id=item.ID})" class="btn btn-danger">حذف</a>
+            </td>
+        </tr>
+    }
 
 </table>

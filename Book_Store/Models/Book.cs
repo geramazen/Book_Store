@@ -20,12 +20,17 @@ namespace Book_Store.Models
         public int AID { get; set; }
         [Display(Name = "القسم")]
         public int CID { get; set; }
+        [Display(Name = "دار النشر")]
+        public int PID { get; set; } 
         [Display(Name = "السعر")]
         public decimal Price { get; set; }
         [Display(Name = "عدد النسخ")]
         public int AvailableCopies { get; set; }
+        [Display(Name = "عدد المجلدات")]
+        public int VolumesNum { get; set; }
         
         public virtual Author Author { get; set; }
         public virtual Category Category { get; set; }
+        public virtual Publisher Publisher { get; set; }
     }
 }
