@@ -7,7 +7,7 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html dir="rtl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,12 @@
     <title>الكتبي</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        th{
+            text-align:right
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
