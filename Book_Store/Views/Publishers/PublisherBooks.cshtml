@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Book_Store.Models.Book>
+
+@{
+    var Publisher = Model.Select(c => c.Publisher.PName).FirstOrDefault();
+    ViewBag.Title = Publisher;
+}
+<style>
+    .card:hover {
+        transform: scale(1.1);
+        z-index: 9;
+    }
+</style>
+
+<link href="~/Content/Site.css" />
+
+<br />
+<h1 class="text-center">@Publisher</h1>
+<br />
+
+<hr />
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-sm-4">
+            <div class="product">
+                <div class="product__photo">
+                    <div class="photo-container">
+                        <div class="photo-main">
+                            <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
+                                <img src="@Url.Content(item.image)" alt="...">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product__info">
+                    <div class="title">
+                        <h1>@item.title</h1>
+                    </div>
+                    <div class="price">
+                        <span>@item.Price</span> <br /> جنيه مصري
+                    </div>
+                    <div class="description">
+                        <h4>
+                            دار النشر:
+                            <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
+                                @item.Publisher.PName
+                            </a>
+                        </h4>
+                        <h4>
+                            المصنف:
+                            <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
+                                @item.Author.FName
+                            </a>
+                        </h4>
+                        <h4>
+                            القسم:
+                            <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
+                                @item.Category.CName
+                            </a>
+                        </h4>
+                        <h4>عدد المجلدات: @item.VolumesNum</h4>
+                        <h4>عددالنسخ المتوفرة: @item.AvailableCopies</h4>
+                    </div>
+                    <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn buy--btn" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضف للسلة</a>
+                </div>
+            </div>
+        </div>
+
+
+
+    }
+
+</div>

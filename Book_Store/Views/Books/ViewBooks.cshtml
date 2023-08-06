@@ -1,5 +1,6 @@
-﻿@model IEnumerable<Book_Store.Models.Book>
-
+﻿@model PagedList.IPagedList<Book_Store.Models.Book>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "ViewBooks";
 }
@@ -10,12 +11,7 @@
     }
 </style>
 
-<link href="~/Content/Site.css"/>
-
-
-
-
-
+<link href="~/Content/Site.css" />
 <br />
 @if (ViewBag.message != null)
 {
@@ -29,53 +25,77 @@
         }
     </div>
 }
+
+
+
 <br />
-<h1 class="text-center">الكــــــتبي</h1>
+<h1 class="text-center">الكُــــــتُبي</h1>
+<br />
 <h4 class="text-center">
     متجر الكتبي لبيع الكتب الجديدة والمستعملة
 </h4>
 
 <hr />
+
+@using (Html.BeginForm("ViewBooks", "Books", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="form-group col-md-4">
+            <div class="col-md-10">
+                @Html.DropDownList("CategoryName", ViewData["CategoryNameList"] as SelectList, "اختر القسم", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <div class="col-md-10">
+                @Html.DropDownList("AutherName", ViewData["AutherNameList"] as SelectList, "اختر اسم المصنف", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            <div class="col-md-10">
+                @Html.Editor("BookName", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل اسم الكتاب" } })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="form-group col-md-4">
+            <div class="col-md-10">
+
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            <div class="col-md-10">
+                <button class="btn btn-success" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            <div class="col-md-10">
+                @Html.DropDownList("PublisherName", ViewData["PublisherNameList"] as SelectList, "اختر دار النشر", new { @class = "form-control" })
+            </div>
+        </div>
+
+
+    </div>
+
+}
+
+<hr />
+@if (ViewBag.NoResult != null)
+{
+    <div class="text-center">
+        <h3>
+            @ViewBag.NoResult
+        </h3>
+    </div>
+}
 <div class="row">
     @foreach (var item in Model)
     {
-        @*<div class="col-sm-3" style="margin-top:10px">
-                <div class="card glass-effect"  style="padding:5px">
-                    <img class="card-img-top" src="@Url.Content(item.image)" alt="Card image cap" width="100%" height="200">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">@item.title</h5>
-                        <p class="card-text"><a href="~/Authors/AllWork/@item.AID">@item.Author.FName</a></p>
-                        <p class="card-text"> السعر: @item.Price</p>
-                        <hr />
-                        <a href="@Url.Action("Details" , "Books" , new {id=item.ID})" class="btn btn-info" role="button">للمزيد</a>
-                        <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضف للسلة</a>
-                    </div>
-                </div>
-            </div>*@
-
-        @*<div class="col-sm-3" style="margin-top:10px">
-                <div class="card glass-effect">
-                    <div class="row no-gutters">
-                        <div class="col-md-6">
-                            <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
-                                <img src="@Url.Content(item.image)" class="card-img" alt="..." width="100%" height="200">
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card-body text-center" style="height:190px">
-                                <h5 class="card-title">@item.title</h5>
-                                <p class="card-text"><a href="~/Authors/AllWork/@item.AID">@item.Author.FName</a></p>
-                                <p class="card-text"><small class="text-muted">السعر: @item.Price</small></p>
-
-                                <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn btn-primary" style="position:fixed; bottom:1%; right:10%" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضف للسلة</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
-
-
-
 
         <div class="col-sm-4">
             <div class="product">
@@ -84,27 +104,40 @@
                         <div class="photo-main">
                             <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
                                 <img src="@Url.Content(item.image)" alt="...">
-                            </a>                           
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="product__info">
                     <div class="title">
                         <h1>@item.title</h1>
-                        <span>@item.Author.FName</span>
                     </div>
                     <div class="price">
                         <span>@item.Price</span> <br /> جنيه مصري
                     </div>
                     <div class="description">
-                        <h3>الوصف</h3>
-                        <ul>
-                            @*<li>@item.description</li>*@
-                            <li>دار النشر: @item.Publisher.PName</li>
-                            <li>الكاتب: @item.Author.FName</li>
-                            <li>عدد المجلدات: @item.VolumesNum</li>
-                            <li>عددالنسخ المتوفرة: @item.AvailableCopies</li>
-                        </ul>
+
+                        @*<li>@item.description</li>*@
+                        <h4>
+                            دار النشر:
+                            <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
+                                @item.Publisher.PName
+                            </a>
+                        </h4>
+                        <h4>
+                            المصنف:
+                            <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
+                                @item.Author.FName
+                            </a>
+                        </h4>
+                        <h4>
+                            القسم:
+                            <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
+                                @item.Category.CName
+                            </a>
+                        </h4>
+                        <h4>عدد المجلدات: @item.VolumesNum</h4>
+                        <h4>عددالنسخ المتوفرة: @item.AvailableCopies</h4>
                     </div>
                     <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn buy--btn" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضف للسلة</a>
                 </div>
@@ -116,74 +149,6 @@
     }
 
 </div>
-
-
-@*<div class="card mb-3" style="max-width: 540px;">
-        <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="..." class="card-img" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
-<!--<div class="row">
-    <div class="col-sm-3">
-        <div class="product">
-            <div class="product__photo">
-                <div class="photo-container">
-                    <div class="photo-main">
-                        <div class="controls">
-                            <i class="material-icons">share</i>
-                            <i class="material-icons">favorite_border</i>
-                        </div>
-                        <img src="https://res.cloudinary.com/john-mantas/image/upload/v1537291846/codepen/delicious-apples/green-apple-with-slice.png" alt="green apple slice">
-                    </div>
-                    <div class="photo-album">
-                        <ul>
-                            <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302064/codepen/delicious-apples/green-apple2.png" alt="green apple"></li>
-                            <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537303532/codepen/delicious-apples/half-apple.png" alt="half apple"></li>
-                            <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537303160/codepen/delicious-apples/green-apple-flipped.png" alt="green apple"></li>
-                            <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537303708/codepen/delicious-apples/apple-top.png" alt="apple top"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="product__info">
-                <div class="title">
-                    <h1>Delicious Apples</h1>
-                    <span>COD: 45999</span>
-                </div>
-                <div class="price">
-                    R$ <span>7.93</span>
-                </div>-->
-                @*<div class="variant">
-                    <h3>SELECT A COLOR</h3>
-                    <ul>
-                        <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302064/codepen/delicious-apples/green-apple2.png" alt="green apple"></li>
-                        <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302752/codepen/delicious-apples/yellow-apple.png" alt="yellow apple"></li>
-                        <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302427/codepen/delicious-apples/orange-apple.png" alt="orange apple"></li>
-                        <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302285/codepen/delicious-apples/red-apple.png" alt="red apple"></li>
-                    </ul>
-                </div>*@
-                <!--<div class="description">
-                    <h3>BENEFITS</h3>
-                    <ul>
-                        <li>Apples are nutricious</li>
-                        <li>Apples may be good for weight loss</li>
-                        <li>Apples may be good for bone health</li>
-                        <li>They're linked to a lowest risk of diabetes</li>
-                    </ul>
-                </div>
-                <button class="buy--btn">ADD TO CART</button>
-            </div>
-        </div>
-    </div>
-</div>-->
-
+<div class="text-center">
+    @Html.PagedListPager(Model, Page => Url.Action("ViewBooks", new { Page }))
+</div>

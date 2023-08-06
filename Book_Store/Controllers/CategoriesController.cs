@@ -123,5 +123,11 @@ namespace Book_Store.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult CategoryBooks(int CID)
+        {
+            var Books = db.Books.Where(b => b.CID == CID).ToList();
+            return View(Books);
+        }
     }
 }

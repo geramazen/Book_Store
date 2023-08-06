@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Book_Store.Models;
 using System.IO;
+using PagedList;
 
 namespace Book_Store.Controllers
 {
@@ -71,8 +72,8 @@ namespace Book_Store.Controllers
                 {
                     ModelState.AddModelError("img", "Please Select an Image For the book");
                 }
-                
-               
+
+
             }
 
             ViewBag.AID = new SelectList(db.Authors, "AID", "FName", book.AID);
@@ -102,21 +103,11 @@ namespace Book_Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Book book, HttpPostedFileBase imgfile)
+        public ActionResult Edit(Book book/*, HttpPostedFileBase imgfile*/)
         {
-            string path = "";
-            if (imgfile.FileName.Length > 0)
-            {
-                path = "~/images/" + Path.GetFileName(imgfile.FileName);
-                imgfile.SaveAs(Server.MapPath(path));
-
-                book.image = path;
-            }
-            else
-            {
-                ModelState.AddModelError("img", "Please Select an Image For the book");
-            }
-
+            var model = db.Books.Where(b => b.ID == book.ID).FirstOrDefault();
+            book.image = model.image;
+            db.SaveChanges();
             if (ModelState.IsValid)
             {
                 db.Entry(book).State = EntityState.Modified;
@@ -164,15 +155,45 @@ namespace Book_Store.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult ViewBooks(string Message, string OrderID)
+        public ActionResult ViewBooks(string Message, string OrderID, int? page, string BookName, int? PublisherName, int? CategoryName, int? AutherName)
         {
+            SetDropDown();
             if (Message != null)
             {
                 ViewBag.Message = Message;
                 ViewBag.OrderID = OrderID;
             }
             var recs = db.Books.Where(c => c.AvailableCopies != 0).ToList();
-            return View(recs);
+
+            if (BookName != null || PublisherName != null || CategoryName != null || AutherName != null)
+            {
+
+                if (BookName != null)
+                {
+                    recs = recs.Where(c => c.title.Contains(BookName)).ToList();
+                }
+                if (PublisherName != null)
+                {
+                    recs = recs.Where(p => p.PID == PublisherName.Value).ToList();
+                }
+                if (CategoryName != null)
+                {
+                    recs = recs.Where(p => p.CID == CategoryName.Value).ToList();
+                }
+                if (AutherName != null)
+                {
+                    recs = recs.Where(p => p.AID == AutherName.Value).ToList();
+                }
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            if(recs.Count() == 0)
+            {
+                ViewBag.NoResult = "عفوا، لا توجد نتائج تطابق هذا البحث";
+            }
+
+            return View(recs.ToPagedList(pageNumber, pageSize));
 
         }
 
@@ -251,5 +272,13 @@ namespace Book_Store.Controllers
             UserCart = null;
             return RedirectToAction("ViewBooks", "Books", new { Message = "تم إرسال طلبك", OrderID = OrderId.ToString() });
         }
+
+        public void SetDropDown()
+        {
+            ViewData["AutherNameList"] = new SelectList(db.Authors.ToList(), "AID", "FName");
+            ViewData["CategoryNameList"] = new SelectList(db.Categories.ToList(), "CID", "CName");
+            ViewData["PublisherNameList"] = new SelectList(db.publishers.ToList(), "PID", "PName");
+        }
+
     }
 }

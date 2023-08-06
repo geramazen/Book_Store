@@ -138,5 +138,12 @@ namespace Book_Store.Controllers
             }
             return View("../Books/ViewBooks", books);
         }
+
+
+        public ActionResult AuthorBooks(int AID)
+        {
+            var Books = db.Books.Where(b => b.AID == AID).ToList();
+            return View(Books);
+        }
     }
 }

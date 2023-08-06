@@ -21,10 +21,11 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <style>
-        th{
-            text-align:right
+        th {
+            text-align: right
         }
-        .glass-effect{
+
+        .glass-effect {
             background: linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0));
             -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
@@ -35,7 +36,7 @@
     </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #884A39 ">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -43,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("الكتبي", "ViewBooks", "Books", new { area = "" }, new { @class = "navbar-brand" })
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -54,31 +55,46 @@
                         <li>@Html.ActionLink("دور النشر", "Index", "Publishers")</li>
                         <li>@Html.ActionLink("الكتب", "Index", "Books")</li>
                     }
-                    @if (Session["UserName"] == null)
-                    {
-                        <li>@Html.ActionLink("تسجيل دخول", "Login", "Users")</li>
-                    }
+                    @Html.ActionLink("الكُتُبي", "ViewBooks", "Books", new { area = "" }, new { @class = "navbar-brand" })
                 </ul>
 
 
                 <ul class="nav navbar-nav">
                     @if (Session["UserName"] == null)
                     {
+
+                        <li>@Html.ActionLink("تسجيل دخول", "Login", "Users")</li>
                         <li><a href=@Url.Action("ViewCart", "Books")> <span class="glyphicon glyphicon-shopping-cart"> </span> <span class="badge">@Session["Cart"]</span></a></li>
                         <li><a href=@Url.Action("OrderFollowing", "Orders")><span class="glyphicon glyphicon-search"></span> تابع طلبك </a></li>
+
                     }
-                        @if (Session["UserName"] != null)
-                        {
-                            <li><a href=@Url.Action("OrdersToConfirm" , "Orders")> <span class="glyphicon glyphicon-shopping-cart"> </span>@if(OrderCount != 0){ <span class="badge progress-bar-danger">@OrderCount</span>} else {<span class="badge">@OrderCount</span>}</a></li>
-                            <li><a href=@Url.Action("OrdersToShip" , "Orders")> <span class="glyphicon glyphicon-ok"> </span>@if(OrderCountShip != 0){ <span class="badge progress-bar-danger">@OrderCountShip</span>} else {<span class="badge">@OrderCountShip</span>}</a></li>
-                            <li class="dropdown">
-                                <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> @Session["UserName"] <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href=@Url.Action("Logout" , "Users")>تسجيل خروج</a></li>
-                                </ul>
-                            </li>
-                        }
-                    </ul>
+                    @if (Session["UserName"] != null)
+                    {
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> @Session["UserName"] <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href=@Url.Action("Logout" , "Users")>تسجيل خروج</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href=@Url.Action("OrdersToConfirm" , "Orders")>
+                                <span class="glyphicon glyphicon-shopping-cart"> </span>@if (OrderCount != 0)
+                                {<span class="badge progress-bar-danger">@OrderCount</span>}
+                            else
+                            {<span class="badge">@OrderCount</span>}
+                            </a>
+                        </li>
+                        <li>
+                            <a href=@Url.Action("OrdersToShip" , "Orders")>
+                                <span class="glyphicon glyphicon-ok"> </span>@if (OrderCountShip != 0)
+                                {<span class="badge progress-bar-danger">@OrderCountShip</span>}
+                            else
+                            {<span class="badge">@OrderCountShip</span>}
+                            </a>
+                        </li>
+
+                    }
+                </ul>
 
 
 

@@ -169,7 +169,7 @@ namespace Book_Store.Controllers
             var Order = db.Orders.Where(c => c.OrderID == OrderID).FirstOrDefault();
             if (Order == null)
             {
-                OrderStatusMessage = ".كود الطلب غير صحيح, تحقق من الكود ثم أعد المحاولة";
+                OrderStatusMessage = "كود الطلب غير صحيح, تحقق من الكود ثم أعد المحاولة";
                 return RedirectToAction("OrderFollowing_Result", new { OrderStatusMessage = OrderStatusMessage, OrderID = 0 });
             }
             else
@@ -177,15 +177,15 @@ namespace Book_Store.Controllers
                 var OrderStatus = Order.Order_Status;
                 if (OrderStatus == 0)
                 {
-                    OrderStatusMessage = ".تم إرسال طلبك إلينا وسيتم تأكيده قريبا";
+                    OrderStatusMessage = "تم إرسال طلبك إلينا وسيتم تأكيده قريبا";
                 }
                 else if (OrderStatus == 1)
                 {
-                    OrderStatusMessage = ".تم وصول طلبك إلينا وتأكيده، وسيتم شحنه عبر شركة الشحن قريبا";
+                    OrderStatusMessage = "تم وصول طلبك إلينا وتأكيده، وسيتم شحنه عبر شركة الشحن قريبا";
                 }
                 else if (OrderStatus == 2)
                 {
-                    OrderStatusMessage = ".تم شحن الطلب، قم بالتواصل مع شركة الشحن لمتابعته";
+                    OrderStatusMessage = "تم شحن الطلب، قم بالتواصل مع شركة الشحن لمتابعته";
                 }
                 return RedirectToAction("OrderFollowing_Result", new { OrderStatusMessage = OrderStatusMessage, OrderID = OrderID });
             }

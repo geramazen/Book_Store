@@ -46,8 +46,7 @@ html, body {
 body {
     display: grid;
     grid-template-rows: 1fr;
-    font-family: "Raleway", sans-serif;
-    background-color: #01e37f;
+    font-family: 'Amiri', serif;
 }
 
 h3 {
@@ -89,7 +88,7 @@ img {
 .photo-main {
     border-radius: 0 6px 6px 0;
     background-color: #9be010;
-    background: radial-gradient(#e5f89e, #96e001);
+    background: radial-gradient(#FFC26F, #C38154);
 }
 
     .photo-main > .controls {

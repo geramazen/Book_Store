@@ -123,5 +123,11 @@ namespace Book_Store.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult PublisherBooks(int PID)
+        {
+            var Books = db.Books.Where(b => b.PID == PID).ToList();
+            return View(Books);
+        }
     }
 }
