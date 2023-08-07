@@ -18,10 +18,14 @@ namespace Book_Store.Controllers
         public static List<Book> UserCart = new List<Book>();
 
         // GET: Books
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var books = db.Books.Include(b => b.Author).Include(b => b.Category);
-            return View(books.ToList());
+            var books = db.Books.Include(b => b.Author).Include(b => b.Category).ToList();
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(books.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Books/Details/5

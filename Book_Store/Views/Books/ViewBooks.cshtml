@@ -16,12 +16,12 @@
 @if (ViewBag.message != null)
 {
     <div class="alert alert-success text-center" role="alert">
-        @ViewBag.Message
+        <h1> @ViewBag.Message</h1>
         @if (ViewBag.OrderID != null)
         {
-            <p>
+            <h2>
                 كود طلبك: @ViewBag.OrderID <br />
-            </p>
+            </h2>
         }
     </div>
 }

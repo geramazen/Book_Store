@@ -1,57 +1,96 @@
-﻿@model IEnumerable<Book_Store.Models.Order>
-
+﻿@model PagedList.IPagedList<Book_Store.Models.Order>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
+<br />
+<hr />
+<h1 class="text-center">
+    جميع الطلبات
+</h1>
+<hr />
+<br />
+@using (Html.BeginForm("Index", "Orders", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
 
-<h2>Index</h2>
+        <div class="form-group col-md-4">
+            <div class="col-md-10">
+                @Html.Editor("ID", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل كود الطلب" } })
+            </div>
+        </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+        <div class="form-group col-md-4">
+            <div class="col-md-10">
+                <button class="btn btn-success" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+<br />
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            إسم العميل
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Adress)
+            عنوان العميل
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MobileNumber)
+            رقم العميل
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Order_Status)
+            كود الطلب
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OrderID)
+            حالة الطلب
         </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Adress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MobileNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Order_Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobileNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+            <td>
+                @if (item.Order_Status == 0)
+                {
+                    <p>
+                        معلّق
+                    </p>
+                }
+                @if (item.OrderID == 1)
+                {
+                    <p>
+                        مؤكد
+                    </p>
+                }
+                @if (item.OrderID == 2)
+                {
+                    <p>
+                        شُحِن
+                    </p>
+                }
+            </td>
+        </tr>
+    }
 
 </table>
+<div class="text-center">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+</div>

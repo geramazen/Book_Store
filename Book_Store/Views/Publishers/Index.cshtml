@@ -1,5 +1,6 @@
-﻿@model IEnumerable<Book_Store.Models.Publisher>
-
+﻿@model PagedList.IPagedList<Book_Store.Models.Publisher>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
@@ -10,7 +11,7 @@
 <table class="table table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PName)
+            اسم دار النشر
         </th>
         <th></th>
     </tr>
@@ -29,3 +30,6 @@
     }
 
 </table>
+<div class="text-center">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+</div>

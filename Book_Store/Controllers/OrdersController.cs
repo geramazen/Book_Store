@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Book_Store.Models;
+using PagedList;
 
 namespace Book_Store.Controllers
 {
@@ -15,9 +16,17 @@ namespace Book_Store.Controllers
         private BookContext db = new BookContext();
 
         // GET: Orders
-        public ActionResult Index()
+        public ActionResult Index(int? page , int? ID)
         {
-            return View(db.Orders.ToList());
+            var recs = db.Orders.OrderByDescending(c => c.ID).ToList();
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            if(ID != null)
+            {
+                recs = recs.Where(id => id.ID == ID.Value).ToList();
+            }
+            return View(recs.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Orders/Details/5

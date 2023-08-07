@@ -1,5 +1,6 @@
-﻿@model IEnumerable<Book_Store.Models.Book>
-
+﻿@model PagedList.IPagedList<Book_Store.Models.Book>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
@@ -11,19 +12,19 @@
 <table class="table table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.title)
+            عنوان الكتاب
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.description)
+            الوصف
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.image)
+            صورة الغلاف
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AID)
+            المصنف
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CID)
+            القسم
         </th>
         <th></th>
     </tr>
@@ -47,7 +48,7 @@
                 @Html.DisplayFor(modelItem => item.Category.CName)
             </td>
             <td>
-                <a href="@Url.Action("edit" , "Books" , new {id=item.ID})" class="btn btn-primary">تعديل</a>     
+                <a href="@Url.Action("edit" , "Books" , new {id=item.ID})" class="btn btn-primary">تعديل</a>
                 |
                 <a href="@Url.Action("delete" , "Books" , new {id=item.ID})" class="btn btn-danger">حذف</a>
             </td>
@@ -55,3 +56,6 @@
     }
 
 </table>
+<div class="text-center">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+</div>
