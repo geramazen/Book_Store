@@ -1,0 +1,58 @@
+﻿@model PagedList.IPagedList<Book_Store.Models.Category>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "UserIndex";
+}
+<br />
+<hr />
+<h1 class="text-center">
+    جميع الأقسام
+</h1>
+<hr />
+<br />
+@using (Html.BeginForm("UserIndex", "Categories", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+
+        <div class="col">
+            <div class="col-md-10">
+                @Html.Editor("CategoryName", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل اسم القسم" } })
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="col">
+            <div class="col-md-10">
+                <button class="btn btn-success" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>
+            إسم القسم
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
+                    @Html.DisplayFor(modelItem => item.CName)
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="text-center">
+    @Html.PagedListPager(Model, Page => Url.Action("UserIndex", new { Page }))
+</div>

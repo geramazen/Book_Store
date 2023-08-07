@@ -140,6 +140,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PublishersController.cs" />
+    <Compile Include="Controllers\ShippingCostsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -180,6 +181,10 @@
     <Compile Include="Migrations\202308031105394_OrderTableUpdated1.Designer.cs">
       <DependentUpon>202308031105394_OrderTableUpdated1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202308071202159_ShippingCostAdded.cs" />
+    <Compile Include="Migrations\202308071202159_ShippingCostAdded.Designer.cs">
+      <DependentUpon>202308071202159_ShippingCostAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
@@ -187,6 +192,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Publisher.cs" />
+    <Compile Include="Models\ShippingCost.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -275,6 +281,14 @@
     <Content Include="Views\Authors\AuthorBooks.cshtml" />
     <Content Include="Views\Publishers\PublisherBooks.cshtml" />
     <Content Include="Views\Categories\CategoryBooks.cshtml" />
+    <Content Include="Views\Authors\UserIndex.cshtml" />
+    <Content Include="Views\Categories\UserIndex.cshtml" />
+    <Content Include="Views\Publishers\UserIndex.cshtml" />
+    <Content Include="Views\ShippingCosts\Create.cshtml" />
+    <Content Include="Views\ShippingCosts\Delete.cshtml" />
+    <Content Include="Views\ShippingCosts\Details.cshtml" />
+    <Content Include="Views\ShippingCosts\Edit.cshtml" />
+    <Content Include="Views\ShippingCosts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -323,6 +337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308031105394_OrderTableUpdated1.resx">
       <DependentUpon>202308031105394_OrderTableUpdated1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308071202159_ShippingCostAdded.resx">
+      <DependentUpon>202308071202159_ShippingCostAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

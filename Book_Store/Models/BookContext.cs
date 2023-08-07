@@ -18,5 +18,6 @@ namespace Book_Store.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Publisher> publishers { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<ShippingCost> shippingCosts { get; set; }
     }
 }

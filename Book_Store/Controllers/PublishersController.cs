@@ -24,6 +24,20 @@ namespace Book_Store.Controllers
             return View(recs.ToPagedList(pageNumber, pageSize));
         }
 
+        public ActionResult UserIndex(int? page, string PublisherName)
+        {
+            var recs = db.publishers.ToList();
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            if(PublisherName != null)
+            {
+                recs = recs.Where(c => c.PName.Contains(PublisherName)).ToList();
+            }
+
+            return View(recs.ToPagedList(pageNumber, pageSize));
+        }
+
         // GET: Publishers/Details/5
         public ActionResult Details(int? id)
         {

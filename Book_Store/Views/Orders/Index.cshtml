@@ -16,13 +16,14 @@
     @Html.AntiForgeryToken()
     <div class="row">
 
-        <div class="form-group col-md-4">
+        <div class="col">
             <div class="col-md-10">
                 @Html.Editor("ID", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل كود الطلب" } })
             </div>
         </div>
-
-        <div class="form-group col-md-4">
+        <br />
+        <br />
+        <div class="col">
             <div class="col-md-10">
                 <button class="btn btn-success" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
             </div>
@@ -33,7 +34,7 @@
 }
 
 <br />
-<table class="table">
+<table class="table table-striped">
     <tr>
         <th>
             إسم العميل
@@ -74,13 +75,13 @@
                         معلّق
                     </p>
                 }
-                @if (item.OrderID == 1)
+                @if (item.Order_Status == 1)
                 {
                     <p>
                         مؤكد
                     </p>
                 }
-                @if (item.OrderID == 2)
+                @if (item.Order_Status == 2)
                 {
                     <p>
                         شُحِن

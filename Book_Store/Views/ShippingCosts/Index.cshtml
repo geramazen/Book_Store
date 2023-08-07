@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Book_Store.Models.ShippingCost>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 class="text-center">سعر التوصيل</h1>
+
+<hr />
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cost)
+        </td>
+        <td>
+            <a href="@Url.Action("edit" , "ShippingCosts" , new {id=item.ID})" class="btn btn-primary">تعديل</a>
+        </td>
+    </tr>
+}
+
+</table>

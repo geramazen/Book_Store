@@ -50,10 +50,18 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (Session["UserName"] != null)
                     {
+                        <li>@Html.ActionLink("سعر التوصيل", "Index", "ShippingCosts")</li>
                         <li>@Html.ActionLink("المصنفين", "Index", "Authors")</li>
                         <li>@Html.ActionLink("الأقسام", "Index", "Categories")</li>
                         <li>@Html.ActionLink("دور النشر", "Index", "Publishers")</li>
                         <li>@Html.ActionLink("الكتب", "Index", "Books")</li>
+                        <li>@Html.ActionLink("جميع الطلبات", "Index", "Orders")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("المصنفين", "UserIndex", "Authors")</li>
+                        <li>@Html.ActionLink("الأقسام", "UserIndex", "Categories")</li>
+                        <li>@Html.ActionLink("دور النشر", "UserIndex", "Publishers")</li>
                     }
                     @Html.ActionLink("الكُتُبي", "ViewBooks", "Books", new { area = "" }, new { @class = "navbar-brand" })
                 </ul>

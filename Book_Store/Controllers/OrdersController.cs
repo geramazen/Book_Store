@@ -24,7 +24,7 @@ namespace Book_Store.Controllers
 
             if(ID != null)
             {
-                recs = recs.Where(id => id.ID == ID.Value).ToList();
+                recs = recs.Where(id => id.OrderID == ID.Value).ToList();
             }
             return View(recs.ToPagedList(pageNumber, pageSize));
         }

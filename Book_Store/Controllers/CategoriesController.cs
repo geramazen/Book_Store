@@ -22,7 +22,21 @@ namespace Book_Store.Controllers
             var recs = db.Categories.ToList();
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            return View(recs.ToPagedList(pageNumber,pageSize));
+            return View(recs.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult UserIndex(int? page, string CategoryName)
+        {
+            var recs = db.Categories.ToList();
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            if(CategoryName != null)
+            {
+                recs = recs.Where(c => c.CName.Contains(CategoryName)).ToList();
+            }
+
+            return View(recs.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Categories/Details/5
