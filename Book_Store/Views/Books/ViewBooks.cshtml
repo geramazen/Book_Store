@@ -43,18 +43,18 @@
     <div class="row">
         <div class="form-group col-md-4">
             <div class="col-md-10">
-                @Html.DropDownList("CategoryName", ViewData["CategoryNameList"] as SelectList, "اختر القسم", new { @class = "form-control" })
+                @Html.DropDownList("CategoryName", ViewData["CategoryNameList"] as SelectList, "اختر القسم", new { @class = "ddlist chosen-select form-control" })
             </div>
         </div>
         <div class="form-group col-md-4">
             <div class="col-md-10">
-                @Html.DropDownList("AutherName", ViewData["AutherNameList"] as SelectList, "اختر اسم المصنف", new { @class = "form-control" })
+                @Html.DropDownList("AutherName", ViewData["AutherNameList"] as SelectList, "اختر اسم المصنف", new { @class = "ddlist chosen-select form-control" })
             </div>
         </div>
 
         <div class="form-group col-md-4">
             <div class="col-md-10">
-                @Html.Editor("BookName", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل اسم الكتاب" } })
+                @Html.Editor("BookName", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل اسم الكتاب", @autoComplete = "on" } })
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
 
         <div class="form-group col-md-4">
             <div class="col-md-10">
-                @Html.DropDownList("PublisherName", ViewData["PublisherNameList"] as SelectList, "اختر دار النشر", new { @class = "form-control" })
+                @Html.DropDownList("PublisherName", ViewData["PublisherNameList"] as SelectList, "اختر دار النشر", new { @class = "ddlist form-control" })
             </div>
         </div>
 
@@ -152,3 +152,14 @@
 <div class="text-center">
     @Html.PagedListPager(Model, Page => Url.Action("ViewBooks", new { Page }))
 </div>
+
+<script src="~/Scripts/chosen.jquery.js"></script>
+<script>
+
+    $(function () {
+        //   normal dropdown
+        $(".ddlist").chosen({
+            //  disable_search_threshold: 1
+        });
+    });
+</script>
