@@ -4,6 +4,9 @@ body {
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Amiri', serif;
+    background-color: #fdf1ec;
+    letter-spacing: 0.1em;
+
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -33,9 +36,142 @@ textarea {
 
 
 
+.wrapper {
+    height: 215px;
+    width: 330px;
+    margin: 25px auto;
+    border:2px solid;
+    border-radius: 7px 7px 7px 7px;
+    /* VIA CSS MATIC https://goo.gl/cIbnS */
+    -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+}
+
+.product-img {
+    float: left;
+    height: 210px;
+    width: 163px;
+}
+
+    .product-img img {
+        border-radius: 7px 0 0 7px;
+    }
+
+.product-info {
+    float: left;
+    height: 210px;
+    width: 163px;
+    padding-right: 5px;
+    border-radius: 0 7px 10px 7px;
+    background-color: #ffffff;
+   /* border-left:2px solid ;*/
+}
+
+.product-text {
+    height: 160px;
+    width: 163px;
+}
+
+    .product-text h1 {
+        margin: 0 0 0 18px;
+        padding-top: 10px;
+        font-size: 17px;
+        color: #474747;
+    }
+
+    .product-text h1,
+    .product-price-btn p {
+        font-family: 'Bentham', serif;
+    }
+
+    .product-text h2 {
+        margin: 0 0 23px 38px;
+        font-size: 13px;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 200;
+        text-transform: uppercase;
+        color: #d2d2d2;
+        letter-spacing: 0.2em;
+    }
+
+    .product-text p {
+        height: 90px;
+        margin: 0 0 0 19px;
+        font-family: 'Playfair Display', serif;
+        color: #8d8d8d;
+        line-height: 1.3em;
+        font-size: 15px;
+        font-weight: lighter;
+        overflow: hidden;
+    }
+
+    .product-text p > a  {
+        font-size: 12px;
+        font-weight: lighter;
+    }
+
+.product-price-btn {
+    height: 50px;
+    width: 163px;
+    margin-top: 2px;
+    position: relative;
+}
+
+    .product-price-btn p {
+        display: inline-block;
+        position: absolute;
+        top: 68%;
+        padding-right: 18%;
+        height: 20px;
+        font-family: 'Trocchi', serif;
+        margin: 0 0 0 18px;
+        font-size: 14px;
+        font-weight: lighter;
+        font-family: 'Raleway', sans-serif;
+        font-size: 12px;
+        font-weight: 200;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+    }
+
+    .product-price-btn > p > span {
+        display: inline-block;
+        height: 20px;
+        font-family: 'Suranna', serif;
+        font-size: 15px;
+    }
+
+    .product-price-btn a {
+        float: right;
+        display: inline-block;
+        height: 30px;
+        width: 120px;
+        margin: 0 10px 0 8px;
+        box-sizing: border-box;
+        border: transparent;
+        border-radius: 15px;
+        font-family: 'Raleway', sans-serif;
+        font-size: 12px;
+        font-weight: 200;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: #ffffff;
+        background-color: #9cebd5;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .product-price-btn button:hover {
+        background-color: #79b0a1;
+    }
+
+
+
+
 /* ----- Variables ----- */
 /* ----- Global ----- */
-* {
+/** {
     box-sizing: border-box;
 }
 
@@ -56,10 +192,10 @@ h3 {
 img {
     max-width: 100%;
     filter: drop-shadow(1px 1px 3px #a6a6a6);
-}
+}*/
 
 /* ----- Product Section ----- */
-.product {
+/*.product {
     display: grid;
     grid-template-columns: 0.9fr 1fr;
     margin: auto;
@@ -67,10 +203,10 @@ img {
     margin-top:3em;
     background-color: white;
     border-radius: 5px;
-}
+}*/
 
 /* ----- Photo Section ----- */
-.product__photo {
+/*.product__photo {
     position: relative;
 }
 
@@ -131,12 +267,12 @@ img {
         padding: 7px;
         border: 1px solid #a6a6a6;
         border-radius: 3px;
-    }
+    }*/
 
 
 
 /* ----- Informations Section ----- */
-.product__info {
+/*.product__info {
     padding: 0.8em 0;
 }
 
@@ -233,12 +369,12 @@ img {
 
     .buy--btn:active {
         transform: scale(0.97);
-    }
+    }*/
 
 
 
 /* ----- Footer Section ----- */
-footer {
+/*footer {
     padding: 1em;
     text-align: center;
     color: #fff;
@@ -250,4 +386,4 @@ footer {
 
         footer > a:hover {
             color: #ff3f40;
-        }
+        }*/
