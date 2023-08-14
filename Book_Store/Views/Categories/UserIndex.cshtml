@@ -4,55 +4,48 @@
 @{
     ViewBag.Title = "UserIndex";
 }
-<br />
-<hr />
-<h1 class="text-center">
-    جميع الأقسام
-</h1>
-<hr />
+
 <br />
 @using (Html.BeginForm("UserIndex", "Categories", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
     <div class="row">
 
-        <div class="col">
-            <div class="col-md-10">
-                @Html.Editor("CategoryName", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل اسم القسم" } })
-            </div>
+        <div class="col-md-6">
+            <button class="btn btn-primary" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
         </div>
-        <br />
-        <br />
-        <div class="col">
-            <div class="col-md-10">
-                <button class="btn btn-success" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
-            </div>
+
+        <div class="col-md-3">
+            @Html.Editor("CategoryName", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل اسم القسم" } })
         </div>
+
 
     </div>
 
 }
 
 <br />
-<table class="table table-striped">
-    <tr>
-        <th>
-            إسم القسم
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="tablesStyle">
+    <table class="table table-hover table-striped">
         <tr>
-            <td>
-                <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
-                    @Html.DisplayFor(modelItem => item.CName)
-                </a>
-            </td>
+            <th>
+                إسم القسم
+            </th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
+                        @Html.DisplayFor(modelItem => item.CName)
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
 <div class="text-center">
     @Html.PagedListPager(Model, Page => Url.Action("UserIndex", new { Page }))
 </div>

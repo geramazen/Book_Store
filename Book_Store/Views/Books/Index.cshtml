@@ -6,56 +6,60 @@
 }
 <br />
 <br />
-<p>
-    @Html.ActionLink("إضافة كتاب", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
+<p class="text-center">
+    @Html.ActionLink("إضافة كتاب", "Create", null, htmlAttributes: new { @class = "btn btn-primary text-center" })
 </p>
-<table class="table table-striped">
-    <tr>
-        <th>
-            عنوان الكتاب
-        </th>
-        <th>
-            الوصف
-        </th>
-        <th>
-            صورة الغلاف
-        </th>
-        <th>
-            المصنف
-        </th>
-        <th>
-            القسم
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="tablesStyle">
+    <table class="table table-striped table-hover">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-                <img src="@Url.Content(item.image)" width="50" height="70" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author.FName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CName)
-            </td>
-            <td>
-                <a href="@Url.Action("edit" , "Books" , new {id=item.ID})" class="btn btn-primary">تعديل</a>
-                |
-                <a href="@Url.Action("delete" , "Books" , new {id=item.ID})" class="btn btn-danger">حذف</a>
-            </td>
+            <th>
+                عنوان الكتاب
+            </th>
+            <th>
+                الوصف
+            </th>
+            <th>
+                صورة الغلاف
+            </th>
+            <th>
+                المصنف
+            </th>
+            <th>
+                القسم
+            </th>
+            <th></th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.image)" width="50" height="70" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.FName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CName)
+                </td>
+                <td>
+                    <a href="@Url.Action("edit" , "Books" , new {id=item.ID})" class="btn btn-primary">تعديل</a>
+                </td>
+                <td>
+                    <a href="@Url.Action("delete" , "Books" , new {id=item.ID})" class="btn btn-danger">حذف</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
 <div class="text-center">
     @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
 </div>

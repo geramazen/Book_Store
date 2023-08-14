@@ -9,10 +9,26 @@
         transform: scale(1.1);
         z-index: 9;
     }
+
 </style>
 
 <link href="~/Content/Site.css" />
+
+
+
 <br />
+@*<div class="text-center highlighted">
+    <h1 class="kotobi ">
+        الــــكُتبـي
+    </h1>
+    <h3 style="font-family: 'Markazi Text', serif; color:wheat; margin:0; margin-left:115px; margin-top:-30px;">
+        متجر لببيع الكتب الجديدة والمستعملة
+    </h3>
+    <br />
+</div>*@
+<br />
+<br />
+
 @if (ViewBag.message != null)
 {
     <div class="alert alert-success text-center" role="alert">
@@ -26,16 +42,6 @@
     </div>
 }
 
-
-
-<br />
-<h1 class="text-center">الكُــــــتُبي</h1>
-<br />
-<h4 class="text-center">
-    متجر الكتبي لبيع الكتب الجديدة والمستعملة
-</h4>
-
-<hr />
 
 @using (Html.BeginForm("ViewBooks", "Books", FormMethod.Get))
 {
@@ -69,7 +75,7 @@
 
         <div class="form-group col-md-4">
             <div class="col-md-10">
-                <button class="btn btn-success" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
+                <button class="btn btn-primary" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
             </div>
         </div>
 
@@ -84,7 +90,6 @@
 
 }
 
-<hr />
 @if (ViewBag.NoResult != null)
 {
     <div class="text-center">
@@ -97,88 +102,56 @@
     @foreach (var item in Model)
     {
 
-        <div class="col-sm-4">
-            <!--<div class="product">
-            <div class="product__photo">
-                <div class="photo-container">
-                    <div class="photo-main">
-                        <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
-                            <img src="@Url.Content(item.image)" alt="...">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="product__info">
-                <div class="title">
-                    <h1>@item.title</h1>
-                </div>
-                <div class="price">
-                    <span>@item.Price</span> <br /> جنيه مصري
-                </div>
-                <div class="description">-->
-            @*<li>@item.description</li>*@
-            <!--<h4>
-                            دار النشر:
-                            <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
-                                @item.Publisher.PName
-                            </a>
-                        </h4>
-                        <h4>
-                            المصنف:
-                            <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
-                                @item.Author.FName
-                            </a>
-                        </h4>
-                        <h4>
-                            القسم:
-                            <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
-                                @item.Category.CName
-                            </a>
-                        </h4>
-                        <h4>عدد المجلدات: @item.VolumesNum</h4>
-                        <h4>عددالنسخ المتوفرة: @item.AvailableCopies</h4>
-                    </div>
-                    <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn buy--btn" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضف للسلة</a>
-                </div>
-            </div>-->
+<div class="col-sm-4">
 
-            <div class="wrapper">
-                <div class="product-img">
-                    <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
-                        <img src="@Url.Content(item.image)" height="210" width="163" alt="..."> 
-                    </a>
-                </div>
-                <div class="product-info">
-                    <div class="product-text">
-                        <h1>@item.title</h1>
-                        <h5>لـ
-                            <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
-                                @item.Author.FName
-                            </a>
-                        </h5>
-                        <p>
-                            <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
-                                @item.Publisher.PName
-                            </a><br>
-                            <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
-                                @item.Category.CName
-                            </a><br>
-                            @item.VolumesNum مجلد<br>
-                            <span>@item.Price</span> جنيه مصري
-                        </p>
-                    </div>
-                    <div class="product-price-btn">
-                        <p>متوفر @item.AvailableCopies نسخة</p>                        
-                        <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn buy--btn" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضف للسلة</a>
-                    </div>
-                </div>
-            </div>
 
+    <div class="wrapper">
+        <div class="product-img">
+            <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
+                <img src="@Url.Content(item.image)" height="210" width="163" alt="...">
+            </a>
         </div>
+        <div class="product-info">
+            <div class="product-text">
+                <h1 style="font-family: 'Reem Kufi', sans-serif;" class="text-center">@item.title</h1>
+                <h5>
+                    المصنف:
+                    <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
+                        @item.Author.FName
+                    </a>
+                </h5>
+                <h5>
+                    الناشر:
+                    <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
+                        @item.Publisher.PName
+                    </a>
+                </h5>
+                <h5>
+                    القسم:
+                    <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
+                        @item.Category.CName
+                    </a>
+                </h5>
+                <h5>
+                    @item.VolumesNum مجلد
+                </h5>
+                <h5 class="text-danger" >
+                    <span>@item.Price</span> ج.م
+                </h5>
+            </div>
+            <hr />
+            <div class="product-price-btn">
+                @*<p>متوفر @item.AvailableCopies نسخة</p>*@
+                <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn btn-primary" role="button">أضف للسلة <span class="glyphicon glyphicon-shopping-cart"></span></a>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 
 
-    }
+}
 
 </div>
 <div class="text-center">

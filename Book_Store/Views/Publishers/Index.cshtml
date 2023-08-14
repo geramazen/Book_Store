@@ -5,31 +5,33 @@
     ViewBag.Title = "Index";
 }
 <br>
-<p>
+<p class="text-center">
     @Html.ActionLink("إضافة دار نشر جديدة", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
 </p>
-<table class="table table-striped">
-    <tr>
-        <th>
-            اسم دار النشر
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="tablesStyle">
+    <table class="table table-striped table-hover">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PName)
-            </td>
-            <td>
-                @Html.ActionLink("تعديل", "Edit", new { id = item.PID }, htmlAttributes: new { @class = "btn btn-primary" }) |
-                @Html.ActionLink("حذف", "Delete", new { id = item.PID }, htmlAttributes: new { @class = "btn btn-danger" })
-            </td>
+            <th>
+                اسم دار النشر
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PName)
+                </td>
+                <td>
+                    @Html.ActionLink("تعديل", "Edit", new { id = item.PID }, htmlAttributes: new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("حذف", "Delete", new { id = item.PID }, htmlAttributes: new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
 <div class="text-center">
     @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
 </div>

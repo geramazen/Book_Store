@@ -1,14 +1,58 @@
 ﻿@import url(https://fonts.googleapis.com/earlyaccess/amiri.css);
+@import url(https://fonts.googleapis.com/earlyaccess/lateef.css);
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Ink&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink:wght@700&family=Reem+Kufi+Ink&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rakkas&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo+Play:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Markazi+Text&display=swap');
 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Amiri', serif;
-    background-color: #fdf1ec;
-    letter-spacing: 0.1em;
-
+    background-color: whitesmoke;
+    max-width: 100%;
+    /*letter-spacing: 0.1em;*/
 }
 
+.Fund {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-image: url("/images/newbg.jpg");
+    background-color: rgba(0,0,0,.3);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.highlighted {
+    background-color: rgba(0,0,0,.3);
+}
+
+.kotobi {
+    font-family: 'Reem Kufi Fun', sans-serif;
+    color: white;
+    font-size: 100px;
+}
+
+.navbar a {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 18px;
+}
+
+.kotobien {
+    color: white;
+    font-size: 100px;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -40,8 +84,8 @@ textarea {
     height: 215px;
     width: 330px;
     margin: 25px auto;
-   /* border:2px solid;*/
-    border-radius: 7px 0px 0px 7px;
+    /* border:2px solid;*/
+    border-radius: 10px;
     /* VIA CSS MATIC https://goo.gl/cIbnS */
     -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
@@ -63,9 +107,9 @@ textarea {
     height: 210px;
     width: 163px;
     padding-right: 5px;
-   /* border-radius: 0 7px 10px 7px;*/
+    /* border-radius: 0 7px 10px 7px;*/
     background-color: #ffffff;
-   /* border-left:2px solid ;*/
+    /* border-left:2px solid ;*/
 }
 
 .product-text {
@@ -82,13 +126,13 @@ textarea {
 
     .product-text h1,
     .product-price-btn p {
-        font-family: 'Bentham', serif;
+        /* font-family: 'Bentham', serif;*/
     }
 
     .product-text h2 {
         margin: 0 0 23px 38px;
         font-size: 13px;
-        font-family: 'Raleway', sans-serif;
+        /* font-family: 'Raleway', sans-serif;*/
         font-weight: 200;
         text-transform: uppercase;
         color: #d2d2d2;
@@ -98,7 +142,7 @@ textarea {
     .product-text p {
         height: 90px;
         margin: 0 0 0 19px;
-        font-family: 'Playfair Display', serif;
+        /*font-family: 'Playfair Display', serif;*/
         color: #8d8d8d;
         line-height: 1.3em;
         font-size: 15px;
@@ -106,10 +150,10 @@ textarea {
         overflow: hidden;
     }
 
-    .product-text p > a  {
-        font-size: 12px;
-        font-weight: lighter;
-    }
+        .product-text p > a {
+            font-size: 12px;
+            font-weight: lighter;
+        }
 
 .product-price-btn {
     height: 50px;
@@ -124,11 +168,11 @@ textarea {
         top: 68%;
         padding-right: 18%;
         height: 20px;
-        font-family: 'Trocchi', serif;
+        /* font-family: 'Trocchi', serif;*/
         margin: 0 0 0 18px;
         font-size: 14px;
         font-weight: lighter;
-        font-family: 'Raleway', sans-serif;
+        /*font-family: 'Raleway', sans-serif;*/
         font-size: 12px;
         font-weight: 200;
         text-transform: uppercase;
@@ -138,7 +182,7 @@ textarea {
     .product-price-btn > p > span {
         display: inline-block;
         height: 20px;
-        font-family: 'Suranna', serif;
+        /* font-family: 'Suranna', serif;*/
         font-size: 15px;
     }
 
@@ -151,13 +195,13 @@ textarea {
         box-sizing: border-box;
         border: transparent;
         border-radius: 15px;
-        font-family: 'Raleway', sans-serif;
+        /* font-family: 'Raleway', sans-serif;*/
         font-size: 12px;
         font-weight: 200;
         text-transform: uppercase;
         letter-spacing: 0.2em;
         color: #ffffff;
-        background-color: #9cebd5;
+        /*background-color: #9cebd5;*/
         cursor: pointer;
         outline: none;
     }
@@ -166,8 +210,27 @@ textarea {
         background-color: #79b0a1;
     }
 
+.tablesStyle {
+    background-color: aliceblue;
+    text-align: center;
+    margin-right: 25%;
+    margin-left: 25%;
+    border-radius:10px;
+}
 
+.tablesStyle a {
+    color:black;
+}
+.tablesStyle td
+{
+    border-radius:10px;
+}
 
+    .tablesStyle th {
+        text-align: center;
+        background-color: #337ab7;
+        color:white;
+    }
 
 /* ----- Variables ----- */
 /* ----- Global ----- */

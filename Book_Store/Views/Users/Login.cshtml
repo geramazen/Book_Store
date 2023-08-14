@@ -4,30 +4,26 @@
     ViewBag.Title = "Login";
 }
 <br />
-<h2 class="text-center">تسجيل الدخول</h2>
-
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal Amiri">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
        
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EMAIL, htmlAttributes: new { @class = "control-label " })
+            @*@Html.LabelFor(model => model.EMAIL, htmlAttributes: new { @class = "control-label " })*@
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "الإسم" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label " })
+            @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label " })*@
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder ="رمز المرور" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,7 +32,7 @@
 
         <div class="form-group">
             <div class=" col-md-10">
-                <input type="submit" value="تسجيل دخول" class="btn btn-success" />
+                <input type="submit" value="تسجيل دخول" class="btn btn-primary" />
                 <br /><br />
                 <p class="text-danger"> @ViewBag.error</p>
             </div>

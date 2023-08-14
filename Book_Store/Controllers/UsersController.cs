@@ -158,9 +158,9 @@ namespace Book_Store.Controllers
         }
 
         [HttpPost, ActionName("Login")]
-        public ActionResult Login_post([Bind(Include = "EMAIL,Password")] User user)
+        public ActionResult Login_post(User user)
         {
-            var rec = db.Users.Where(x => x.EMAIL == user.EMAIL && x.Password == user.Password).ToList().FirstOrDefault();
+            var rec = db.Users.Where(x => x.Name == user.Name && x.Password == user.Password).ToList().FirstOrDefault();
             if(rec != null)
             {
                 Session["UserName"] = rec.Name;

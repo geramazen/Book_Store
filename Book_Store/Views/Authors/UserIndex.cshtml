@@ -5,54 +5,44 @@
     ViewBag.Title = "UserIndex";
 }
 <br />
-<hr />
-<h1 class="text-center">
-    جميع المصنفين
-</h1>
-<hr />
 <br />
-@using (Html.BeginForm("UserIndex", "Authors", FormMethod.Get))
-{
-    @Html.AntiForgeryToken()
-    <div class="row">
-
-        <div class="col">
-            <div class="col-md-10">
-                @Html.Editor("Author", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل اسم المصنف" } })
-            </div>
-        </div>
-        <br />
-        <br />
-        <div class="col">
-            <div class="col-md-10">
-                <button class="btn btn-success" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
-            </div>
-        </div>
-
-    </div>
-
-}
-
-<br />
-<table class="table table-striped">
-    <tr>
-        <th>
-            إسم المصنف
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
+<div>
+    @using (Html.BeginForm("UserIndex", "Authors", FormMethod.Get))
     {
-        <tr>
-            <td>
-                <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
-                    @Html.DisplayFor(modelItem => item.FName)
-                </a>
-            </td>
-        </tr>
-    }
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-primary" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
+            </div>
+            <div class="col-md-3">
+                @Html.Editor("Author", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل اسم المصنف" } })
+            </div>           
+        </div>
 
-</table>
+    }
+</div>
+<br />
+<div class="tablesStyle" >
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>
+                إسم المصنف
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
+                        @Html.DisplayFor(modelItem => item.FName)
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
 <div class="text-center">
     @Html.PagedListPager(Model, Page => Url.Action("UserIndex", new { Page }))
 </div>

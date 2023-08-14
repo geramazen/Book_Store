@@ -4,42 +4,56 @@
     ViewBag.Title = "Details";
 }
 
+<style>
+    .caption {
+        color: cornsilk;
+    }
+
+        .caption h4 a {
+            color: burlywood;
+        }
+    
+    
+</style>
 
 <br />
 <br />
-<div class="text-center">
-    <div class="row text-center">
-        <div>
-            <div class="thumbnail">
-                <h4 class="text-danger">عدد النسخ المتوفرة:  @Html.DisplayFor(model => model.AvailableCopies)</h4>
-                <img src="@Url.Content(Model.image)" width="242" height="200" alt="...">
-                <div class="caption">
-                    <h2>@Html.DisplayFor(model => model.title)</h2>
-                    <h4>
-                        المصنف:
-                        <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=Model.AID})">
-                            @Model.Author.FName
-                        </a>
-                    </h4>
-                    <h4>
-                        القسم:
-                        <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=Model.CID})">
-                            @Model.Category.CName
-                        </a>
-                    </h4>
-                    <h4>
-                        دار النشر:
-                        <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=Model.PID})">
-                            @Model.Publisher.PName
-                        </a>
-                    </h4>
-                    <h4>عدد المجلدات:  @Html.DisplayFor(model => model.VolumesNum)</h4>
-                    <h4>@Html.DisplayFor(model => model.description)</h4>
-                    <h4>السعر:  @Html.DisplayFor(model => model.Price)</h4>
-                    <p><a href="@Url.Action("AddToCart" , "Books" , new {id=Model.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضافة إلى سلة المشتريات</a></p>
-                </div>
-            </div>
+
+<div class="row text-center">
+
+    <div class="col-md-6 text-right">
+        <div class="caption" style="height:400px;width:300px">
+            <h2  style="font-family: 'Reem Kufi', sans-serif;">@Html.DisplayFor(model => model.title)</h2>
+            <hr />
+            <h4>
+                المصنف:
+                <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=Model.AID})">
+                    @Model.Author.FName
+                </a>
+            </h4>
+            <h4>
+                القسم:
+                <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=Model.CID})">
+                    @Model.Category.CName
+                </a>
+            </h4>
+            <h4>
+                دار النشر:
+                <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=Model.PID})">
+                    @Model.Publisher.PName
+                </a>
+            </h4>
+            <h4>عدد المجلدات:  @Html.DisplayFor(model => model.VolumesNum)</h4>
+            <h4>@Html.DisplayFor(model => model.description)</h4>
+            <h4 class="text-success">السعر:  @Html.DisplayFor(model => model.Price) ج.م</h4>
+            <h4>عدد النسخ المتوفرة:  @Html.DisplayFor(model => model.AvailableCopies)</h4>
+            <br />
+            <p><a href="@Url.Action("AddToCart" , "Books" , new {id=Model.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضافة إلى سلة المشتريات</a></p>
         </div>
     </div>
+    <div class="col-md-6 text-left">
+        <img src="@Url.Content(Model.image)" width="300" height="400" alt="..." >
+    </div>
 </div>
+
 
