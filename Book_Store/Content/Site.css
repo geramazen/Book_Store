@@ -40,12 +40,12 @@ textarea {
     height: 215px;
     width: 330px;
     margin: 25px auto;
-    border:2px solid;
-    border-radius: 7px 7px 7px 7px;
+   /* border:2px solid;*/
+    border-radius: 7px 0px 0px 7px;
     /* VIA CSS MATIC https://goo.gl/cIbnS */
     -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.20);
 }
 
 .product-img {
@@ -63,7 +63,7 @@ textarea {
     height: 210px;
     width: 163px;
     padding-right: 5px;
-    border-radius: 0 7px 10px 7px;
+   /* border-radius: 0 7px 10px 7px;*/
     background-color: #ffffff;
    /* border-left:2px solid ;*/
 }
