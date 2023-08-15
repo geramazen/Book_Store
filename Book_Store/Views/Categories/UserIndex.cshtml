@@ -1,18 +1,18 @@
 ﻿@model PagedList.IPagedList<Book_Store.Models.Category>
 @using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "UserIndex";
 }
 
-<br />
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 @using (Html.BeginForm("UserIndex", "Categories", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
     <div class="row">
 
         <div class="col-md-6">
-            <button class="btn btn-primary" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
+            <button class="btn btn-primary" value="Search" type="submit">ابحث</button>
         </div>
 
         <div class="col-md-3">

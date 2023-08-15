@@ -4,15 +4,14 @@
 @{
     ViewBag.Title = "UserIndex";
 }
-<br />
-<br />
+
 <div>
     @using (Html.BeginForm("UserIndex", "Authors", FormMethod.Get))
     {
         @Html.AntiForgeryToken()
         <div class="row">
             <div class="col-md-6">
-                <button class="btn btn-primary" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
+                <button class="btn btn-primary" value="Search" type="submit">ابحث</button>
             </div>
             <div class="col-md-3">
                 @Html.Editor("Author", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل اسم المصنف" } })

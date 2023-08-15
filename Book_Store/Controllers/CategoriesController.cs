@@ -31,7 +31,7 @@ namespace Book_Store.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
-            if(CategoryName != null)
+            if (CategoryName != null)
             {
                 recs = recs.Where(c => c.CName.Contains(CategoryName)).ToList();
             }
@@ -143,10 +143,12 @@ namespace Book_Store.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult CategoryBooks(int CID)
+        public ActionResult CategoryBooks(int? page, int CID)
         {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
             var Books = db.Books.Where(b => b.CID == CID).ToList();
-            return View(Books);
+            return View(Books.ToPagedList(pageNumber, pageSize));
         }
     }
 }

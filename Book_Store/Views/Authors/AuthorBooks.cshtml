@@ -1,72 +1,67 @@
-﻿@model IEnumerable<Book_Store.Models.Book>
+﻿@model PagedList.IPagedList<Book_Store.Models.Book>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     var Author = Model.Select(c => c.Author.FName).FirstOrDefault();
     ViewBag.Title = Author;
 }
-<style>
-    .card:hover {
-        transform: scale(1.1);
-        z-index: 9;
-    }
-</style>
 
 <link href="~/Content/Site.css" />
-<br />
-<hr />
-<h1 class="text-center">@Author</h1>
+<h1 class="text-center" style="font-family: 'Reem Kufi', sans-serif; color:whitesmoke">@Author</h1>
 <hr />
 <div class="row">
     @foreach (var item in Model)
     {
-
         <div class="col-sm-4">
-            <div class="product">
-                <div class="product__photo">
-                    <div class="photo-container">
-                        <div class="photo-main">
-                            <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
-                                <img src="@Url.Content(item.image)" alt="...">
-                            </a>
-                        </div>
-                    </div>
+            <div class="wrapper">
+                <div class="product-img">
+                    <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
+                        <img src="@Url.Content(item.image)" height="210" width="163" alt="...">
+                    </a>
                 </div>
-                <div class="product__info">
-                    <div class="title">
-                        <h1>@item.title</h1>
-                    </div>
-                    <div class="price">
-                        <span>@item.Price</span> <br /> جنيه مصري
-                    </div>
-                    <div class="description">
-                        <h4>
-                            دار النشر:
-                            <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
-                                @item.Publisher.PName
-                            </a>
-                        </h4>
-                        <h4>
+                <div class="product-info">
+                    <div class="product-text">
+                        <h1 style="font-family: 'Reem Kufi', sans-serif;" class="text-center">@item.title</h1>
+                        <h5>
                             المصنف:
                             <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
                                 @item.Author.FName
                             </a>
-                        </h4>
-                        <h4>
+                        </h5>
+                        <h5>
+                            الناشر:
+                            <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
+                                @item.Publisher.PName
+                            </a>
+                        </h5>
+                        <h5>
                             القسم:
                             <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
                                 @item.Category.CName
                             </a>
-                        </h4>
-                        <h4>عدد المجلدات: @item.VolumesNum</h4>
-                        <h4>عددالنسخ المتوفرة: @item.AvailableCopies</h4>
+                        </h5>
+                        <h5>
+                            @item.VolumesNum مجلد
+                        </h5>
+                        <h5 class="text-danger">
+                            <span>@item.Price</span> ج.م
+                        </h5>
                     </div>
-                    <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn buy--btn" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضف للسلة</a>
+                    <hr />
+                    <div class="product-price-btn">
+                        @*<p>متوفر @item.AvailableCopies نسخة</p>*@
+                        <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn btn-primary" role="button">أضف للسلة <span class="glyphicon glyphicon-shopping-cart"></span></a>
+                    </div>
                 </div>
             </div>
+
         </div>
-
-
 
     }
 
+</div>
+<br />
+<div class="text-center">
+    @Html.PagedListPager(Model, Page => Url.Action("ViewBooks", new { Page }))
 </div>

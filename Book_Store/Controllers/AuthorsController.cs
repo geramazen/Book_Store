@@ -157,10 +157,12 @@ namespace Book_Store.Controllers
         }
 
 
-        public ActionResult AuthorBooks(int AID)
+        public ActionResult AuthorBooks(int? page ,int AID)
         {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
             var Books = db.Books.Where(b => b.AID == AID).ToList();
-            return View(Books);
+            return View(Books.ToPagedList(pageNumber, pageSize));
         }
     }
 }

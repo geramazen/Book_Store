@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/images/Screenshot 2023-08-14 124747.png">
+    <link rel="icon" type="image/png" href="/images/icon.png">
     <title style="font-family: 'Aref Ruqaa Ink', serif; ">الكتبي</title>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="~/Content/chosen.css" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>الكتبي</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -41,11 +41,9 @@
         }
     </style>
 </head>
-<body>
+<body style="left:0">
 
-    @*class="navbar navbar-dark bg-dark" class="navbar navbar-dark bg-primary"*@
     <nav class="navbar navbar-inverse navbar-fixed-top " style="border: 0; margin: 0; background-color: #337ab7; ">
-        @*<div class="navbar navbar-inverse navbar-fixed-top " style="background-color: #884A39 ">*@
         <div class="">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -120,90 +118,84 @@
         </div>
         @*</div>*@
     </nav>
-    <div class="">
-        <div class="Fund">
 
-        </div>
-        <div class="text-center highlighted">
+    <div class="Fund">
+    </div>
+
+    <div class="text-center highlighted">
+        <br />
+        <h1 class="kotobi ">
+            الــــكُتبـي
+        </h1>
+        <h3 style="font-family: 'Markazi Text', serif; color:wheat; margin:0; margin-left:115px; margin-top:-30px;">
+            متجر لببيع الكتب الجديدة والمستعملة
+        </h3>
+        <br />
+        <br />
+    </div>
+
+    <div class="highlighted">
+        <div style="position:fixed">
+            <a href="https://www.facebook.com/alkutbibookstore0?mibextid=ZbWKwL" target="_blank" class="fa fa-facebook"></a>
             <br />
-            <h1 class="kotobi ">
-                الــــكُتبـي
-            </h1>
-            <h3 style="font-family: 'Markazi Text', serif; color:wheat; margin:0; margin-left:115px; margin-top:-30px;">
-                متجر لببيع الكتب الجديدة والمستعملة
-            </h3>
+            <a href="https://instagram.com/alkutbi331?igshid=MzRlODBiNWFlZA==" target="_blank" class="fa fa-instagram"></a>
             <br />
+            <a href="https://wa.me/201122506393" target="_blank">
+                <i class="fa fa-whatsapp"></i>
+            </a>
         </div>
-        <div class="highlighted">
+        <div class="container">
             @RenderBody()
         </div>
-
-
-
-
-
-        <!-- Footer -->
-        <footer class="text-center text-lg-start text-muted text-light reveal" style="background-color: #337ab7; ">
-            
-            <section class="text-light">
-                <div class="container text-center text-md-start mt-5">
-                    <!-- Grid row -->
-                    <div class="row mt-3">
-
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 text-right">
-                            <!-- Links -->
-                            <h6 class="text-uppercase fw-bold mb-4 text-center">تواصل معنا</h6>
-
-                            <p><i class="fa fa-map-marker" aria-hidden="true"></i>  54 شارع ميشيل بخوم, الدقي, الجيزة </p>
-                            <p>
-                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                fundata-100@fundata-esl.com
-                            </p>
-                            <p><i class="fa fa-phone" aria-hidden="true"></i> 01095559585</p>
-                            <p><i class="fa fa-phone" aria-hidden="true"></i> +202 33362107</p>
-                            <p><i class="fa fa-fax" aria-hidden="true"></i> +202 33364970</p>
-
-                        </div>
-                        <!-- Grid column -->
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                            <!-- Content -->
-                            @*<h6 style="font-family: 'Bebas Neue', cursive;" class="text-light fw-bold mb-4">
-                                <i class="fas fa-gem me-3"></i> Fund Data
-                            </h6>*@
-                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="ArIndex">
-                                <img src="~/Pics/logo.png" width="180" height="80" alt="">
-                            </a>
-                            <p>
-                                نحن متخصصون في مجال إدارة صناديق الإستثمار.
-                            </p>
-                        </div>
-                        <!-- Grid column -->
-                        <!-- Grid column -->
-                        <!-- Grid column -->
-                        <!-- Grid column -->
-                        <!-- Grid column -->
-                        <!-- Grid column -->
-                        <!-- Grid column -->
-                    </div>
-                    <!-- Grid row -->
-                </div>
-            </section>
-            <!-- Section: Links  -->
-            <!-- Copyright -->
-            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05); font-family: 'Bebas Neue', cursive;">
-                &copy; 2023 - M.R.Soft
-                <a class="text-reset fw-bold" href="#"></a>
-            </div>
-            <!-- Copyright -->
-        </footer>
-        <!-- Footer -->
-
-
-
-
-
-
     </div>
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="text-center text-lg-start text-muted text-light reveal" style="background-color: #337ab7; padding:0px ; bottom:0;left:0;width:100%">
+        <br />
+        <section style="color:aliceblue" class="text-center">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3 text-center">
+                    
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <h3>تواصل معنا</h3>
+                        <hr />
+                        <a href="https://www.facebook.com/alkutbibookstore0?mibextid=ZbWKwL" target="_blank" class="fa fa-facebook facedet"></a>
+                        <a href="https://instagram.com/alkutbi331?igshid=MzRlODBiNWFlZA==" target="_blank" class="fa fa-instagram insdet"></a>
+                        <a href="https://wa.me/201122506393" target="_blank">
+                            <i class="fa fa-whatsapp whatsdet"></i>
+                        </a>
+                    </div>
+
+
+
+
+
+                    <div class="col-md-6">
+                        <!-- Links -->
+                        <br />
+                        <h1 style="font-family: 'Aref Ruqaa Ink', serif; font-size:55px">
+                            الكتبي
+                        </h1>                     
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h4><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>  شارع سيد طلبه-متفرع من الوفاء والامل -الهرم -الجيزة-مصر  </h4>
+                        <hr />
+                        <h4><i class="glyphicon glyphicon-phone" aria-hidden="true"></i> 01122506393</h4>
+                    </div>
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <br />
+    </footer>
+    <!-- Footer -->
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

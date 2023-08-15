@@ -194,7 +194,7 @@ namespace Book_Store.Controllers
                 }
                 else if (OrderStatus == 2)
                 {
-                    OrderStatusMessage = "تم شحن الطلب، قم بالتواصل مع شركة الشحن لمتابعته";
+                    OrderStatusMessage = "تم شحن الطلب، قم بالتواصل مع شركة الشحن لمتابعتـه";
                 }
                 return RedirectToAction("OrderFollowing_Result", new { OrderStatusMessage = OrderStatusMessage, OrderID = OrderID });
             }

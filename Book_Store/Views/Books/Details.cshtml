@@ -16,9 +16,6 @@
     
 </style>
 
-<br />
-<br />
-
 <div class="row text-center">
 
     <div class="col-md-6 text-right">
@@ -49,11 +46,17 @@
             <h4>عدد النسخ المتوفرة:  @Html.DisplayFor(model => model.AvailableCopies)</h4>
             <br />
             <p><a href="@Url.Action("AddToCart" , "Books" , new {id=Model.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضافة إلى سلة المشتريات</a></p>
+            <p>
+                <a href="https://wa.me/201122506393?text=مرحبا،%20أريد%20الإستفسار%20عن%20كتاب @Model.title" target="_blank">
+                    <i class="fa fa-whatsapp whatsdet "></i>
+                </a>
+            </p>
         </div>
     </div>
     <div class="col-md-6 text-left">
         <img src="@Url.Content(Model.image)" width="300" height="400" alt="..." >
     </div>
 </div>
-
+<br />
+<br />
 

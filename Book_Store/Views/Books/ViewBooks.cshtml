@@ -16,7 +16,6 @@
 
 
 
-<br />
 @*<div class="text-center highlighted">
     <h1 class="kotobi ">
         الــــكُتبـي
@@ -26,8 +25,7 @@
     </h3>
     <br />
 </div>*@
-<br />
-<br />
+
 
 @if (ViewBag.message != null)
 {
@@ -36,7 +34,7 @@
         @if (ViewBag.OrderID != null)
         {
             <h2>
-                كود طلبك: @ViewBag.OrderID <br />
+                كود الطلب: @ViewBag.OrderID <br />
             </h2>
         }
     </div>
@@ -75,7 +73,7 @@
 
         <div class="form-group col-md-4">
             <div class="col-md-10">
-                <button class="btn btn-primary" value="Search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> ابحث</button>
+                <button class="btn btn-primary" value="Search" type="submit">إبحث</button>
             </div>
         </div>
 
