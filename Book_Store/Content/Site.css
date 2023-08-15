@@ -158,7 +158,6 @@ textarea {
     height: 50px;
     width: 163px;
     margin-top: 2px;
-    position: relative;
 }
 
     .product-price-btn p {
@@ -186,28 +185,28 @@ textarea {
     }
 
     .product-price-btn a {
-        float: right;
         display: inline-block;
-        height: 30px;
-        width: 120px;
+        height: 35px;
+        width: 35px;
+        text-align: center;
         margin: 0 10px 0 8px;
+        padding: 10px 10px 10px 10px;
         box-sizing: border-box;
         border: transparent;
-        border-radius: 15px;
+        border-radius: 30px;
         /* font-family: 'Raleway', sans-serif;*/
-        font-size: 12px;
+        font-size: 18px;
         font-weight: 200;
         text-transform: uppercase;
-        letter-spacing: 0.2em;
-        color: #ffffff;
-        /*background-color: #9cebd5;*/
+        color: whitesmoke;
+        background-color: #337ab7;
         cursor: pointer;
         outline: none;
     }
 
-    .product-price-btn button:hover {
-        background-color: #79b0a1;
-    }
+        .product-price-btn a:hover {
+            background-color: #3a90d9;
+        }
 
 .tablesStyle {
     background-color: aliceblue;

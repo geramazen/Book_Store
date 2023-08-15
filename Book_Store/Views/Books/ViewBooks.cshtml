@@ -112,6 +112,7 @@
         <div class="product-info">
             <div class="product-text">
                 <h1 style="font-family: 'Reem Kufi', sans-serif;" class="text-center">@item.title</h1>
+                <br />
                 <h5>
                     المصنف:
                     <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
@@ -130,17 +131,13 @@
                         @item.Category.CName
                     </a>
                 </h5>
-                <h5>
-                    @item.VolumesNum مجلد
-                </h5>
-                <h5 class="text-danger" >
+                <h5 class="text-danger">
                     <span>@item.Price</span> ج.م
                 </h5>
             </div>
-            <hr />
-            <div class="product-price-btn">
-                @*<p>متوفر @item.AvailableCopies نسخة</p>*@
-                <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn btn-primary" role="button">أضف للسلة <span class="glyphicon glyphicon-shopping-cart"></span></a>
+            <br />
+            <div class="product-price-btn" style="text-align:center">       
+                <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" role="button"><span class="glyphicon glyphicon-shopping-cart"></span></a>
             </div>
         </div>
     </div>
