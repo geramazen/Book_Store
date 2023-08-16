@@ -11,7 +11,7 @@
     }
 
 </style>
-
+<link href="~/Content/Chosen/chosen.min.css" />
 <link href="~/Content/Site.css" />
 
 
@@ -79,7 +79,7 @@
 
         <div class="form-group col-md-4">
             <div class="col-md-10">
-                @Html.DropDownList("PublisherName", ViewData["PublisherNameList"] as SelectList, "اختر دار النشر", new { @class = "ddlist form-control" })
+                @Html.DropDownList("PublisherName", ViewData["PublisherNameList"] as SelectList, "اختر دار النشر", new { @class = "form-control ddlist" })
             </div>
         </div>
 
@@ -155,11 +155,19 @@
 
 <script src="~/Scripts/chosen.jquery.js"></script>
 <script>
+    $("Input").val(null);
+    $("Select").val(null);
+</script>
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<script>
+    //$(document).ready(function () {
+    //    $('#AutherName').trigger("chosen:updated");
+    //    $(function () {
 
-    $(function () {
-        //   normal dropdown
-        $(".ddlist").chosen({
-            //  disable_search_threshold: 1
-        });
-    });
+    //        $(".ddlist").chosen({
+    //            disable_search_threshold: 10,
+
+    //        });
+    //    });
+    //});
 </script>

@@ -107,11 +107,18 @@ namespace Book_Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Book book/*, HttpPostedFileBase imgfile*/)
+        public ActionResult Edit(Book book, HttpPostedFileBase imgfile = null)
         {
-            var model = db.Books.Where(b => b.ID == book.ID).FirstOrDefault();
-            book.image = model.image;
-            db.SaveChanges();
+            //var model = db.Books.Where(b => b.ID == book.ID).FirstOrDefault();
+            //book.image = model.image;
+            string path = "";
+            if (imgfile != null && imgfile.FileName.Length > 0)
+            {
+                path = "~/images/" + Path.GetFileName(imgfile.FileName);
+                imgfile.SaveAs(Server.MapPath(path));
+                book.image = path;
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(book).State = EntityState.Modified;
@@ -192,11 +199,11 @@ namespace Book_Store.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
-            if(recs.Count() == 0)
+            if (recs.Count() == 0)
             {
                 ViewBag.NoResult = "عفوا، لا توجد نتائج تطابق هذا البحث";
             }
-
+           
             return View(recs.ToPagedList(pageNumber, pageSize));
 
         }
