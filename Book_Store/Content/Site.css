@@ -229,7 +229,7 @@ textarea {
     }
 
 
-.fa {
+.Social {
     padding:10px;
     font-size: 20px;
     margin-right:0px;
@@ -238,7 +238,6 @@ textarea {
     text-align: center;
     text-decoration: none;
 }
-
     .fa:hover {
         opacity: 1;
     }

@@ -90,10 +90,12 @@
 
 @if (ViewBag.NoResult != null)
 {
-    <div class="text-center">
-        <h3>
+    <div class="text-center" style="color: white; font-family: 'Lateef', serif;">
+        <h1>
             @ViewBag.NoResult
-        </h3>
+        </h1>
+        <br />
+        <br />
     </div>
 }
 <div class="row">
@@ -137,7 +139,7 @@
             </div>
             <br />
             <div class="product-price-btn" style="text-align:center">       
-                <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" role="button"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+                <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" role="button"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
             </div>
         </div>
     </div>
