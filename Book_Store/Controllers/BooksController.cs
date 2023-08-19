@@ -14,7 +14,7 @@ namespace Book_Store.Controllers
 {
     public class BooksController : Controller
     {
-        private BookContext db = new BookContext();
+        private readonly BookContext db = new BookContext();
         public static List<Book> UserCart = new List<Book>();
 
         // GET: Books
@@ -61,10 +61,9 @@ namespace Book_Store.Controllers
         {
             if (ModelState.IsValid)
             {
-                string path = "";
                 if (imgfile.FileName.Length > 0)
                 {
-                    path = "~/images/" + Path.GetFileName(imgfile.FileName);
+                    string path = "~/images/" + Path.GetFileName(imgfile.FileName);
                     imgfile.SaveAs(Server.MapPath(path));
 
                     book.image = path;
@@ -111,10 +110,10 @@ namespace Book_Store.Controllers
         {
             //var model = db.Books.Where(b => b.ID == book.ID).FirstOrDefault();
             //book.image = model.image;
-            string path = "";
+           
             if (imgfile != null && imgfile.FileName.Length > 0)
             {
-                path = "~/images/" + Path.GetFileName(imgfile.FileName);
+                string path = "~/images/" + Path.GetFileName(imgfile.FileName);
                 imgfile.SaveAs(Server.MapPath(path));
                 book.image = path;
             }
@@ -196,7 +195,7 @@ namespace Book_Store.Controllers
                     recs = recs.Where(p => p.AID == AutherName.Value).ToList();
                 }
             }
-            int pageSize = 10;
+            int pageSize = 12;
             int pageNumber = (page ?? 1);
 
             if (recs.Count() == 0)
@@ -238,7 +237,7 @@ namespace Book_Store.Controllers
         public ActionResult UserConfirmOrder(Order order)
         {
             var Books = UserCart;
-            return RedirectToAction("Create", "Orders", new { Books = Books, order = order });
+            return RedirectToAction("Create", "Orders", new { Books, order });
         }
 
         public ActionResult DeleteFromCart(int id)
@@ -280,7 +279,7 @@ namespace Book_Store.Controllers
             }
             db.SaveChanges();
             Session["Cart"] = 0;
-            UserCart = null;
+            UserCart.Clear();
             return RedirectToAction("ViewBooks", "Books", new { Message = "تم إرسال طلبك", OrderID = OrderId.ToString() });
         }
 

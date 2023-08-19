@@ -13,7 +13,7 @@ namespace Book_Store.Controllers
 {
     public class PublishersController : Controller
     {
-        private BookContext db = new BookContext();
+        private readonly BookContext db = new BookContext();
 
         // GET: Publishers
         public ActionResult Index(int? page)
