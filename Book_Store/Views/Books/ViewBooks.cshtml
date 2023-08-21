@@ -1,9 +1,11 @@
 ﻿@model PagedList.IPagedList<Book_Store.Models.Book>
 @using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 @{
     ViewBag.Title = "ViewBooks";
 }
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <style>
     .wrapper:hover {
         transform: scale(1.1);
@@ -155,21 +157,23 @@
     @Html.PagedListPager(Model, Page => Url.Action("ViewBooks", new { Page }))
 </div>
 
-<script src="~/Scripts/chosen.jquery.js"></script>
+
+
+
 <script>
     $("Input").val(null);
     $("Select").val(null);
 </script>
-<script src="~/Scripts/chosen.jquery.min.js"></script>
+
 <script>
-    //$(document).ready(function () {
-    //    $('#AutherName').trigger("chosen:updated");
-    //    $(function () {
+    $(document).ready(function () {
+       // $('#AutherName').trigger("chosen:updated");
+        $(function () {
 
-    //        $(".ddlist").chosen({
-    //            disable_search_threshold: 10,
+            $(".ddlist").chosen({
+                disable_search_threshold: 10,
 
-    //        });
-    //    });
-    //});
+            });
+        });
+    });
 </script>

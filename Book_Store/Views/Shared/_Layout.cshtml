@@ -15,10 +15,10 @@
     <title style="font-family: 'Aref Ruqaa Ink', serif; ">الكتبي</title>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/chosen.jquery.js"></script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
 
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/chosen.css" />
+    <link rel="stylesheet" href="~/Content/Chosen/chosen.min.css" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -30,7 +30,9 @@
         th {
             text-align: right
         }
-
+        .chosen-container{
+            float:right;
+        }
         .glass-effect {
             background: linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0));
             -webkit-backdrop-filter: blur(20px);
@@ -187,8 +189,8 @@
 
     </footer>
     <!-- Footer -->
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>
