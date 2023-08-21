@@ -135,10 +135,11 @@
                         @item.Category.CName
                     </a>
                 </h5>
-                <h5 class="text-danger">
+                <h5 style="color: white; display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 50px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">
                     <span>@item.Price</span> ج.م
                 </h5>
             </div>
+            <br />
             <br />
             <div class="product-price-btn" style="text-align:center">       
                 <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" role="button"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>

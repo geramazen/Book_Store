@@ -20,7 +20,7 @@
 
     <div class="col-md-6 text-right">
         <div class="caption" style="height:400px;width:300px">
-            <h2  style="font-family: 'Reem Kufi', sans-serif;">@Html.DisplayFor(model => model.title)</h2>
+            <h2 style="font-family: 'Reem Kufi', sans-serif;">@Html.DisplayFor(model => model.title)</h2>
             <hr />
             <h4>
                 المصنف:
@@ -42,9 +42,9 @@
             </h4>
             <h4>عدد المجلدات:  @Html.DisplayFor(model => model.VolumesNum)</h4>
             <h4>@Html.DisplayFor(model => model.description)</h4>
-            <h4 class="text-success">السعر:  @Html.DisplayFor(model => model.Price) ج.م</h4>
             <h4>عدد النسخ المتوفرة:  @Html.DisplayFor(model => model.AvailableCopies)</h4>
-            <br />
+            <h4 style="display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 30px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">السعر:  @Html.DisplayFor(model => model.Price) ج.م</h4>
+            <hr />
             <p><a href="@Url.Action("AddToCart" , "Books" , new {id=Model.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضافة إلى سلة المشتريات</a></p>
             <p>
                 <a href="https://wa.me/201122506393?text=مرحبا،%20أريد%20الإستفسار%20عن%20كتاب @Model.title" target="_blank">

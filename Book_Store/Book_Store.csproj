@@ -137,6 +137,7 @@
     <Compile Include="Controllers\AuthorsController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\DiscountCouponsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PublishersController.cs" />
@@ -185,11 +186,16 @@
     <Compile Include="Migrations\202308071202159_ShippingCostAdded.Designer.cs">
       <DependentUpon>202308071202159_ShippingCostAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202308211156053_DiscountCouponAdded.cs" />
+    <Compile Include="Migrations\202308211156053_DiscountCouponAdded.Designer.cs">
+      <DependentUpon>202308211156053_DiscountCouponAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\BookContext.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\DiscountCoupon.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Publisher.cs" />
     <Compile Include="Models\ShippingCost.cs" />
@@ -237,6 +243,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\SweetAlert.js" />
+    <Content Include="Scripts\Sweetalert.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -299,6 +307,11 @@
     <Content Include="Views\ShippingCosts\Details.cshtml" />
     <Content Include="Views\ShippingCosts\Edit.cshtml" />
     <Content Include="Views\ShippingCosts\Index.cshtml" />
+    <Content Include="Views\DiscountCoupons\Create.cshtml" />
+    <Content Include="Views\DiscountCoupons\Delete.cshtml" />
+    <Content Include="Views\DiscountCoupons\Details.cshtml" />
+    <Content Include="Views\DiscountCoupons\Edit.cshtml" />
+    <Content Include="Views\DiscountCoupons\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -350,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308071202159_ShippingCostAdded.resx">
       <DependentUpon>202308071202159_ShippingCostAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308211156053_DiscountCouponAdded.resx">
+      <DependentUpon>202308211156053_DiscountCouponAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

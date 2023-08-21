@@ -57,42 +57,44 @@
                     <th>
                         @Html.DisplayNameFor(model => model.OrderID)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
                 </tr>
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Adress)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MobileNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.BookName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PublisherName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OrderID)
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublisherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+            </tr>
                 }
 
             </table>
         </div>
     }
 }
-else
-{
-    <div class="text-center" style="height:200px">
-        <h2 style="color: white; font-family: 'Lateef', serif;">
-            أدخل كود الطلب وتتبع طلبك
-        </h2>
-    </div>
-}
+
+<div class="text-center" style="height:150px">
+</div>
+
 

@@ -1,0 +1,48 @@
+﻿@model PagedList.IPagedList<Book_Store.Models.DiscountCoupon>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+
+<p class="text-center">
+    @Html.ActionLink("إضافة كوبون جديد", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })
+</p>
+<div class="tablesStyle">
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>
+                الكوبون
+            </th>
+            <th>
+                نسبة الخصم
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.percentage)
+                </td>
+                <td>
+                    @Html.ActionLink("تعديل", "Edit", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("حذف", "Delete", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="text-center">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+</div>
+
+<div class="text-center" style="height:150px">
+</div>

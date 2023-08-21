@@ -16,7 +16,7 @@ namespace Book_Store.Controllers
         private BookContext db = new BookContext();
 
         // GET: Orders
-        public ActionResult Index(int? page , int? ID)
+        public ActionResult Index(int? page , int? ID, string Coupon)
         {
             var recs = db.Orders.OrderByDescending(c => c.ID).ToList();
             int pageSize = 10;
@@ -25,6 +25,10 @@ namespace Book_Store.Controllers
             if(ID != null)
             {
                 recs = recs.Where(id => id.OrderID == ID.Value).ToList();
+            }
+            if(Coupon != null)
+            {
+                recs = recs.Where(c => c.DiscountCoupon == Coupon).ToList();
             }
             return View(recs.ToPagedList(pageNumber, pageSize));
         }

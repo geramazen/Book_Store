@@ -11,6 +11,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Markazi+Text&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gulzar&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ruwudu&display=swap');
 body {
     padding-top: 50px;
     font-family: 'Amiri', serif;
@@ -193,7 +194,7 @@ textarea {
         padding: 10px 10px 10px 10px;
         box-sizing: border-box;
         border: transparent;
-        border-radius: 30px;
+        border-radius: 100%;
         /* font-family: 'Raleway', sans-serif;*/
         font-size: 18px;
         font-weight: 200;

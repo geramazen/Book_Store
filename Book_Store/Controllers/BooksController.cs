@@ -18,9 +18,31 @@ namespace Book_Store.Controllers
         public static List<Book> UserCart = new List<Book>();
 
         // GET: Books
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string BookName, int? PublisherName, int? CategoryName, int? AutherName)
         {
+            SetDropDown();
             var books = db.Books.Include(b => b.Author).Include(b => b.Category).ToList();
+
+            if (BookName != null || PublisherName != null || CategoryName != null || AutherName != null)
+            {
+
+                if (BookName != null)
+                {
+                    books = books.Where(c => c.title.Contains(BookName)).ToList();
+                }
+                if (PublisherName != null)
+                {
+                    books = books.Where(p => p.PID == PublisherName.Value).ToList();
+                }
+                if (CategoryName != null)
+                {
+                    books = books.Where(p => p.CID == CategoryName.Value).ToList();
+                }
+                if (AutherName != null)
+                {
+                    books = books.Where(p => p.AID == AutherName.Value).ToList();
+                }
+            }
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
@@ -253,6 +275,7 @@ namespace Book_Store.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateOrder(List<Book> Books, Order order)
         {
+            DiscountCoupon Coupon = new DiscountCoupon();
             Book book = new Book();
             Books = UserCart;
             var OrderId = 1;
@@ -260,6 +283,20 @@ namespace Book_Store.Controllers
             {
                 OrderId = db.Orders.Select(c => c.OrderID).Max() + 1;
             }
+
+            if(order.DiscountCoupon != null)
+            {
+                Coupon = db.DiscountCoupons.Where(c => c.Name == order.DiscountCoupon).FirstOrDefault();
+                if(Coupon != null)
+                {
+                    var Discount = Coupon.percentage;
+                    foreach(var Item in Books)
+                    {
+                        Item.Price = (Item.Price - ((Discount / 100) * Item.Price));
+                    }
+                }
+            }
+
             foreach (var item in Books)
             {
                 book = db.Books.Where(b => b.ID == item.ID).FirstOrDefault();
@@ -275,6 +312,10 @@ namespace Book_Store.Controllers
                     Order_Status = 0,
                     PublisherName = item.Publisher.PName
                 };
+                if(Coupon != null)
+                {
+                    DBorder.DiscountCoupon = Coupon.Name;
+                }
                 db.Orders.Add(DBorder);
             }
             db.SaveChanges();
