@@ -7,11 +7,13 @@
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <style>
-    .card:hover {
+    .wrapper:hover {
         transform: scale(1.1);
         z-index: 9;
     }
 
+</style>
+<link href="~/Content/Chosen/chosen.min.css" />
 <link href="~/Content/Site.css" />
 
 
@@ -98,75 +100,81 @@
         <br />
     </div>
 }
-
-
 <div class="row">
-   
     @foreach (var item in Model)
     {
 
-        <div class="col-sm-4">
-            <div class="product">
-                <div class="product__photo">
-                    <div class="photo-container">
-                        <div class="photo-main">
-                            <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
-                                <img src="@Url.Content(item.image)" alt="...">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__info">
-                    <div class="title">
-                        <h1>@item.title</h1>
-                    </div>
-                    <div class="price">
-                        <span>@item.Price</span> <br /> جنيه مصري
-                    </div>
-                    <div class="description">
+<div class="col-sm-4">
 
-                        @*<li>@item.description</li>*@
-                        <h4>
-                            دار النشر:
-                            <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
-                                @item.Publisher.PName
-                            </a>
-                        </h4>
-                        <h4>
-                            المصنف:
-                            <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
-                                @item.Author.FName
-                            </a>
-                        </h4>
-                        <h4>
-                            القسم:
-                            <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
-                                @item.Category.CName
-                            </a>
-                        </h4>
-                        <h4>عدد المجلدات: @item.VolumesNum</h4>
-                        <h4>عددالنسخ المتوفرة: @item.AvailableCopies</h4>
-                    </div>
-                    <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn buy--btn" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضف للسلة</a>
-                </div>
+
+    <div class="wrapper">
+        <div class="product-img">
+            <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
+                <img src="@Url.Content(item.image)" height="210" width="163" alt="...">
+            </a>
+        </div>
+        <div class="product-info">
+            <div class="product-text">
+                <h1 style="font-family: 'Reem Kufi', sans-serif;" class="text-center">@item.title</h1>
+                <br />
+                <h5>
+                    المصنف:
+                    <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
+                        @item.Author.FName
+                    </a>
+                </h5>
+                <h5>
+                    الناشر:
+                    <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
+                        @item.Publisher.PName
+                    </a>
+                </h5>
+                <h5>
+                    القسم:
+                    <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
+                        @item.Category.CName
+                    </a>
+                </h5>
+                <h5 style="color: white; display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 50px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">
+                    <span>@item.Price</span> ج.م
+                </h5>
+            </div>
+            <br />
+            <br />
+            <div class="product-price-btn" style="text-align:center">       
+                <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" role="button"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
             </div>
         </div>
+    </div>
+
+</div>
 
 
 
-    }
+}
 
+</div>
 <div class="text-center">
     @Html.PagedListPager(Model, Page => Url.Action("ViewBooks", new { Page }))
 </div>
 
-<script src="~/Scripts/chosen.jquery.js"></script>
-<script>
 
-    $(function () {
-        //   normal dropdown
-        $(".ddlist").chosen({
-            //  disable_search_threshold: 1
+
+
+<script>
+    $("Input").val(null);
+    $("Select").val(null);
+</script>
+
+<script>
+    $(document).ready(function () {
+       // $('#AutherName').trigger("chosen:updated");
+        $(function () {
+
+            $(".ddlist").chosen({
+                disable_search_threshold: 10,
+
+            });
         });
     });
 </script>
