@@ -137,6 +137,7 @@
     <Compile Include="Controllers\AuthorsController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\DiscountCouponsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PublishersController.cs" />
@@ -185,11 +186,28 @@
     <Compile Include="Migrations\202308071202159_ShippingCostAdded.Designer.cs">
       <DependentUpon>202308071202159_ShippingCostAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202308211156053_DiscountCouponAdded.cs" />
+    <Compile Include="Migrations\202308211156053_DiscountCouponAdded.Designer.cs">
+      <DependentUpon>202308211156053_DiscountCouponAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308211413155_RatingAddedToTheBooks.cs" />
+    <Compile Include="Migrations\202308211413155_RatingAddedToTheBooks.Designer.cs">
+      <DependentUpon>202308211413155_RatingAddedToTheBooks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308211418223_RatingAddedToTheBooks1.cs" />
+    <Compile Include="Migrations\202308211418223_RatingAddedToTheBooks1.Designer.cs">
+      <DependentUpon>202308211418223_RatingAddedToTheBooks1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308220829595_RatingBookUpdated.cs" />
+    <Compile Include="Migrations\202308220829595_RatingBookUpdated.Designer.cs">
+      <DependentUpon>202308220829595_RatingBookUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\BookContext.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\DiscountCoupon.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Publisher.cs" />
     <Compile Include="Models\ShippingCost.cs" />
@@ -202,7 +220,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\chosen.css" />
+    <Content Include="Content\Chosen\chosen-sprite.png" />
+    <Content Include="Content\Chosen\chosen.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -225,7 +244,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -237,6 +256,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\SweetAlert.js" />
+    <Content Include="Scripts\Sweetalert.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -299,6 +320,11 @@
     <Content Include="Views\ShippingCosts\Details.cshtml" />
     <Content Include="Views\ShippingCosts\Edit.cshtml" />
     <Content Include="Views\ShippingCosts\Index.cshtml" />
+    <Content Include="Views\DiscountCoupons\Create.cshtml" />
+    <Content Include="Views\DiscountCoupons\Delete.cshtml" />
+    <Content Include="Views\DiscountCoupons\Details.cshtml" />
+    <Content Include="Views\DiscountCoupons\Edit.cshtml" />
+    <Content Include="Views\DiscountCoupons\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -350,6 +376,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308071202159_ShippingCostAdded.resx">
       <DependentUpon>202308071202159_ShippingCostAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308211156053_DiscountCouponAdded.resx">
+      <DependentUpon>202308211156053_DiscountCouponAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308211413155_RatingAddedToTheBooks.resx">
+      <DependentUpon>202308211413155_RatingAddedToTheBooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308211418223_RatingAddedToTheBooks1.resx">
+      <DependentUpon>202308211418223_RatingAddedToTheBooks1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308220829595_RatingBookUpdated.resx">
+      <DependentUpon>202308220829595_RatingBookUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -11,16 +11,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="icon" type="image/png" href="/images/icon.png">
+    <title style="font-family: 'Aref Ruqaa Ink', serif; ">الكتبي</title>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/chosen.jquery.js"></script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
 
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/chosen.css" />
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/Chosen/chosen.min.css" />
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>الكتبي</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -29,7 +30,9 @@
         th {
             text-align: right
         }
-
+        .chosen-container{
+            float:right;
+        }
         .glass-effect {
             background: linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0));
             -webkit-backdrop-filter: blur(20px);
@@ -40,9 +43,10 @@
         }
     </style>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #884A39 ">
-        <div class="container">
+<body style="left:0">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top " style="border: 0; margin: 0; background-color: #337ab7; ">
+        <div class="">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -55,6 +59,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (Session["UserName"] != null)
                     {
+                        <li>@Html.ActionLink("كوبونات الخصم", "Index", "DiscountCoupons")</li>
                         <li>@Html.ActionLink("سعر التوصيل", "Index", "ShippingCosts")</li>
                         <li>@Html.ActionLink("المصنفين", "Index", "Authors")</li>
                         <li>@Html.ActionLink("الأقسام", "Index", "Categories")</li>
@@ -68,7 +73,7 @@
                         <li>@Html.ActionLink("الأقسام", "UserIndex", "Categories")</li>
                         <li>@Html.ActionLink("دور النشر", "UserIndex", "Publishers")</li>
                     }
-                    @Html.ActionLink("الكُتُبي", "ViewBooks", "Books", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("الكتبي", "ViewBooks", "Books", new { area = "" }, new { @class = "navbar-brand", @style = "font-family: 'Aref Ruqaa Ink', serif; font-size: 26px;" })
                 </ul>
 
 
@@ -78,16 +83,15 @@
 
                         <li>@Html.ActionLink("تسجيل دخول", "Login", "Users")</li>
                         <li><a href=@Url.Action("ViewCart", "Books")> <span class="glyphicon glyphicon-shopping-cart"> </span> <span class="badge">@Session["Cart"]</span></a></li>
-                        <li><a href=@Url.Action("OrderFollowing", "Orders")><span class="glyphicon glyphicon-search"></span> تابع طلبك </a></li>
+                        <li><a href=@Url.Action("OrderFollowing", "Orders")>تابع طلبك  <span class="glyphicon glyphicon-search"></span></a></li>
 
                     }
                     @if (Session["UserName"] != null)
                     {
-                        <li class="dropdown">
-                            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> @Session["UserName"] <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href=@Url.Action("Logout" , "Users")>تسجيل خروج</a></li>
-                            </ul>
+                        <li>
+
+                            <a href=@Url.Action("Logout" , "Users")>تسجيل خروج</a>
+
                         </li>
                         <li>
                             <a href=@Url.Action("OrdersToConfirm" , "Orders")>
@@ -115,18 +119,81 @@
 
             </div>
         </div>
+        @*</div>*@
+    </nav>
+
+    <div class="Fund">
     </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-        </footer>
+    <div class="text-center highlighted">
+        <br />
+        <h1 class="kotobi ">
+            الــــكُتبـي
+        </h1>
+        <h3 style="font-family: 'Markazi Text', serif; color:wheat; margin:0; margin-left:115px; margin-top:-30px;">
+            متجر لببيع الكتب الجديدة والمستعملة
+        </h3>
+        <br />
+        <br />
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <div class="highlighted">
+        <div style="position:fixed">
+            <a href="https://www.facebook.com/alkutbibookstore0?mibextid=ZbWKwL" target="_blank" class="fa fa-facebook Social"></a>
+            <br />
+            <a href="https://instagram.com/alkutbi331?igshid=MzRlODBiNWFlZA==" target="_blank" class="fa fa-instagram Social"></a>
+            <br />
+            <a href="https://wa.me/201122506393" target="_blank">
+                <i class="fa fa-whatsapp Social"></i>
+            </a>
+        </div>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="text-center text-lg-start text-muted text-light reveal" style="background-color: #337ab7; padding:0px ; bottom:0;left:0;width:100%;">
+        <br />
+        <section style="color:aliceblue" class="text-center">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3 text-center">
+
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <h3>تواصل معنا</h3>
+                        <hr />
+                        <a href="https://www.facebook.com/alkutbibookstore0?mibextid=ZbWKwL" target="_blank" class="fa fa-facebook facedet Social"></a>
+                        <a href="https://instagram.com/alkutbi331?igshid=MzRlODBiNWFlZA==" target="_blank" class="fa fa-instagram insdet Social"></a>
+                        <a href="https://wa.me/201122506393" target="_blank">
+                            <i class="fa fa-whatsapp whatsdet Social"></i>
+                        </a>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- Links -->
+                        <br />
+                        <h1 style="font-family: 'Aref Ruqaa Ink', serif; font-size:55px">
+                            الكتبي
+                        </h1>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h4><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>  شارع سيد طلبه-متفرع من الوفاء والامل -الهرم -الجيزة-مصر  </h4>
+                        <hr />
+                        <h4><i class="glyphicon glyphicon-phone" aria-hidden="true"></i> 01122506393</h4>
+                    </div>
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+
+    </footer>
+    <!-- Footer -->
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+    <script src="~/Scripts/Sweetalert.min.js"></script>
+    <script src="~/Scripts/SweetAlert.js"></script>
     @RenderSection("scripts", required: false)
-
 </body>
 </html>

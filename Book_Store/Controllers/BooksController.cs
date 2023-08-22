@@ -14,13 +14,35 @@ namespace Book_Store.Controllers
 {
     public class BooksController : Controller
     {
-        private BookContext db = new BookContext();
+        private readonly BookContext db = new BookContext();
         public static List<Book> UserCart = new List<Book>();
 
         // GET: Books
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string BookName, int? PublisherName, int? CategoryName, int? AutherName)
         {
+            SetDropDown();
             var books = db.Books.Include(b => b.Author).Include(b => b.Category).ToList();
+
+            if (BookName != null || PublisherName != null || CategoryName != null || AutherName != null)
+            {
+
+                if (BookName != null)
+                {
+                    books = books.Where(c => c.title.Contains(BookName)).ToList();
+                }
+                if (PublisherName != null)
+                {
+                    books = books.Where(p => p.PID == PublisherName.Value).ToList();
+                }
+                if (CategoryName != null)
+                {
+                    books = books.Where(p => p.CID == CategoryName.Value).ToList();
+                }
+                if (AutherName != null)
+                {
+                    books = books.Where(p => p.AID == AutherName.Value).ToList();
+                }
+            }
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
@@ -61,13 +83,14 @@ namespace Book_Store.Controllers
         {
             if (ModelState.IsValid)
             {
-                string path = "";
                 if (imgfile.FileName.Length > 0)
                 {
-                    path = "~/images/" + Path.GetFileName(imgfile.FileName);
+                    string path = "~/images/" + Path.GetFileName(imgfile.FileName);
                     imgfile.SaveAs(Server.MapPath(path));
 
                     book.image = path;
+                    book.NumberOfRates = 0;
+                    book.Rate = 0;
                     db.Books.Add(book);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -107,11 +130,18 @@ namespace Book_Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Book book/*, HttpPostedFileBase imgfile*/)
+        public ActionResult Edit(Book book, HttpPostedFileBase imgfile = null)
         {
-            var model = db.Books.Where(b => b.ID == book.ID).FirstOrDefault();
-            book.image = model.image;
-            db.SaveChanges();
+            //var model = db.Books.Where(b => b.ID == book.ID).FirstOrDefault();
+            //book.image = model.image;
+           
+            if (imgfile != null && imgfile.FileName.Length > 0)
+            {
+                string path = "~/images/" + Path.GetFileName(imgfile.FileName);
+                imgfile.SaveAs(Server.MapPath(path));
+                book.image = path;
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(book).State = EntityState.Modified;
@@ -189,14 +219,14 @@ namespace Book_Store.Controllers
                     recs = recs.Where(p => p.AID == AutherName.Value).ToList();
                 }
             }
-            int pageSize = 10;
+            int pageSize = 12;
             int pageNumber = (page ?? 1);
 
-            if(recs.Count() == 0)
+            if (recs.Count() == 0)
             {
                 ViewBag.NoResult = "عفوا، لا توجد نتائج تطابق هذا البحث";
             }
-
+           
             return View(recs.ToPagedList(pageNumber, pageSize));
 
         }
@@ -231,7 +261,7 @@ namespace Book_Store.Controllers
         public ActionResult UserConfirmOrder(Order order)
         {
             var Books = UserCart;
-            return RedirectToAction("Create", "Orders", new { Books = Books, order = order });
+            return RedirectToAction("Create", "Orders", new { Books, order });
         }
 
         public ActionResult DeleteFromCart(int id)
@@ -247,6 +277,7 @@ namespace Book_Store.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateOrder(List<Book> Books, Order order)
         {
+            DiscountCoupon Coupon = new DiscountCoupon();
             Book book = new Book();
             Books = UserCart;
             var OrderId = 1;
@@ -254,6 +285,20 @@ namespace Book_Store.Controllers
             {
                 OrderId = db.Orders.Select(c => c.OrderID).Max() + 1;
             }
+
+            if(order.DiscountCoupon != null)
+            {
+                Coupon = db.DiscountCoupons.Where(c => c.Name == order.DiscountCoupon).FirstOrDefault();
+                if(Coupon != null)
+                {
+                    var Discount = Coupon.percentage;
+                    foreach(var Item in Books)
+                    {
+                        Item.Price = (Item.Price - ((Discount / 100) * Item.Price));
+                    }
+                }
+            }
+
             foreach (var item in Books)
             {
                 book = db.Books.Where(b => b.ID == item.ID).FirstOrDefault();
@@ -269,11 +314,15 @@ namespace Book_Store.Controllers
                     Order_Status = 0,
                     PublisherName = item.Publisher.PName
                 };
+                if(Coupon != null)
+                {
+                    DBorder.DiscountCoupon = Coupon.Name;
+                }
                 db.Orders.Add(DBorder);
             }
             db.SaveChanges();
             Session["Cart"] = 0;
-            UserCart = null;
+            UserCart.Clear();
             return RedirectToAction("ViewBooks", "Books", new { Message = "تم إرسال طلبك", OrderID = OrderId.ToString() });
         }
 
@@ -284,5 +333,21 @@ namespace Book_Store.Controllers
             ViewData["PublisherNameList"] = new SelectList(db.publishers.ToList(), "PID", "PName");
         }
 
+        public void AddRate(int Rate, int BID)
+        {
+            var Book = db.Books.Where(c => c.ID == BID).FirstOrDefault();
+            if(Book.NumberOfRates.Value == 0)
+            {
+                Book.NumberOfRates = 1;
+                Book.Rate = Rate;
+            }
+            else
+            {
+                var NumberOfRates = Book.NumberOfRates.Value + 1;
+                Book.Rate = (Rate + Book.Rate.Value) / 2;
+                Book.NumberOfRates = NumberOfRates;
+            }
+            db.SaveChanges();
+        }
     }
 }

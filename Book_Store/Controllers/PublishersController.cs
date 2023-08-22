@@ -13,7 +13,7 @@ namespace Book_Store.Controllers
 {
     public class PublishersController : Controller
     {
-        private BookContext db = new BookContext();
+        private readonly BookContext db = new BookContext();
 
         // GET: Publishers
         public ActionResult Index(int? page)
@@ -30,7 +30,7 @@ namespace Book_Store.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
-            if(PublisherName != null)
+            if (PublisherName != null)
             {
                 recs = recs.Where(c => c.PName.Contains(PublisherName)).ToList();
             }
@@ -142,10 +142,12 @@ namespace Book_Store.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult PublisherBooks(int PID)
+        public ActionResult PublisherBooks(int? page, int PID)
         {
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
             var Books = db.Books.Where(b => b.PID == PID).ToList();
-            return View(Books);
+            return View(Books.ToPagedList(pageNumber, pageSize));
         }
     }
 }

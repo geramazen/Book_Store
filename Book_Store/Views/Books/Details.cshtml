@@ -4,42 +4,133 @@
     ViewBag.Title = "Details";
 }
 
+<style>
+    .caption {
+        color: cornsilk;
+    }
 
-<br />
-<br />
-<div class="text-center">
-    <div class="row text-center">
-        <div>
-            <div class="thumbnail">
-                <h4 class="text-danger">عدد النسخ المتوفرة:  @Html.DisplayFor(model => model.AvailableCopies)</h4>
-                <img src="@Url.Content(Model.image)" width="242" height="200" alt="...">
-                <div class="caption">
-                    <h2>@Html.DisplayFor(model => model.title)</h2>
-                    <h4>
-                        المصنف:
-                        <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=Model.AID})">
-                            @Model.Author.FName
-                        </a>
-                    </h4>
-                    <h4>
-                        القسم:
-                        <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=Model.CID})">
-                            @Model.Category.CName
-                        </a>
-                    </h4>
-                    <h4>
-                        دار النشر:
-                        <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=Model.PID})">
-                            @Model.Publisher.PName
-                        </a>
-                    </h4>
-                    <h4>عدد المجلدات:  @Html.DisplayFor(model => model.VolumesNum)</h4>
-                    <h4>@Html.DisplayFor(model => model.description)</h4>
-                    <h4>السعر:  @Html.DisplayFor(model => model.Price)</h4>
-                    <p><a href="@Url.Action("AddToCart" , "Books" , new {id=Model.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضافة إلى سلة المشتريات</a></p>
-                </div>
+        .caption h4 a {
+            color: burlywood;
+        }
+
+    .rate {
+        float: right;
+        height: 46px;
+        padding: 0 10px;
+    }
+
+        .rate:not(:checked) > input {
+            position: absolute;
+            top: -9999px;
+        }
+
+        .rate:not(:checked) > label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+
+            .rate:not(:checked) > label:before {
+                content: '★ ';
+            }
+
+        .rate > input:checked ~ label {
+            color: #ffc700;
+        }
+
+        .rate:not(:checked) > label:hover,
+        .rate:not(:checked) > label:hover ~ label {
+            color: #deb217;
+        }
+
+        .rate > input:checked + label:hover,
+        .rate > input:checked + label:hover ~ label,
+        .rate > input:checked ~ label:hover,
+        .rate > input:checked ~ label:hover ~ label,
+        .rate > label:hover ~ input:checked ~ label {
+            color: #c59b08;
+        }
+</style>
+
+<div class="row text-center">
+
+    <div class="col-md-6 text-right">
+        <div class="caption" style="height:400px;width:300px">
+            <h2 style="font-family: 'Reem Kufi', sans-serif;">@Html.DisplayFor(model => model.title)</h2>
+            <hr />
+            <h4>
+                المصنف:
+                <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=Model.AID})">
+                    @Model.Author.FName
+                </a>
+            </h4>
+            <h4>
+                القسم:
+                <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=Model.CID})">
+                    @Model.Category.CName
+                </a>
+            </h4>
+            <h4>
+                دار النشر:
+                <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=Model.PID})">
+                    @Model.Publisher.PName
+                </a>
+            </h4>
+            <h4>عدد المجلدات:  @Html.DisplayFor(model => model.VolumesNum)</h4>
+            <h4>@Html.DisplayFor(model => model.description)</h4>
+            <h4>عدد النسخ المتوفرة:  @Html.DisplayFor(model => model.AvailableCopies)</h4>
+            <h4 style="display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 30px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">السعر:  @Html.DisplayFor(model => model.Price) ج.م</h4>
+            <br />
+            <h5>عدد التقييمات:  @Html.DisplayFor(model => model.NumberOfRates)</h5>
+            <div class="rate" style="display:inline-block">
+                <input type="radio" id="star5" name="rate" value="5" onchange="AddRate(this.value, @Model.ID)" />
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" name="rate" value="4" onchange="AddRate(this.value, @Model.ID)" />
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3" name="rate" value="3" onchange="AddRate(this.value, @Model.ID)" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" name="rate" value="2" onchange="AddRate(this.value, @Model.ID)" />
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" name="rate" value="1" onchange="AddRate(this.value, @Model.ID)" />
+                <label for="star1" title="text">1 star</label>
             </div>
+            <br />
+            <br />
+            <hr />
+            <p><a href="@Url.Action("AddToCart" , "Books" , new {id=Model.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضافة إلى سلة المشتريات</a></p>
+            <p>
+                <a href="https://wa.me/201122506393?text=مرحبا،%20أريد%20الإستفسار%20عن%20كتاب @Model.title" target="_blank">
+                    <i class="fa fa-whatsapp whatsdet Social"></i>
+                </a>
+            </p>
         </div>
+
+    </div>
+    <div class="col-md-6 text-left">
+        <img src="@Url.Content(Model.image)" width="300" height="400" alt="...">
     </div>
 </div>
+<div class="text-center" style="height:120px">
+</div>
 
+<script>
+
+    function AddRate(Rate, BID) {
+        $.ajax({
+            url: '/Books/AddRate/',
+            data: {
+                Rate: Rate,
+                BID: BID
+            },
+            type: 'GET',
+            success: function () {
+                swal("شكرا لك!", "تم إرسال تقييم الكتاب إلينا", "success");
+                $('input[name=rate]').attr("disabled", true);
+            }
+        });
+    }
+</script>

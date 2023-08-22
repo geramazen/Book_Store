@@ -26,5 +26,6 @@ namespace Book_Store.Models
         public int Order_Status { get; set; }
         [Display(Name = "كود الطلب")]
         public int OrderID { get; set; }
+        public string DiscountCoupon { get; set; }
     }
 }
