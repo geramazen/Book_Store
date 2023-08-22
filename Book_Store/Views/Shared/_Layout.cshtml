@@ -57,7 +57,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    @if (Session["UserName"] != null)
+                    @if (Session["UserName"] != null && Session["UserName"].ToString() == "Admin")
                     {
                         <li>@Html.ActionLink("كوبونات الخصم", "Index", "DiscountCoupons")</li>
                         <li>@Html.ActionLink("سعر التوصيل", "Index", "ShippingCosts")</li>
@@ -80,7 +80,7 @@
                 <ul class="nav navbar-nav">
                     @if (Session["UserName"] == null)
                     {
-
+                        <li>@Html.ActionLink("إنشاء حساب", "Regester", "Users")</li>
                         <li>@Html.ActionLink("تسجيل دخول", "Login", "Users")</li>
                         <li><a href=@Url.Action("ViewCart", "Books")> <span class="glyphicon glyphicon-shopping-cart"> </span> <span class="badge">@Session["Cart"]</span></a></li>
                         <li><a href=@Url.Action("OrderFollowing", "Orders")>تابع طلبك  <span class="glyphicon glyphicon-search"></span></a></li>

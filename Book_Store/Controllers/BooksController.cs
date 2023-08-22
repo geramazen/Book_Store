@@ -333,8 +333,18 @@ namespace Book_Store.Controllers
             ViewData["PublisherNameList"] = new SelectList(db.publishers.ToList(), "PID", "PName");
         }
 
-        public void AddRate(int Rate, int BID)
+        public decimal AddRate(int Rate, int BID)
         {
+            if (Session["UserID"] == null)
+            {
+                return -1;
+            }
+            var UID = Convert.ToInt32(Session["UserID"]);
+            var CheckRate = db.UsersRates.Where(c => c.UID == UID && c.BID == BID).FirstOrDefault();
+            if(CheckRate != null)
+            {
+                return 0;
+            }
             var Book = db.Books.Where(c => c.ID == BID).FirstOrDefault();
             if(Book.NumberOfRates.Value == 0)
             {
@@ -347,7 +357,16 @@ namespace Book_Store.Controllers
                 Book.Rate = (Rate + Book.Rate.Value) / 2;
                 Book.NumberOfRates = NumberOfRates;
             }
+            UsersRate UserRate = new UsersRate()
+            {
+                BID = BID,
+                UID = UID,
+                Rate = Rate
+            };
+            db.UsersRates.Add(UserRate);
             db.SaveChanges();
+
+            return Book.Rate.Value;
         }
     }
 }

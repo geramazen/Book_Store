@@ -202,6 +202,10 @@
     <Compile Include="Migrations\202308220829595_RatingBookUpdated.Designer.cs">
       <DependentUpon>202308220829595_RatingBookUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202308221238155_UsersRateAdded.cs" />
+    <Compile Include="Migrations\202308221238155_UsersRateAdded.Designer.cs">
+      <DependentUpon>202308221238155_UsersRateAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
@@ -212,6 +216,7 @@
     <Compile Include="Models\Publisher.cs" />
     <Compile Include="Models\ShippingCost.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UsersRate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308220829595_RatingBookUpdated.resx">
       <DependentUpon>202308220829595_RatingBookUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308221238155_UsersRateAdded.resx">
+      <DependentUpon>202308221238155_UsersRateAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

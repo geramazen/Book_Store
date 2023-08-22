@@ -20,5 +20,6 @@ namespace Book_Store.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<ShippingCost> shippingCosts { get; set; }
         public DbSet<DiscountCoupon> DiscountCoupons { get; set; }
+        public DbSet<UsersRate> UsersRates { get; set; }
     }
 }

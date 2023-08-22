@@ -56,7 +56,7 @@ namespace Book_Store.Controllers
             {
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
 
             return View(user);
@@ -164,6 +164,7 @@ namespace Book_Store.Controllers
             if(rec != null)
             {
                 Session["UserName"] = rec.Name;
+                Session["UserID"] = rec.ID;
                 Session["Cart"] = 0;
                 return RedirectToAction("ViewBooks", "Books");
             }

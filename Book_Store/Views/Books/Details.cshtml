@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    var Rates = Model.NumberOfRates + 1;
 }
 
 <style>
@@ -64,19 +65,19 @@
             <hr />
             <h4>
                 المصنف:
-                <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=Model.AID})">
+                <a href="@Url.Action("AuthorBooks", "Authors", new { AID = Model.AID })">
                     @Model.Author.FName
                 </a>
             </h4>
             <h4>
                 القسم:
-                <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=Model.CID})">
+                <a href="@Url.Action("CategoryBooks", "Categories", new { CID = Model.CID })">
                     @Model.Category.CName
                 </a>
             </h4>
             <h4>
                 دار النشر:
-                <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=Model.PID})">
+                <a href="@Url.Action("PublisherBooks", "Publishers", new { PID = Model.PID })">
                     @Model.Publisher.PName
                 </a>
             </h4>
@@ -85,7 +86,7 @@
             <h4>عدد النسخ المتوفرة:  @Html.DisplayFor(model => model.AvailableCopies)</h4>
             <h4 style="display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 30px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">السعر:  @Html.DisplayFor(model => model.Price) ج.م</h4>
             <br />
-            <h5>عدد التقييمات:  @Html.DisplayFor(model => model.NumberOfRates)</h5>
+            <h5>عدد التقييمات: <span id="NRate"> @Html.DisplayFor(model => model.NumberOfRates)</span></h5>
             <div class="rate" style="display:inline-block">
                 <input type="radio" id="star5" name="rate" value="5" onchange="AddRate(this.value, @Model.ID)" />
                 <label for="star5" title="text">5 stars</label>
@@ -101,7 +102,7 @@
             <br />
             <br />
             <hr />
-            <p><a href="@Url.Action("AddToCart" , "Books" , new {id=Model.ID})" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضافة إلى سلة المشتريات</a></p>
+            <p><a href="@Url.Action("AddToCart", "Books", new { id = Model.ID })" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضافة إلى سلة المشتريات</a></p>
             <p>
                 <a href="https://wa.me/201122506393?text=مرحبا،%20أريد%20الإستفسار%20عن%20كتاب @Model.title" target="_blank">
                     <i class="fa fa-whatsapp whatsdet Social"></i>
@@ -118,7 +119,7 @@
 </div>
 
 <script>
-
+    document.getElementById("star" + parseInt(@Model.Rate).toString()).setAttribute("checked", true);
     function AddRate(Rate, BID) {
         $.ajax({
             url: '/Books/AddRate/',
@@ -127,9 +128,48 @@
                 BID: BID
             },
             type: 'GET',
-            success: function () {
+            success: function (data) {
+                if (data == 0) {
+                    swal("يُرجى الإنتباه!", "لقد قمت بتقييم الكتاب مسبقا", "warning");
+                    $('input[name=rate]').attr("disabled", true);
+                    if (@Model.Rate == 0) {
+                        $("#star1").prop('checked', false);
+                        $("#star2").prop('checked', false);
+                        $("#star3").prop('checked', false);
+                        $("#star4").prop('checked', false);
+                        $("#star5").prop('checked', false);
+                        return;
+                    }
+                    else {
+                        document.getElementById("star" + parseInt(@Model.Rate).toString()).setAttribute("checked", true);
+                        return;
+                    }
+                    
+                }
+                if (data == -1) {
+                    swal("يُرجى الإنتباه!", "فضلا, قم بتسجيل الدخول لتتمكن من تقييم الكتاب", "warning");
+                    
+                   if (@Model.Rate == 0) {
+                        $("#star1").prop('checked', false);
+                        $("#star2").prop('checked', false);
+                        $("#star3").prop('checked', false);
+                        $("#star4").prop('checked', false);
+                       $("#star5").prop('checked', false);
+                       $('input[name=rate]').attr("disabled", true);
+                       return;
+                    }
+                   else {
+                       document.getElementById("star" + parseInt(@Model.Rate).toString()).setAttribute("checked", true);
+                       $('input[name=rate]').attr("disabled", true);
+                       return;
+                    }
+                    
+                }
+                console.log(data);
                 swal("شكرا لك!", "تم إرسال تقييم الكتاب إلينا", "success");
                 $('input[name=rate]').attr("disabled", true);
+                document.getElementById("star" + parseInt(data).toString()).setAttribute("checked", true);
+                document.getElementById("NRate").innerText = @Rates;
             }
         });
     }
