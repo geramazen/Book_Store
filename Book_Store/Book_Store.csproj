@@ -190,6 +190,18 @@
     <Compile Include="Migrations\202308211156053_DiscountCouponAdded.Designer.cs">
       <DependentUpon>202308211156053_DiscountCouponAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202308211413155_RatingAddedToTheBooks.cs" />
+    <Compile Include="Migrations\202308211413155_RatingAddedToTheBooks.Designer.cs">
+      <DependentUpon>202308211413155_RatingAddedToTheBooks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308211418223_RatingAddedToTheBooks1.cs" />
+    <Compile Include="Migrations\202308211418223_RatingAddedToTheBooks1.Designer.cs">
+      <DependentUpon>202308211418223_RatingAddedToTheBooks1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308220829595_RatingBookUpdated.cs" />
+    <Compile Include="Migrations\202308220829595_RatingBookUpdated.Designer.cs">
+      <DependentUpon>202308220829595_RatingBookUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
@@ -366,6 +378,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308211156053_DiscountCouponAdded.resx">
       <DependentUpon>202308211156053_DiscountCouponAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308211413155_RatingAddedToTheBooks.resx">
+      <DependentUpon>202308211413155_RatingAddedToTheBooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308211418223_RatingAddedToTheBooks1.resx">
+      <DependentUpon>202308211418223_RatingAddedToTheBooks1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308220829595_RatingBookUpdated.resx">
+      <DependentUpon>202308220829595_RatingBookUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

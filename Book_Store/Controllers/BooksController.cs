@@ -89,6 +89,8 @@ namespace Book_Store.Controllers
                     imgfile.SaveAs(Server.MapPath(path));
 
                     book.image = path;
+                    book.NumberOfRates = 0;
+                    book.Rate = 0;
                     db.Books.Add(book);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -331,5 +333,21 @@ namespace Book_Store.Controllers
             ViewData["PublisherNameList"] = new SelectList(db.publishers.ToList(), "PID", "PName");
         }
 
+        public void AddRate(int Rate, int BID)
+        {
+            var Book = db.Books.Where(c => c.ID == BID).FirstOrDefault();
+            if(Book.NumberOfRates.Value == 0)
+            {
+                Book.NumberOfRates = 1;
+                Book.Rate = Rate;
+            }
+            else
+            {
+                var NumberOfRates = Book.NumberOfRates.Value + 1;
+                Book.Rate = (Rate + Book.Rate.Value) / 2;
+                Book.NumberOfRates = NumberOfRates;
+            }
+            db.SaveChanges();
+        }
     }
 }
