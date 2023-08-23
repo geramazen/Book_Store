@@ -97,7 +97,30 @@
                     <a href="@Url.Action("edit" , "Books" , new {id=item.ID})" class="btn btn-primary">تعديل</a>
                 </td>
                 <td>
-                    <a href="@Url.Action("delete" , "Books" , new {id=item.ID})" class="btn btn-danger">حذف</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirm_@item.ID">
+                        حذف
+                    </button>
+
+
+                    <div class="modal" tabindex="-1" role="dialog" id="deleteConfirm_@item.ID">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">يرجى الانتباه</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>هل تريد تاكيد حذف كتاب @item.title ؟</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="~/Books/Delete?id=@item.ID" class="btn btn-primary">تأكيد</a>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
         }
@@ -107,6 +130,12 @@
 <div class="text-center">
     @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
 </div>
+
+
+
+
+
+
 
 <script>
     $("Input").val(null);

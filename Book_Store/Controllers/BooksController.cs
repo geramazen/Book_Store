@@ -42,6 +42,7 @@ namespace Book_Store.Controllers
                 {
                     books = books.Where(p => p.AID == AutherName.Value).ToList();
                 }
+
             }
 
             int pageSize = 10;
@@ -91,6 +92,7 @@ namespace Book_Store.Controllers
                     book.image = path;
                     book.NumberOfRates = 0;
                     book.Rate = 0;
+                    book.EntryDate = DateTime.Now.Date;
                     db.Books.Add(book);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -134,14 +136,13 @@ namespace Book_Store.Controllers
         {
             //var model = db.Books.Where(b => b.ID == book.ID).FirstOrDefault();
             //book.image = model.image;
-           
+
             if (imgfile != null && imgfile.FileName.Length > 0)
             {
                 string path = "~/images/" + Path.GetFileName(imgfile.FileName);
                 imgfile.SaveAs(Server.MapPath(path));
                 book.image = path;
             }
-
             if (ModelState.IsValid)
             {
                 db.Entry(book).State = EntityState.Modified;
@@ -155,24 +156,10 @@ namespace Book_Store.Controllers
         }
 
 
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Book book = db.Books.Find(id);
-            if (book == null)
-            {
-                return HttpNotFound();
-            }
-            return View(book);
-        }
+
 
         // POST: Books/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
             Book book = db.Books.Find(id);
             db.Books.Remove(book);
@@ -189,7 +176,7 @@ namespace Book_Store.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult ViewBooks(string Message, string OrderID, int? page, string BookName, int? PublisherName, int? CategoryName, int? AutherName)
+        public ActionResult ViewBooks(string Message, string OrderID, int? page, string BookName, int? PublisherName, int? CategoryName, int? AutherName, int? Sort)
         {
             SetDropDown();
             if (Message != null)
@@ -219,6 +206,22 @@ namespace Book_Store.Controllers
                     recs = recs.Where(p => p.AID == AutherName.Value).ToList();
                 }
             }
+
+            if (Sort != null)
+            {
+                if (Sort.Value == 1)
+                {
+                    recs = recs.OrderByDescending(c => c.Rate).ToList();
+                }
+                else if (Sort.Value == 2)
+                {
+                    recs = recs.OrderBy(c => c.Price).ToList();
+                }
+                else
+                {
+                    recs = recs.OrderByDescending(c => c.EntryDate).ToList();
+                }
+            }
             int pageSize = 12;
             int pageNumber = (page ?? 1);
 
@@ -226,12 +229,12 @@ namespace Book_Store.Controllers
             {
                 ViewBag.NoResult = "عفوا، لا توجد نتائج تطابق هذا البحث";
             }
-           
+
             return View(recs.ToPagedList(pageNumber, pageSize));
 
         }
 
-        public ActionResult AddToCart(int id)
+        public JsonResult AddToCart(int id)
         {
             Book book = db.Books.Find(id);
             UserCart.Add(new Book
@@ -245,15 +248,38 @@ namespace Book_Store.Controllers
                 Publisher = book.Publisher
             });
             Session["Cart"] = UserCart.Count();
-            return RedirectToAction("ViewBooks");
+            return Json(new { status = true },JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult ViewCart(string Message)
+        public ActionResult ViewCart(string Message, string copoun)
         {
             if (Message != null)
             {
                 ViewBag.Message = Message;
             }
+
+            if (copoun != null)
+            {
+                Book Book = new Book();
+                var Cop = db.DiscountCoupons.Where(c => c.Name == copoun).FirstOrDefault();
+                var Discount = Cop.percentage;
+                foreach (var Item in UserCart)
+                {
+                    Book = db.Books.Where(c => c.ID == Item.ID).FirstOrDefault();
+                    Item.Price = (Book.Price - ((Discount / 100) * Book.Price));
+                }
+                ViewBag.Sale = "Sale";
+            }
+            else
+            {
+                Book Book = new Book();
+                foreach (var Item in UserCart)
+                {
+                    Book = db.Books.Where(c => c.ID == Item.ID).FirstOrDefault();
+                    Item.Price = Book.Price;
+                }
+            }
+
             var books = UserCart;
             return View(books.ToList());
         }
@@ -286,13 +312,13 @@ namespace Book_Store.Controllers
                 OrderId = db.Orders.Select(c => c.OrderID).Max() + 1;
             }
 
-            if(order.DiscountCoupon != null)
+            if (order.DiscountCoupon != null)
             {
                 Coupon = db.DiscountCoupons.Where(c => c.Name == order.DiscountCoupon).FirstOrDefault();
-                if(Coupon != null)
+                if (Coupon != null)
                 {
                     var Discount = Coupon.percentage;
-                    foreach(var Item in Books)
+                    foreach (var Item in Books)
                     {
                         Item.Price = (Item.Price - ((Discount / 100) * Item.Price));
                     }
@@ -314,7 +340,7 @@ namespace Book_Store.Controllers
                     Order_Status = 0,
                     PublisherName = item.Publisher.PName
                 };
-                if(Coupon != null)
+                if (Coupon != null)
                 {
                     DBorder.DiscountCoupon = Coupon.Name;
                 }
@@ -341,12 +367,12 @@ namespace Book_Store.Controllers
             }
             var UID = Convert.ToInt32(Session["UserID"]);
             var CheckRate = db.UsersRates.Where(c => c.UID == UID && c.BID == BID).FirstOrDefault();
-            if(CheckRate != null)
+            if (CheckRate != null)
             {
                 return 0;
             }
             var Book = db.Books.Where(c => c.ID == BID).FirstOrDefault();
-            if(Book.NumberOfRates.Value == 0)
+            if (Book.NumberOfRates.Value == 0)
             {
                 Book.NumberOfRates = 1;
                 Book.Rate = Rate;

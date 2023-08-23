@@ -5,7 +5,14 @@
     BookContext _db = new BookContext();
     var Cost = _db.shippingCosts.Select(c => c.Cost).FirstOrDefault();
     var TotalAmount = Model.Select(c => c.Price).Sum() + Cost;
+    var BeforDisc = 0m;
 }
+<style>
+    #Deletebtn {
+        color: white;
+        background-color: #A30000;
+    }
+</style>
 <br />
 @if (ViewBag.message != null)
 {
@@ -13,8 +20,30 @@
         @ViewBag.Message
     </div>
 }
+@if (Model.Count() != 0)
+{
+    using (Html.BeginForm("ViewCart", "Books"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.Editor("copoun", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل كود الخصم" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="احسب السعر بعد الخصم" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+}
 <div class="tablesStyle">
-    <table class="table table-striped table-hover">
+    <table class="table table-hover">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.title)
@@ -25,9 +54,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.image)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
+            @if (ViewBag.Sale != null)
+            {
+                <th>
+                    السعر قبل الخصم
+                </th>
+            }
             <th></th>
         </tr>
 
@@ -43,16 +79,43 @@
                 <td>
                     <img src="@Url.Content(item.image)" width="50" height="50" />
                 </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
+                @if (ViewBag.Sale != null)
+                {
+                    BeforDisc = BeforDisc + _db.Books.Where(c => c.ID == item.ID).Select(c => c.Price).FirstOrDefault();
+                    <td>
+                        @_db.Books.Where(c => c.ID == item.ID).Select(c => c.Price).FirstOrDefault()
+                    </td>
+                }
                 <td>
-                    @Html.ActionLink("حذف من السلة", "DeleteFromCart", new { id = item.PID }, htmlAttributes: new { @class = "btn btn-danger" })
+                    @Html.ActionLink("حذف من السلة", "DeleteFromCart", new { id = item.PID }, htmlAttributes: new { @class = "btn btn-danger", @id = "Deletebtn" })
                 </td>
             </tr>
         }
         @if (Model.Count() != 0)
         {
+            if (ViewBag.Sale != null)
+            {
+                <tr>
+                    <td>
+                        الإجمالي قبل الخصم(بدون التوصيل)
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        @BeforDisc
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            }
             <tr>
                 <td>
                     تكلفة التوصيل
@@ -67,6 +130,7 @@
                 <td>
                 </td>
             </tr>
+
             <tr>
                 <td>
                     الإجمالي مع تكلفة التوصيل
@@ -92,10 +156,33 @@
 }
 else
 {
-<div class="text-center" style="height:250px">
-    <h2 style="color: white; font-family: 'Reem Kufi', sans-serif;">
-        لا يوجد طلبات
-    </h2>
-</div>
+    <div class="text-center" style="height:250px">
+        <h2 style="color: white; font-family: 'Reem Kufi', sans-serif;">
+            لا يوجد طلبات
+        </h2>
+    </div>
 }
 <br />
+
+<script>
+    $('#copoun').on('change', function () {
+        var DiscountCoupon = $("#copoun").val();
+        if (DiscountCoupon == null) {
+            return;
+        }
+        $.ajax({
+            url: '../DiscountCoupons/CheckCoupon/',
+            data: { DiscountCoupon: DiscountCoupon },
+            type: 'GET',
+            success: function (response) {
+                if (response.status == 0) {
+                    swal("الكود غير صحيح!", "الكود الذي أدخلته غير صحيح، راجع الكود ثم أعد المحاولة", "error");
+                    document.getElementById('copoun').value = null;
+                }
+                else {
+                    swal("تم التحقق من الكود!", response.Message, "success");
+                }
+            }
+        });
+    })
+</script>

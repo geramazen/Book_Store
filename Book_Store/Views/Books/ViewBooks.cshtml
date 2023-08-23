@@ -12,6 +12,35 @@
         z-index: 9;
     }
 
+
+    .rate {
+        text-align: center;
+        height: 16px;
+        padding: 0 2px;
+        margin-right: 30%;
+    }
+
+        .rate:not(:checked) > input {
+            position: fixed;
+            top: -9999px;
+        }
+
+        .rate:not(:checked) > label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 12px;
+            color: #ccc;
+        }
+
+            .rate:not(:checked) > label:before {
+                content: '★ ';
+            }
+
+        .rate > input:checked ~ label {
+            color: #ffc700;
+        }
 </style>
 <link href="~/Content/Chosen/chosen.min.css" />
 <link href="~/Content/Site.css" />
@@ -19,20 +48,20 @@
 
 
 @*<div class="text-center highlighted">
-    <h1 class="kotobi ">
-        الــــكُتبـي
-    </h1>
-    <h3 style="font-family: 'Markazi Text', serif; color:wheat; margin:0; margin-left:115px; margin-top:-30px;">
-        متجر لببيع الكتب الجديدة والمستعملة
-    </h3>
-    <br />
-</div>*@
+        <h1 class="kotobi ">
+            الــــكُتبـي
+        </h1>
+        <h3 style="font-family: 'Markazi Text', serif; color:wheat; margin:0; margin-left:115px; margin-top:-30px;">
+            متجر لببيع الكتب الجديدة والمستعملة
+        </h3>
+        <br />
+    </div>*@
 
 
 @if (ViewBag.message != null)
 {
     <div class="alert alert-success text-center" role="alert">
-        <h1> @ViewBag.Message</h1>
+        <h2> @ViewBag.Message</h2>
         @if (ViewBag.OrderID != null)
         {
             <h2>
@@ -67,15 +96,30 @@
 
     <div class="row">
 
+
+
         <div class="form-group col-md-4">
             <div class="col-md-10">
-
+                <button class="btn btn-primary" value="Search" type="submit">إبحث</button>
             </div>
         </div>
 
         <div class="form-group col-md-4">
             <div class="col-md-10">
-                <button class="btn btn-primary" value="Search" type="submit">إبحث</button>
+                <select class="form-control" name="Sort">
+                    <option disabled value="">
+                        ترتيب حسب:
+                    </option>
+                    <option value="1">
+                        التقييم
+                    </option>
+                    <option value="2">
+                        السعر من الأرخص إلى لأغلى
+                    </option>
+                    <option value="3">
+                        تاريخ الإضافة
+                    </option>
+                </select>
             </div>
         </div>
 
@@ -104,54 +148,104 @@
     @foreach (var item in Model)
     {
 
-<div class="col-sm-4">
+        <div class="col-sm-4">
 
 
-    <div class="wrapper">
-        <div class="product-img">
-            <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
-                <img src="@Url.Content(item.image)" height="210" width="163" alt="...">
-            </a>
-        </div>
-        <div class="product-info">
-            <div class="product-text">
-                <h1 style="font-family: 'Reem Kufi', sans-serif;" class="text-center">@item.title</h1>
-                <br />
-                <h5>
-                    المصنف:
-                    <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
-                        @item.Author.FName
+            <div class="wrapper" id="@item.ID">
+
+                <div class="product-img">
+
+                    <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
+                        <img src="@Url.Content(item.image)" height="210" width="163" alt="...">
                     </a>
-                </h5>
-                <h5>
-                    الناشر:
-                    <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
-                        @item.Publisher.PName
-                    </a>
-                </h5>
-                <h5>
-                    القسم:
-                    <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
-                        @item.Category.CName
-                    </a>
-                </h5>
-                <h5 style="color: white; display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 50px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">
-                    <span>@item.Price</span> ج.م
-                </h5>
+                </div>
+                <div class="product-info">
+                    <div class="rate">
+                        @if (item.Rate == 5)
+                        {
+                            <input type="radio" value="5" checked />
+                            <label for="star5" title="text">5 stars</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                        }
+                        @if (item.Rate >= 4 && item.Rate < 5)
+                        {
+                            <input type="radio" value="4" checked />
+                            <label for="star4" title="text">4 stars</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                        }
+                        @if (item.Rate >= 3 && item.Rate < 4)
+                        {
+                            <input type="radio" value="3" checked />
+                            <label for="star3" title="text">3 stars</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                        }
+                        @if (item.Rate >= 2 && item.Rate < 3)
+                        {
+                            <input type="radio" value="2" checked />
+                            <label for="star2" title="text">2 stars</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                        }
+                        @if (item.Rate >= 1 && item.Rate < 2)
+                        {
+                            <input type="radio" value="1" checked />
+                            <label for="star1" title="text">1 star</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                        }
+                    </div>
+                    <div class="product-text">
+                        <h1 style="font-family: 'Reem Kufi', sans-serif;" class="text-center">@item.title</h1>
+
+                        <h5>
+                            المصنف:
+                            <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
+                                @item.Author.FName
+                            </a>
+                        </h5>
+                        <h5>
+                            الناشر:
+                            <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
+                                @item.Publisher.PName
+                            </a>
+                        </h5>
+                        <h5>
+                            القسم:
+                            <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
+                                @item.Category.CName
+                            </a>
+                        </h5>
+                        <h5 style="color: white; display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 50px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">
+                            <span>@item.Price</span> ج.م
+                        </h5>
+                    </div>
+                    <br />
+                    <div class="product-price-btn" style="text-align:center">
+                        <a onclick="AddToCart(@item.ID)" role="button"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                    </div>
+                </div>
             </div>
-            <br />
-            <br />
-            <div class="product-price-btn" style="text-align:center">       
-                <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" role="button"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
-            </div>
+
         </div>
-    </div>
-
-</div>
-
-
-
-}
+    }
 
 </div>
 <div class="text-center">
@@ -160,15 +254,12 @@
 
 
 
-
-<script>
-    $("Input").val(null);
-    $("Select").val(null);
-</script>
-
 <script>
     $(document).ready(function () {
-       // $('#AutherName').trigger("chosen:updated");
+        $("Input").val(null);
+        $("Select").val(null);
+        $('input[name=rate]').attr("disabled", true);
+
         $(function () {
 
             $(".ddlist").chosen({
@@ -178,3 +269,17 @@
         });
     });
 </script>
+
+<script>
+    function AddToCart(id) {
+        $.ajax({
+            url: '../Books/AddToCart',
+            data: { id: id },
+            type: 'GET',
+            success: function (Status) {
+                swal("تمت إضافة الكتاب في السلة!", "", "success");
+            }
+        });
+    }
+</script>
+

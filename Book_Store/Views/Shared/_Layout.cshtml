@@ -30,9 +30,11 @@
         th {
             text-align: right
         }
-        .chosen-container{
-            float:right;
+
+        .chosen-container {
+            float: right;
         }
+
         .glass-effect {
             background: linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0));
             -webkit-backdrop-filter: blur(20px);
@@ -80,19 +82,28 @@
                 <ul class="nav navbar-nav">
                     @if (Session["UserName"] == null)
                     {
-                        <li>@Html.ActionLink("إنشاء حساب", "Regester", "Users")</li>
+                        <li>@Html.ActionLink("إنشاء حساب", "Create", "Users")</li>
                         <li>@Html.ActionLink("تسجيل دخول", "Login", "Users")</li>
-                        <li><a href=@Url.Action("ViewCart", "Books")> <span class="glyphicon glyphicon-shopping-cart"> </span> <span class="badge">@Session["Cart"]</span></a></li>
-                        <li><a href=@Url.Action("OrderFollowing", "Orders")>تابع طلبك  <span class="glyphicon glyphicon-search"></span></a></li>
+
 
                     }
+
                     @if (Session["UserName"] != null)
                     {
+
                         <li>
 
                             <a href=@Url.Action("Logout" , "Users")>تسجيل خروج</a>
 
                         </li>
+                    }
+                    @if (Session["UserName"] == null || Session["UserName"].ToString() != "Admin")
+                    {
+                        <li><a href=@Url.Action("ViewCart", "Books")> <span class="glyphicon glyphicon-shopping-cart"> </span> <span class="badge">@Session["Cart"]</span></a></li>
+                    }
+                    <li><a href=@Url.Action("OrderFollowing", "Orders")>تابع طلبك  <span class="glyphicon glyphicon-search"></span></a></li>
+                    @if (Session["UserName"] != null && Session["UserName"].ToString() == "Admin")
+                    {
                         <li>
                             <a href=@Url.Action("OrdersToConfirm" , "Orders")>
                                 <span class="glyphicon glyphicon-shopping-cart"> </span>@if (OrderCount != 0)

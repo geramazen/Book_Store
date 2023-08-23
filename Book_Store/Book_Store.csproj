@@ -206,6 +206,10 @@
     <Compile Include="Migrations\202308221238155_UsersRateAdded.Designer.cs">
       <DependentUpon>202308221238155_UsersRateAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202308230853192_EntryDateAdded.cs" />
+    <Compile Include="Migrations\202308230853192_EntryDateAdded.Designer.cs">
+      <DependentUpon>202308230853192_EntryDateAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
@@ -396,6 +400,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308221238155_UsersRateAdded.resx">
       <DependentUpon>202308221238155_UsersRateAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308230853192_EntryDateAdded.resx">
+      <DependentUpon>202308230853192_EntryDateAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
