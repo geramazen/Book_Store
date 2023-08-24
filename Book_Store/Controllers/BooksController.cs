@@ -72,7 +72,9 @@ namespace Book_Store.Controllers
             ViewBag.AID = new SelectList(db.Authors, "AID", "FName");
             ViewBag.CID = new SelectList(db.Categories, "CID", "CName");
             ViewBag.PID = new SelectList(db.publishers, "PID", "PName");
-            return View();
+            Book book = new Book();
+            book.EntryDate = DateTime.Now.Date;
+            return View(book);
         }
 
         // POST: Books/Create
@@ -84,7 +86,7 @@ namespace Book_Store.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (imgfile.FileName.Length > 0)
+                if (imgfile!=null && imgfile.FileName.Length > 0)
                 {
                     string path = "~/images/" + Path.GetFileName(imgfile.FileName);
                     imgfile.SaveAs(Server.MapPath(path));

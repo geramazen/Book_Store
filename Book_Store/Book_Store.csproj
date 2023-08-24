@@ -210,6 +210,10 @@
     <Compile Include="Migrations\202308230853192_EntryDateAdded.Designer.cs">
       <DependentUpon>202308230853192_EntryDateAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202308240925300_notNullDate.cs" />
+    <Compile Include="Migrations\202308240925300_notNullDate.Designer.cs">
+      <DependentUpon>202308240925300_notNullDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
@@ -403,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308230853192_EntryDateAdded.resx">
       <DependentUpon>202308230853192_EntryDateAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308240925300_notNullDate.resx">
+      <DependentUpon>202308240925300_notNullDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
