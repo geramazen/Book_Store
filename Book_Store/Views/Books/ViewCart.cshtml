@@ -30,7 +30,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.Editor("copoun", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل كود الخصم" } })
+                    @Html.Editor("copoun", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل كود الخصم", @required = "required" } })
                 </div>
             </div>
 
@@ -71,13 +71,17 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.title)
+                    <a href="@Url.Action("Details" , "Books" , new {ID=item.ID})">
+                        @Html.DisplayFor(modelItem => item.title)
+                    </a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.description)
                 </td>
                 <td>
-                    <img src="@Url.Content(item.image)" width="50" height="50" />
+                    <a href="@Url.Action("Details" , "Books" , new {ID=item.ID})">
+                        <img src="@Url.Content(item.image)" width="50" height="70" />
+                    </a>
                 </td>
 
                 <td>

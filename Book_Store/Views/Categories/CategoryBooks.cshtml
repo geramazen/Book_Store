@@ -15,25 +15,79 @@
 
 <link href="~/Content/Site.css" />
 
-<br />
 <h1 class="text-center" style="font-family: 'Reem Kufi', sans-serif; color:whitesmoke">@Category</h1>
-<br />
-
 <hr />
 <div class="row">
     @foreach (var item in Model)
     {
 
         <div class="col-sm-4">
-            <div class="wrapper">
+
+
+            <div class="wrapper" id="@item.ID">
+
                 <div class="product-img">
+
                     <a href="@Url.Action("Details" , "Books" , new {id=item.ID})">
                         <img src="@Url.Content(item.image)" height="210" width="163" alt="...">
                     </a>
                 </div>
                 <div class="product-info">
+                    <div class="rate">
+                        @if (item.Rate == 5)
+                        {
+                            <input type="radio" value="5" checked />
+                            <label for="star5" title="text">5 stars</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                        }
+                        @if (item.Rate >= 4 && item.Rate < 5)
+                        {
+                            <input type="radio" value="4" checked />
+                            <label for="star4" title="text">4 stars</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                        }
+                        @if (item.Rate >= 3 && item.Rate < 4)
+                        {
+                            <input type="radio" value="3" checked />
+                            <label for="star3" title="text">3 stars</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                        }
+                        @if (item.Rate >= 2 && item.Rate < 3)
+                        {
+                            <input type="radio" value="2" checked />
+                            <label for="star2" title="text">2 stars</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                        }
+                        @if (item.Rate >= 1 && item.Rate < 2)
+                        {
+                            <input type="radio" value="1" checked />
+                            <label for="star1" title="text">1 star</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                        }
+                    </div>
                     <div class="product-text">
                         <h1 style="font-family: 'Reem Kufi', sans-serif;" class="text-center">@item.title</h1>
+
                         <h5>
                             المصنف:
                             <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
@@ -52,25 +106,18 @@
                                 @item.Category.CName
                             </a>
                         </h5>
-                        <h5>
-                            @item.VolumesNum مجلد
-                        </h5>
-                        <h5 class="text-danger">
+                        <h5 style="color: white; display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 50px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">
                             <span>@item.Price</span> ج.م
                         </h5>
                     </div>
-                    <hr />
-                    <div class="product-price-btn">
-                        @*<p>متوفر @item.AvailableCopies نسخة</p>*@
-                        <a href="@Url.Action("AddToCart" , "Books" , new {id=item.ID})" class="btn btn-primary" role="button">أضف للسلة <span class="glyphicon glyphicon-shopping-cart"></span></a>
+                    <br />
+                    <div class="product-price-btn" style="text-align:center">
+                        <a onclick="AddToCart(@item.ID)" role="button"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
 
         </div>
-
-
-
     }
 
 </div>
@@ -78,3 +125,30 @@
 <div class="text-center">
     @Html.PagedListPager(Model, Page => Url.Action("ViewBooks", new { Page }))
 </div>
+@if (Model.Count == 0)
+{
+    <div class="text-center" style=" height:125px ;color:white">
+        <h1>
+            لا توجد كتب في القسم في الوقت الحالي
+        </h1>
+    </div>
+}
+
+<script>
+
+    function AddToCart(id) {
+        $.ajax({
+            url: '../Books/AddToCart',
+            data: { id: id },
+            type: 'GET',
+            success: function (response) {
+                if (response.status == true) {
+                    swal("تمت إضافة الكتاب في السلة!", "", "success");
+                }
+                else {
+                    swal("عفوا!", response.message, "warning");
+                }
+            }
+        });
+    }
+</script>

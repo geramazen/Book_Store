@@ -214,6 +214,14 @@
     <Compile Include="Migrations\202308240925300_notNullDate.Designer.cs">
       <DependentUpon>202308240925300_notNullDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202308241217597_WatchersCountAdded.cs" />
+    <Compile Include="Migrations\202308241217597_WatchersCountAdded.Designer.cs">
+      <DependentUpon>202308241217597_WatchersCountAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308241218497_WatchersCountUpdated.cs" />
+    <Compile Include="Migrations\202308241218497_WatchersCountUpdated.Designer.cs">
+      <DependentUpon>202308241218497_WatchersCountUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
@@ -410,6 +418,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308240925300_notNullDate.resx">
       <DependentUpon>202308240925300_notNullDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308241217597_WatchersCountAdded.resx">
+      <DependentUpon>202308241217597_WatchersCountAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308241218497_WatchersCountUpdated.resx">
+      <DependentUpon>202308241218497_WatchersCountUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

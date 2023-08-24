@@ -119,6 +119,9 @@
                     <option value="3">
                         تاريخ الإضافة
                     </option>
+                    <option value="4">
+                        عدد المشاهدات
+                    </option>
                 </select>
             </div>
         </div>
@@ -276,8 +279,13 @@
             url: '../Books/AddToCart',
             data: { id: id },
             type: 'GET',
-            success: function (Status) {
-                swal("تمت إضافة الكتاب في السلة!", "", "success");
+            success: function (response) {
+                if (response.status == true) {
+                    swal("تمت إضافة الكتاب في السلة!", "", "success");
+                }
+                else {
+                    swal("عفوا!", response.message, "warning");
+                }
             }
         });
     }

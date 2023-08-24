@@ -32,6 +32,7 @@ namespace Book_Store.Models
         public int? NumberOfRates { get; set; }
         [Display(Name = "تاريخ الإضافة")]
         public DateTime EntryDate { get; set; }
+        public int WatchersCount { get; set; }
         public virtual Author Author { get; set; }
         public virtual Category Category { get; set; }
         public virtual Publisher Publisher { get; set; }

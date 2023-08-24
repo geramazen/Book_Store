@@ -63,6 +63,8 @@ namespace Book_Store.Controllers
             {
                 return HttpNotFound();
             }
+            book.WatchersCount++;
+            db.SaveChanges();
             return View(book);
         }
 
@@ -219,9 +221,13 @@ namespace Book_Store.Controllers
                 {
                     recs = recs.OrderBy(c => c.Price).ToList();
                 }
-                else
+                else if(Sort.Value == 3)
                 {
                     recs = recs.OrderByDescending(c => c.EntryDate).ToList();
+                }
+                else
+                {
+                    recs = recs.OrderByDescending(c => c.WatchersCount).ToList();
                 }
             }
             int pageSize = 12;
@@ -239,6 +245,14 @@ namespace Book_Store.Controllers
         public JsonResult AddToCart(int id)
         {
             Book book = db.Books.Find(id);
+
+            var AvlCop = UserCart.Where(c => c.ID == id).Count();
+
+            if(AvlCop >= book.AvailableCopies)
+            {
+                return Json(new { status = false , message = "لقد تجاوزت عدد النسخ المتوفرة من هذا الكتاب" }, JsonRequestBehavior.AllowGet);
+            }
+
             UserCart.Add(new Book
             {
                 ID = book.ID,
@@ -260,17 +274,24 @@ namespace Book_Store.Controllers
                 ViewBag.Message = Message;
             }
 
-            if (copoun != null)
+            if (copoun != null && copoun != "")
             {
                 Book Book = new Book();
                 var Cop = db.DiscountCoupons.Where(c => c.Name == copoun).FirstOrDefault();
-                var Discount = Cop.percentage;
-                foreach (var Item in UserCart)
+                if(Cop == null)
                 {
-                    Book = db.Books.Where(c => c.ID == Item.ID).FirstOrDefault();
-                    Item.Price = (Book.Price - ((Discount / 100) * Book.Price));
+                    ViewBag.Message = "الكود الذي أدخلته غير صحيح";
                 }
-                ViewBag.Sale = "Sale";
+                else 
+                {
+                    var Discount = Cop.percentage;
+                    foreach (var Item in UserCart)
+                    {
+                        Book = db.Books.Where(c => c.ID == Item.ID).FirstOrDefault();
+                        Item.Price = (Book.Price - ((Discount / 100) * Book.Price));
+                    }
+                    ViewBag.Sale = "Sale";
+                }  
             }
             else
             {

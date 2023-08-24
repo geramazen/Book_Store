@@ -295,3 +295,32 @@ textarea {
     font-size: 23px;
     z-index: 100;
 }
+
+.rate {
+    text-align: center;
+    height: 16px;
+    padding: 0 2px;
+    margin-right: 30%;
+}
+
+    .rate:not(:checked) > input {
+        position: fixed;
+        top: -9999px;
+    }
+
+    .rate:not(:checked) > label {
+        float: right;
+        width: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 12px;
+        color: #ccc;
+    }
+
+        .rate:not(:checked) > label:before {
+            content: '★ ';
+        }
+
+    .rate > input:checked ~ label {
+        color: #ffc700;
+    }

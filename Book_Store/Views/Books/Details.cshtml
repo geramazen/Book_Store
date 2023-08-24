@@ -56,7 +56,9 @@
 </style>
 
 <div class="row text-center">
-
+    <h3 style="color:antiquewhite">
+        عدد المشاهدات: @Model.WatchersCount
+    </h3>
     <div class="col-md-6 text-right">
         <div class="caption" style="height:400px;width:300px">
             <h2 style="font-family: 'Reem Kufi', sans-serif;">@Html.DisplayFor(model => model.title)</h2>
@@ -86,7 +88,8 @@
             <h4 style="display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 30px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">السعر:  @Html.DisplayFor(model => model.Price) ج.م</h4>
             <br />
             <hr />
-            <p><a href="@Url.Action("AddToCart", "Books", new { id = Model.ID })" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> إضافة إلى سلة المشتريات</a></p>
+            <p><a onclick="AddToCart(@Model.ID)" class="btn d-block btn-primary" role="button"><i class="fa fa-cart-plus" aria-hidden="true"></i>إضافة إلى سلة المشتريات</a></p>
+
             <p>
                 <a href="https://wa.me/201122506393?text=مرحبا،%20أريد%20الإستفسار%20عن%20كتاب @Model.title" target="_blank">
                     <i class="fa fa-whatsapp whatsdet Social"></i>
@@ -101,7 +104,7 @@
         <img src="@Url.Content(Model.image)" width="300" height="400" alt="...">
         <div class="text-center" style="margin-right:40%">
             <h5 style="color:white">عدد التقييمات: <span id="NRate"> @Html.DisplayFor(model => model.NumberOfRates)</span></h5>
-            <div class="rate" style="display:inline-block">
+            <div class="rate" style="display:inline-block; margin-left:25%">
                 <input type="radio" id="star5" name="rate" value="5" onchange="AddRate(this.value, @Model.ID)" />
                 <label for="star5" title="text">5 stars</label>
                 <input type="radio" id="star4" name="rate" value="4" onchange="AddRate(this.value, @Model.ID)" />
@@ -183,5 +186,23 @@
 
     if (@Model.Rate > 0) {
         document.getElementById("star" + parseInt(@Model.Rate).toString()).setAttribute("checked", true);
+    }
+</script>
+
+<script>
+    function AddToCart(id) {
+        $.ajax({
+            url: '/Books/AddToCart',
+            data: { id: id },
+            type: 'GET',
+            success: function (response) {
+                if (response.status == true) {
+                    swal("تمت إضافة الكتاب في السلة!", "", "success");
+                }
+                else {
+                    swal("عفوا!", response.message, "warning");
+                }
+            }
+        });
     }
 </script>
