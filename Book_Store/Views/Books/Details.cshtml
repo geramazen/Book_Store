@@ -82,7 +82,7 @@
             <h4>عدد المجلدات:  @Html.DisplayFor(model => model.VolumesNum)</h4>
             <h4>@Html.DisplayFor(model => model.description)</h4>
             <h4>عدد النسخ المتوفرة:  @Html.DisplayFor(model => model.AvailableCopies)</h4>
-            <h4>تاريخ الإضافة:   @Model.EntryDate.Value.ToString("yyyy-MM-dd")</h4>
+            <h4>تاريخ الإضافة:   @Model.EntryDate.ToString("yyyy-MM-dd")</h4>
             <h4 style="display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 30px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">السعر:  @Html.DisplayFor(model => model.Price) ج.م</h4>
             <br />
             <hr />
