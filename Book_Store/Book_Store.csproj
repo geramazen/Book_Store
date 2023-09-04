@@ -222,6 +222,10 @@
     <Compile Include="Migrations\202308241218497_WatchersCountUpdated.Designer.cs">
       <DependentUpon>202308241218497_WatchersCountUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202309040903554_p1.cs" />
+    <Compile Include="Migrations\202309040903554_p1.Designer.cs">
+      <DependentUpon>202309040903554_p1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
@@ -243,6 +247,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Chosen\chosen-sprite.png" />
     <Content Include="Content\Chosen\chosen.min.css" />
+    <Content Include="Content\Fonts.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -264,6 +269,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="libman.json" />
+    <None Include="Properties\PublishProfiles\mhamedkassem-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\mhamedkassem-001-site1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -388,6 +395,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308030846391_OrderTableAdded.resx">
       <DependentUpon>202308030846391_OrderTableAdded.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308030904105_OrderTableUpdated.resx">
       <DependentUpon>202308030904105_OrderTableUpdated.cs</DependentUpon>
@@ -424,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308241218497_WatchersCountUpdated.resx">
       <DependentUpon>202308241218497_WatchersCountUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309040903554_p1.resx">
+      <DependentUpon>202309040903554_p1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

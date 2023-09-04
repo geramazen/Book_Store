@@ -23,8 +23,10 @@ namespace Book_Store
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                       "~/Content/Fonts.css",
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css"
+                     ));
         }
     }
 }

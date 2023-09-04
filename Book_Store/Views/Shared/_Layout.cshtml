@@ -13,18 +13,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/images/icon.png">
     <title style="font-family: 'Aref Ruqaa Ink', serif; ">الكتبي</title>
+ 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/chosen.jquery.min.js"></script>
 
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Fonts.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
     <link rel="stylesheet" href="~/Content/Chosen/chosen.min.css" />
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>الكتبي</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="stylesheet" href="~/Content/Site.css" />
 
     <style>
         th {
@@ -43,11 +46,24 @@
             border: 1px solid rgba(255,255,255,0.18);
             border-radius: 5px;
         }
+
+        navbar a:hover, a:focus {
+            color: #23527c;
+            text-decoration: underline;
+        }
+
+        body {
+            padding-top: 50px;
+            font-family: 'Amiri', serif;
+            background-color: whitesmoke;
+            max-width: 100%;
+            /*letter-spacing: 0.1em;*/
+        }
     </style>
 </head>
 <body style="left:0">
 
-    <nav class="navbar navbar-inverse navbar-fixed-top " style="border: 0; margin: 0; background-color: #337ab7; ">
+    <nav class="navbar navbar-inverse navbar-fixed-top " style="border: 0; margin: 0; background-color: #337ab7; color:white ; ">
         <div class="">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
