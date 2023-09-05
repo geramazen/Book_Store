@@ -27,7 +27,30 @@
                 </td>
                 <td>
                     @Html.ActionLink("تعديل", "Edit", new { id = item.CID }, htmlAttributes: new { @class = "btn btn-primary" }) |
-                    @Html.ActionLink("حذف", "Delete", new { id = item.CID }, htmlAttributes: new { @class = "btn btn-danger" })
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirm_@item.CID">
+                        حذف
+                    </button>
+
+
+                    <div class="modal" tabindex="-1" role="dialog" id="deleteConfirm_@item.CID">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">يرجى الانتباه</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>هل تريد تاكيد حذف قسم: @item.CName ؟</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="~/Categories/Delete?id=@item.CID" class="btn btn-primary">تأكيد</a>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
         }

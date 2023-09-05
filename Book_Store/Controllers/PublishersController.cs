@@ -110,28 +110,14 @@ namespace Book_Store.Controllers
         // GET: Publishers/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Publisher publisher = db.publishers.Find(id);
-            if (publisher == null)
-            {
-                return HttpNotFound();
-            }
-            return View(publisher);
-        }
-
-        // POST: Publishers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
             Publisher publisher = db.publishers.Find(id);
             db.publishers.Remove(publisher);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        // POST: Publishers/Delete/5
+  
 
         protected override void Dispose(bool disposing)
         {

@@ -16,9 +16,9 @@
             <th>
                 الإسم الأول
             </th>
-            <th>
+            @*<th>
                 الإسم الأخير
-            </th>
+            </th>*@
             <th></th>
         </tr>
 
@@ -28,12 +28,35 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FName)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.LName)
-                </td>
+                </td>*@
                 <td>
                     @Html.ActionLink("تعديل", "Edit", new { id = item.AID }, htmlAttributes: new { @class = "btn btn-primary" }) |
-                    @Html.ActionLink("حذف", "Delete", new { id = item.AID }, htmlAttributes: new { @class = "btn btn-danger" })
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirm_@item.AID">
+                        حذف
+                    </button>
+
+
+                    <div class="modal" tabindex="-1" role="dialog" id="deleteConfirm_@item.AID">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">يرجى الانتباه</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>هل تريد تاكيد حذف المصنف: @item.FName ؟</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="~/Authors/Delete?id=@item.AID" class="btn btn-primary">تأكيد</a>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
         }
