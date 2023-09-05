@@ -27,5 +27,6 @@ namespace Book_Store.Models
         [Display(Name = "كود الطلب")]
         public int OrderID { get; set; }
         public string DiscountCoupon { get; set; }
+        public DateTime? OrderDate { get; set; }
     }
 }

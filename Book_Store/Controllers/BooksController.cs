@@ -329,6 +329,12 @@ namespace Book_Store.Controllers
             DiscountCoupon Coupon = new DiscountCoupon();
             Book book = new Book();
             Books = UserCart;
+
+            foreach(var item in Books)
+            {
+                item.Price = db.Books.Where(c => c.ID == item.ID).Select(c => c.Price).FirstOrDefault();
+            }
+
             var OrderId = 1;
             if (db.Orders.Count() != 0)
             {
@@ -361,7 +367,8 @@ namespace Book_Store.Controllers
                     MobileNumber = order.MobileNumber,
                     Name = order.Name,
                     Order_Status = 0,
-                    PublisherName = item.Publisher.PName
+                    PublisherName = item.Publisher.PName,
+                    OrderDate = DateTime.Now.Date
                 };
                 if (Coupon != null)
                 {
