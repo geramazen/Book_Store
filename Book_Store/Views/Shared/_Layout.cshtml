@@ -112,7 +112,7 @@
                     }
                     @if (Session["UserName"] == null || Session["UserName"].ToString() != "Admin")
                     {
-                        <li><a href=@Url.Action("ViewCart", "Books")> <span class="glyphicon glyphicon-shopping-cart"> </span> <span class="badge">@Session["Cart"]</span></a></li>
+                        <li><a href=@Url.Action("ViewCart", "Books")> <span class="glyphicon glyphicon-shopping-cart"> </span> <span class="badge">@(Session["Cart"]??0)</span></a></li>
                     }
                     <li><a href=@Url.Action("OrderFollowing", "Orders")>تابع طلبك  <span class="glyphicon glyphicon-search"></span></a></li>
                     @if (Session["UserName"] != null && Session["UserName"].ToString() == "Admin")
