@@ -136,7 +136,7 @@ namespace Book_Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Book book, HttpPostedFileBase imgfile = null)
+        public ActionResult Edit(Book book, HttpPostedFileBase imgfile)
         {
             //var model = db.Books.Where(b => b.ID == book.ID).FirstOrDefault();
             //book.image = model.image;
@@ -147,6 +147,11 @@ namespace Book_Store.Controllers
                 imgfile.SaveAs(Server.MapPath(path));
                 book.image = path;
             }
+            else
+            {
+                book.description = "imgfile not working";
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(book).State = EntityState.Modified;

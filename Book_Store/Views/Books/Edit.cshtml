@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 <div class="tablesStyle">
-    @using (Html.BeginForm("edit", "Books", FormMethod.Post))
+    @using (Html.BeginForm("edit", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <br />
