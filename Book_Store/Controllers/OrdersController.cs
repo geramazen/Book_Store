@@ -26,7 +26,7 @@ namespace Book_Store.Controllers
             {
                 recs = recs.Where(id => id.OrderID == ID.Value).ToList();
             }
-            if(Coupon != null)
+            if(Coupon != null && Coupon != "")
             {
                 recs = recs.Where(c => c.DiscountCoupon == Coupon).ToList();
             }
