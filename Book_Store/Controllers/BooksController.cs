@@ -90,7 +90,7 @@ namespace Book_Store.Controllers
             {
                 if (imgfile!=null && imgfile.FileName.Length > 0)
                 {
-                    string path = "~/images/" + Path.GetFileName(imgfile.FileName);
+                    string path = "~/images/" + DateTime.Now.ToString("yyyy-MM-dd-H-mm-ss") + Path.GetFileName(imgfile.FileName);
                     imgfile.SaveAs(Server.MapPath(path));
 
                     book.image = path;
@@ -143,7 +143,7 @@ namespace Book_Store.Controllers
 
             if (imgfile != null && imgfile.FileName.Length > 0)
             {
-                string path = "~/images/" + Path.GetFileName(imgfile.FileName);
+                string path = "~/images/" + DateTime.Now.ToString("yyyy-MM-dd-H-mm-ss") + Path.GetFileName(imgfile.FileName);
                 imgfile.SaveAs(Server.MapPath(path));
                 book.image = path;
             }

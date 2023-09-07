@@ -166,6 +166,7 @@ namespace Book_Store.Controllers
                 Session["UserName"] = rec.Name;
                 Session["UserID"] = rec.ID;
                 Session["Cart"] = 0;
+                
                 return RedirectToAction("ViewBooks", "Books");
             }
             else
