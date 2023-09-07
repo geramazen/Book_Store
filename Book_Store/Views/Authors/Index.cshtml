@@ -16,9 +16,9 @@
             <th>
                 الإسم الأول
             </th>
-            <th>
+            @*<th>
                 الإسم الأخير
-            </th>
+            </th>*@
             <th></th>
         </tr>
 
@@ -28,9 +28,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FName)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.LName)
-                </td>
+                </td>*@
                 <td>
                     @Html.ActionLink("تعديل", "Edit", new { id = item.AID }, htmlAttributes: new { @class = "btn btn-primary" }) |
                     @*@Html.ActionLink("حذف", "Delete", new { id = item.AID }, htmlAttributes: new { @class = "btn btn-danger" })*@

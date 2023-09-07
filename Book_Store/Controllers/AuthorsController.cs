@@ -132,6 +132,9 @@ namespace Book_Store.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: Authors/Delete/5
+  
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
