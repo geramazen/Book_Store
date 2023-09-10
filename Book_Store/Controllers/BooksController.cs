@@ -147,10 +147,10 @@ namespace Book_Store.Controllers
                 imgfile.SaveAs(Server.MapPath(path));
                 book.image = path;
             }
-            else
-            {
-                book.description = "imgfile not working";
-            }
+            //else
+            //{
+            //    book.description = "imgfile not working";
+            //}
 
             if (ModelState.IsValid)
             {
