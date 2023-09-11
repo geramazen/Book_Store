@@ -1,9 +1,9 @@
 ﻿
 body {
-    padding-top: 50px;
+    padding-top: 5rem;
     font-family: 'Aref Ruqaa Ink', serif;
     background-color: whitesmoke;
-    max-width: 100%;
+    width: 100%;
     /*letter-spacing: 0.1em;*/
 }
 
@@ -42,8 +42,8 @@ body {
 }
 /* Set padding to keep content from hitting the edges */
 /*.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 15rem;
+    padding-right: 15rem;
 }*/
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -57,9 +57,12 @@ body {
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width:33rem;
 }
 
+/*.form-control{
+    width:35%;
+}*/
 
 
 
@@ -68,225 +71,78 @@ textarea {
 
 
 .wrapper {
-    height: 215px;
-    width: 330px;
-    margin: 25px auto;
-    /* border:2px solid;*/
-    border-radius: 10px;
+    height: 21rem;
+    width: 100%;
+    margin: 1.5rem auto;
+    /* border:2rem solid;*/
     /* VIA CSS MATIC https://goo.gl/cIbnS */
     -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.20);
 }
 
+    .wrapper:hover {
+        transform: scale(1.1);
+        z-index: 9;
+    }
+
 .product-img {
     float: left;
-    height: 210px;
-    width: 163px;
+    height: 100%;
+    width: 50%;
 }
 
     .product-img img {
-        border-radius: 7px 0 0 7px;
+        border-radius: 0 0 0 0;
+        height: 100%;
+        width: 100%;
     }
 
 .product-info {
-    float: left;
-    height: 210px;
-    width: 163px;
-    padding-right: 5px;
-    /* border-radius: 0 7px 10px 7px;*/
+    float: right;
+    height: 100%;
+    width: 50%;
+    padding-right: 1rem;
+    border-radius: 0 7px 7px 0;
     background-color: #ffffff;
-    /* border-left:2px solid ;*/
+    /* border-left:2rem solid ;*/
 }
 
 .product-text {
-    height: 160px;
-    width: 163px;
+    height: 14rem;
+    width: 100%;
 }
 
-    .product-text h1 {
-        margin: 0 0 0 18px;
-        padding-top: 10px;
+    .product-text > h1 {
+        /* margin: 0 0 0 1rem;*/
+        /*padding-top: 10rem;*/
+        margin-top: 2rem;
         font-size: 17px;
         color: #474747;
     }
 
-    .product-text h1,
-    .product-price-btn p {
-        /* font-family: 'Bentham', serif;*/
-    }
-
-    .product-text h2 {
-        margin: 0 0 23px 38px;
-        font-size: 13px;
+    .product-text > h5 {
+        margin: 0 0 1rem 1rem;
+        font-size: 15px;
         /* font-family: 'Raleway', sans-serif;*/
         font-weight: 200;
         text-transform: uppercase;
-        color: #d2d2d2;
-        letter-spacing: 0.2em;
-    }
-
-    .product-text p {
-        height: 90px;
-        margin: 0 0 0 19px;
-        /*font-family: 'Playfair Display', serif;*/
         color: #8d8d8d;
-        line-height: 1.3em;
-        font-size: 15px;
-        font-weight: lighter;
+        /* line-height: 1.3em;*/
         overflow: hidden;
     }
 
-        .product-text p > a {
+        .product-text > h5 > a {
             font-size: 12px;
             font-weight: lighter;
         }
 
-.product-price-btn {
-    height: 50px;
-    width: 163px;
-    margin-top: 2px;
-}
 
-    .product-price-btn p {
-        display: inline-block;
-        position: absolute;
-        top: 68%;
-        padding-right: 18%;
-        height: 20px;
-        /* font-family: 'Trocchi', serif;*/
-        margin: 0 0 0 18px;
-        font-size: 14px;
-        font-weight: lighter;
-        /*font-family: 'Raleway', sans-serif;*/
-        font-size: 12px;
-        font-weight: 200;
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
-    }
-
-    .product-price-btn > p > span {
-        display: inline-block;
-        height: 20px;
-        /* font-family: 'Suranna', serif;*/
-        font-size: 15px;
-    }
-
-    .product-price-btn a {
-        display: inline-block;
-        height: 35px;
-        width: 35px;
-        text-align: center;
-        margin: 0 10px 0 8px;
-        padding: 10px 10px 10px 10px;
-        box-sizing: border-box;
-        border: transparent;
-        border-radius: 100%;
-        /* font-family: 'Raleway', sans-serif;*/
-        font-size: 18px;
-        font-weight: 200;
-        text-transform: uppercase;
-        color: whitesmoke;
-        background-color: #337ab7;
-        cursor: pointer;
-        outline: none;
-    }
-
-        .product-price-btn a:hover {
-            background-color: #3a90d9;
-        }
-
-.tablesStyle {
-    background-color: aliceblue;
-    text-align: center;
-    border-radius:10px;
-}
-
-.tablesStyle a {
-    color:black;
-}
-.tablesStyle td
-{
-    border-radius:10px;
-}
-
-    .tablesStyle th {
-        text-align: center;
-        background-color: #337ab7;
-        color:white;
-    }
-
-
-.Social {
-    padding:10px;
-    font-size: 20px;
-    margin-right:0px;
-    margin-bottom:5px;
-    width: 40px;
-    text-align: center;
-    text-decoration: none;
-}
-    .fa:hover {
-        opacity: 1;
-    }
-
-.fa-facebook {
-    background: #3B5998;
-    color: white;
-}
-
-.fa-instagram {
-    background: #125688;
-    color: white;
-}
-
-.fa-whatsapp {
-    background-color: #25d366;
-    color: #FFF;
-}
-
-.whatsdet {
-    width: 45px;
-    height: 45px;
-    bottom: 40px;
-    right: 40px;
-    background-color: #25d366;
-    color: #FFF;
-    border-radius: 50px;
-    text-align: center;
-    font-size: 23px;
-    z-index: 100;
-}
-
-.facedet {
-    width: 45px;
-    height: 45px;
-    bottom: 40px;
-    right: 40px;
-    background: #3B5998;
-    color: #FFF;
-    border-radius: 50px;
-    text-align: center;
-    font-size: 23px;
-    z-index: 100;
-}
-.insdet {
-    width: 45px;
-    height: 45px;
-    bottom: 40px;
-    right: 40px;
-    background: #125688;
-    color: #FFF;
-    border-radius: 50px;
-    text-align: center;
-    font-size: 23px;
-    z-index: 100;
-}
 
 .rate {
     text-align: center;
-    height: 16px;
-    padding: 0 2px;
+    height: 0.5rem;
+    width: 100%;
     margin-right: 30%;
 }
 
@@ -311,3 +167,82 @@ textarea {
     .rate > input:checked ~ label {
         color: #ffc700;
     }
+
+
+
+.tablesStyle {
+    background-color: aliceblue;
+    text-align: center;
+    border-radius: 10px;
+}
+
+    .tablesStyle a {
+        color: black;
+    }
+
+    .tablesStyle td {
+        border-radius: 10px;
+    }
+
+    .tablesStyle th {
+        text-align: center;
+        background-color: #337ab7;
+        color: white;
+    }
+
+
+.Social {
+    padding: 1rem;
+    font-size: 20px;
+    margin-right: 0.5rem;
+    margin-bottom: 1rem;
+    width: 4rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 40%;
+}
+
+    .Social:hover {
+        transform: scale(1.1);
+        color: white;
+        text-decoration: none;
+    }
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+.fa-whatsapp {
+    background-color: #25d366;
+    color: #FFF;
+}
+
+.whatsdet, .facedet, .insdet {
+    width: 5rem;
+    height: 5rem;
+    padding: 1.5rem;
+    bottom: 1rem;
+    right: 1rem;
+    color: #FFF;
+    border-radius: 45%;
+    text-align: center;
+    font-size: 23px;
+}
+
+.whatsdet {
+    background-color: #25d366;
+}
+
+.facedet {
+    background: #3B5998;
+}
+
+.insdet {
+    background: #125688;
+}
