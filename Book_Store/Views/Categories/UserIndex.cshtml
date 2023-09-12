@@ -1,7 +1,9 @@
 ﻿@model PagedList.IPagedList<Book_Store.Models.Category>
 @using PagedList.Mvc;
+@using Book_Store.Models;
 @{
     ViewBag.Title = "UserIndex";
+    BookContext _db = new BookContext();
 }
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -31,6 +33,9 @@
             <th>
                 إسم القسم
             </th>
+            <th>
+              عدد الكتب المتوفرة في القسم
+            </th>
         </tr>
 
         @foreach (var item in Model)
@@ -38,8 +43,11 @@
             <tr>
                 <td>
                     <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
-                        @Html.DisplayFor(modelItem => item.CName)
+                        @Html.DisplayFor(modelItem => item.CName) 
                     </a>
+                </td>
+                <td>
+                    <span class="label label-primary">@_db.Books.Where(c => c.CID == item.CID && c.AvailableCopies != 0).Count()</span>
                 </td>
             </tr>
         }

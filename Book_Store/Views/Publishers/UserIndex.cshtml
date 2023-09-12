@@ -1,8 +1,10 @@
 ﻿@model PagedList.IPagedList<Book_Store.Models.Publisher>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@using Book_Store.Models;
 @{
     ViewBag.Title = "UserIndex";
+    BookContext _db = new BookContext();
 }
 
 @using (Html.BeginForm("UserIndex", "Publishers", FormMethod.Get))
@@ -28,6 +30,9 @@
             <th>
                 إسم دار النشر
             </th>
+            <th>
+                عدد الكتب التابعة لدار النشر
+            </th>
         </tr>
 
         @foreach (var item in Model)
@@ -37,6 +42,9 @@
                     <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
                         @Html.DisplayFor(modelItem => item.PName)
                     </a>
+                </td>
+                <td>
+                    <span class="label label-primary">@_db.Books.Where(c => c.PID == item.PID && c.AvailableCopies != 0).Count()</span>
                 </td>
             </tr>
         }
