@@ -88,13 +88,20 @@
             <h4 style="display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 30px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">السعر:  @Html.DisplayFor(model => model.Price) ج.م</h4>
             <br />
             <hr />
-            <p><a onclick="AddToCart(@Model.ID)" class="btn d-block btn-primary" role="button"><i class="fa fa-cart-plus" aria-hidden="true"></i>إضافة إلى سلة المشتريات</a></p>
 
-            <p>
-                <a href="https://wa.me/201122506393?text=مرحبا،%20أريد%20الإستفسار%20عن%20كتاب @Model.title" target="_blank">
-                    <i class="fa fa-whatsapp whatsdet Social"></i>
-                </a>
-            </p>
+            <div class="row">
+                <div class="col-md-8 text-right">
+                    <p><a onclick="AddToCart(@Model.ID)" class="btn d-block btn-primary" role="button"><i class="fa fa-cart-plus" aria-hidden="true"></i>إضافة إلى سلة المشتريات</a></p>
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        <a href="https://wa.me/201122506393?text=مرحبا،%20أريد%20الإستفسار%20عن%20كتاب @Model.title" target="_blank">
+                            <i class="fa fa-whatsapp whatsdet Social"></i>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -118,7 +125,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 <br />
 
