@@ -129,7 +129,7 @@ namespace Book_Store.Controllers
             }
             ViewBag.AID = new SelectList(db.Authors, "AID", "FName", book.AID);
             ViewBag.CID = new SelectList(db.Categories, "CID", "CName", book.CID);
-            ViewBag.PID = new SelectList(db.publishers, "PID", "PName");
+            ViewBag.PID = new SelectList(db.publishers, "PID", "PName",book.PID);
             return View(book);
         }
 
