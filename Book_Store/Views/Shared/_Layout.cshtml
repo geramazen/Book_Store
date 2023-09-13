@@ -4,7 +4,7 @@
     BookContext _db = new BookContext();
     var OrderCount = _db.Orders.Where(c => c.Order_Status == 0).GroupBy(c => c.OrderID).Count();
     var OrderCountShip = _db.Orders.Where(c => c.Order_Status == 1).GroupBy(c => c.OrderID).Count();
-    var NotifyOrdersCount = _db.NotifyOrders.Count();
+    var NotifyOrdersCount = _db.NotifyOrders.Where(c => c.Status == 0).Count();
 }
 
 <!DOCTYPE html>
