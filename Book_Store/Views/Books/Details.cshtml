@@ -90,9 +90,21 @@
             <hr />
 
             <div class="row">
-                <div class="col-md-8 text-right">
-                    <p><a onclick="AddToCart(@Model.ID)" class="btn d-block btn-primary" role="button"><i class="fa fa-cart-plus" aria-hidden="true"></i>إضافة إلى سلة المشتريات</a></p>
-                </div>
+                @if (Model.AvailableCopies != 0)
+                {
+                    <div class="col-md-8 text-right">
+                        <p><a onclick="AddToCart(@Model.ID)" class="btn d-block btn-primary" role="button"><i class="fa fa-cart-plus" aria-hidden="true"></i>إضافة إلى سلة المشتريات</a></p>
+                    </div>
+                }
+                else
+                {
+
+                    <button type="button" class="btn btn-primary col-md-8 text-right" data-toggle="modal" data-target="#exampleModal">
+                        أخبرني عن توفر الكتاب
+                    </button>
+
+
+                }
                 <div class="col-md-4">
                     <p>
                         <a href="https://wa.me/201122506393?text=مرحبا،%20أريد%20الإستفسار%20عن%20كتاب @Model.title" target="_blank">
@@ -128,6 +140,38 @@
 
 </div>
 <br />
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">من فضلك أدخل بياناتك</h5>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="~/NotifyOrders/Create"> 
+                    <div class="form-group">
+                        <label for="Name">الإسم</label>
+                        <input name="Name" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="MobileNumber">رقم الهاتف</label>
+                        <input name="MobileNumber" type="number" class="form-control">
+                        <small class="form-text text-muted">يفضل إدخال رقم الواتساب لنتمكن من التواصل معك عند توفر الكتاب</small>
+                    </div>
+                    <input hidden name="BID" value="@Model.ID" />
+                    <input hidden name="BookName" value="@Model.title" />
+                    <button type="submit" class="btn btn-primary">إرسال البيانات</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 <script>
 

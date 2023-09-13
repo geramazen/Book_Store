@@ -21,5 +21,6 @@ namespace Book_Store.Models
         public DbSet<ShippingCost> shippingCosts { get; set; }
         public DbSet<DiscountCoupon> DiscountCoupons { get; set; }
         public DbSet<UsersRate> UsersRates { get; set; }
+        public DbSet<NotifyOrder> NotifyOrders { get; set; }
     }
 }

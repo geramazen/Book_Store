@@ -4,6 +4,7 @@
     BookContext _db = new BookContext();
     var OrderCount = _db.Orders.Where(c => c.Order_Status == 0).GroupBy(c => c.OrderID).Count();
     var OrderCountShip = _db.Orders.Where(c => c.Order_Status == 1).GroupBy(c => c.OrderID).Count();
+    var NotifyOrdersCount = _db.NotifyOrders.Count();
 }
 
 <!DOCTYPE html>
@@ -13,8 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/images/icon.png">
     <title style="font-family: 'Aref Ruqaa Ink', serif; ">الكتبي</title>
- 
-   
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
@@ -131,6 +132,15 @@
                                 {<span class="badge progress-bar-danger">@OrderCountShip</span>}
                             else
                             {<span class="badge">@OrderCountShip</span>}
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href=@Url.Action("Index" , "NotifyOrders")>
+                                <span class="glyphicon glyphicon-bullhorn"> </span>@if (NotifyOrdersCount != 0)
+                                {<span class="badge progress-bar-danger">@NotifyOrdersCount</span>}
+                            else
+                            {<span class="badge">@NotifyOrdersCount</span>}
                             </a>
                         </li>
 

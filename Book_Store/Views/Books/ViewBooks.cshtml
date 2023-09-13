@@ -203,16 +203,25 @@
                                 }
                             </h5>
                         </div>
-                        <div class="row p-0 m-0">
-                            <div class="col-md-5 p-0 m-0 text-right">
-                                <a onclick="AddToCart(@item.ID)" role="button" class="btn btn-success product-buy-btn" style="cursor:cell">
-                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                </a>
+                        @if (item.AvailableCopies != 0)
+                        {
+                            <div class="row p-0 m-0">
+                                <div class="col-md-5 p-0 m-0 text-right">
+                                    <a onclick="AddToCart(@item.ID)" role="button" class="btn btn-success product-buy-btn" style="cursor:cell">
+                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <div class="col-md-7 p-0 m-0 text-right">
+                                    <div class="btn btn-primary p-0 m-0" style="cursor:default"> <span>@item.Price</span> ج.م</div>
+                                </div>
                             </div>
+                        }
+                        else
+                        {
                             <div class="col-md-7 p-0 m-0 text-right">
-                                <div class="btn btn-primary p-0 m-0" style="cursor:default"> <span>@item.Price</span> ج.م</div>
+                                <div class="btn btn-danger p-0 m-0" style="cursor:default"> غير متوفر حاليا.</div>
                             </div>
-                        </div>
+                        }
                         <br />
                         <br />
                     </div>

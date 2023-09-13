@@ -199,7 +199,7 @@ namespace Book_Store.Controllers
                 ViewBag.Message = Message;
                 ViewBag.OrderID = OrderID;
             }
-            var recs = db.Books.Where(c => c.AvailableCopies != 0).ToList();
+            var recs = db.Books.ToList();
 
             if (BookName != null || PublisherName != null || CategoryName != null || AutherName != null)
             {

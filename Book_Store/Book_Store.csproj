@@ -139,6 +139,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DiscountCouponsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NotifyOrdersController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PublishersController.cs" />
     <Compile Include="Controllers\ShippingCostsController.cs" />
@@ -226,12 +227,21 @@
     <Compile Include="Migrations\202309131053472_BookStatusAdded.Designer.cs">
       <DependentUpon>202309131053472_BookStatusAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202309131133387_NotifyOrderAdded.cs" />
+    <Compile Include="Migrations\202309131133387_NotifyOrderAdded.Designer.cs">
+      <DependentUpon>202309131133387_NotifyOrderAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202309131317095_NotifyOrderUpdated.cs" />
+    <Compile Include="Migrations\202309131317095_NotifyOrderUpdated.Designer.cs">
+      <DependentUpon>202309131317095_NotifyOrderUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\BookContext.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\DiscountCoupon.cs" />
+    <Compile Include="Models\NotifyOrder.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Publisher.cs" />
     <Compile Include="Models\ShippingCost.cs" />
@@ -353,6 +363,11 @@
     <Content Include="Views\DiscountCoupons\Details.cshtml" />
     <Content Include="Views\DiscountCoupons\Edit.cshtml" />
     <Content Include="Views\DiscountCoupons\Index.cshtml" />
+    <Content Include="Views\NotifyOrders\Create.cshtml" />
+    <Content Include="Views\NotifyOrders\Delete.cshtml" />
+    <Content Include="Views\NotifyOrders\Details.cshtml" />
+    <Content Include="Views\NotifyOrders\Edit.cshtml" />
+    <Content Include="Views\NotifyOrders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -435,6 +450,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309131053472_BookStatusAdded.resx">
       <DependentUpon>202309131053472_BookStatusAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309131133387_NotifyOrderAdded.resx">
+      <DependentUpon>202309131133387_NotifyOrderAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309131317095_NotifyOrderUpdated.resx">
+      <DependentUpon>202309131317095_NotifyOrderUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
