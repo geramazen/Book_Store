@@ -222,6 +222,10 @@
     <Compile Include="Migrations\202308241218497_WatchersCountUpdated.Designer.cs">
       <DependentUpon>202308241218497_WatchersCountUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202309131053472_BookStatusAdded.cs" />
+    <Compile Include="Migrations\202309131053472_BookStatusAdded.Designer.cs">
+      <DependentUpon>202309131053472_BookStatusAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
@@ -428,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308241218497_WatchersCountUpdated.resx">
       <DependentUpon>202308241218497_WatchersCountUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309131053472_BookStatusAdded.resx">
+      <DependentUpon>202309131053472_BookStatusAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

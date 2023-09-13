@@ -185,6 +185,23 @@
                                     @item.Category.CName
                                 </a>
                             </h5>
+                            <h5>
+                                حالة الكتاب:
+                                @if (item.BookStaus == 1)
+                                {
+
+                                    <span style="color:black">
+                                        جديد
+                                    </span>
+
+                                }
+                                else
+                                {
+                                    <span style="color:black">
+                                        مستعمل
+                                    </span>
+                                }
+                            </h5>
                         </div>
                         <div class="row p-0 m-0">
                             <div class="col-md-5 p-0 m-0 text-right">
@@ -208,7 +225,8 @@
 </div>
 
 <div class="text-center">
-    @Html.PagedListPager(Model, Page => Url.Action("ViewBooks", new {
+    @Html.PagedListPager(Model, Page => Url.Action("ViewBooks", new
+    {
 
     Page,
     Message = ViewContext.HttpContext.Request.QueryString["Message"],

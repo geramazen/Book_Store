@@ -74,6 +74,8 @@ namespace Book_Store.Controllers
             ViewBag.AID = new SelectList(db.Authors, "AID", "FName");
             ViewBag.CID = new SelectList(db.Categories, "CID", "CName");
             ViewBag.PID = new SelectList(db.publishers, "PID", "PName");
+            var BookstatusList = new List<SelectListItem> { new SelectListItem { Text = "جديد", Value = "1" }, new SelectListItem { Text = "مستعمل", Value = "2" } };
+            ViewBag.BookStatus = new SelectList(BookstatusList.ToList(), "Value", "text");
             Book book = new Book
             {
                 EntryDate = DateTime.Now.Date
@@ -90,7 +92,7 @@ namespace Book_Store.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (imgfile!=null && imgfile.FileName.Length > 0)
+                if (imgfile != null && imgfile.FileName.Length > 0)
                 {
                     string path = "~/images/" + DateTime.Now.ToString("yyyy-MM-dd-H-mm-ss") + Path.GetFileName(imgfile.FileName);
                     imgfile.SaveAs(Server.MapPath(path));
@@ -131,7 +133,9 @@ namespace Book_Store.Controllers
             }
             ViewBag.AID = new SelectList(db.Authors, "AID", "FName", book.AID);
             ViewBag.CID = new SelectList(db.Categories, "CID", "CName", book.CID);
-            ViewBag.PID = new SelectList(db.publishers, "PID", "PName",book.PID);
+            ViewBag.PID = new SelectList(db.publishers, "PID", "PName", book.PID);
+            var BookstatusList = new List<SelectListItem> { new SelectListItem { Text = "جديد", Value = "1", Selected = book.BookStaus == 1 ? true : false }, new SelectListItem { Text = "مستعمل", Value = "2", Selected = book.BookStaus == 2 ? true : false } };
+            ViewBag.BookStatus = new SelectList(BookstatusList.ToList(), "Value", "text");
             return View(book);
         }
 
@@ -228,7 +232,7 @@ namespace Book_Store.Controllers
                 {
                     recs = recs.OrderBy(c => c.Price).ToList();
                 }
-                else if(Sort.Value == 3)
+                else if (Sort.Value == 3)
                 {
                     recs = recs.OrderByDescending(c => c.EntryDate).ToList();
                 }
@@ -255,9 +259,9 @@ namespace Book_Store.Controllers
 
             var AvlCop = UserCart.Where(c => c.ID == id).Count();
 
-            if(AvlCop >= book.AvailableCopies)
+            if (AvlCop >= book.AvailableCopies)
             {
-                return Json(new { status = false , message = "لقد تجاوزت عدد النسخ المتوفرة من هذا الكتاب" }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = false, message = "لقد تجاوزت عدد النسخ المتوفرة من هذا الكتاب" }, JsonRequestBehavior.AllowGet);
             }
 
             UserCart.Add(new Book
@@ -271,7 +275,7 @@ namespace Book_Store.Controllers
                 Publisher = book.Publisher
             });
             Session["Cart"] = UserCart.Count();
-            return Json(new { status = true },JsonRequestBehavior.AllowGet);
+            return Json(new { status = true }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ViewCart(string Message, string copoun)
@@ -285,11 +289,11 @@ namespace Book_Store.Controllers
             {
                 Book Book = new Book();
                 var Cop = db.DiscountCoupons.Where(c => c.Name == copoun).FirstOrDefault();
-                if(Cop == null)
+                if (Cop == null)
                 {
                     ViewBag.Message = "الكود الذي أدخلته غير صحيح";
                 }
-                else 
+                else
                 {
                     var Discount = Cop.percentage;
                     foreach (var Item in UserCart)
@@ -298,7 +302,7 @@ namespace Book_Store.Controllers
                         Item.Price = (Book.Price - ((Discount / 100) * Book.Price));
                     }
                     ViewBag.Sale = "Sale";
-                }  
+                }
             }
             else
             {
@@ -337,7 +341,7 @@ namespace Book_Store.Controllers
             Book book = new Book();
             Books = UserCart;
 
-            foreach(var item in Books)
+            foreach (var item in Books)
             {
                 item.Price = db.Books.Where(c => c.ID == item.ID).Select(c => c.Price).FirstOrDefault();
             }
@@ -394,6 +398,9 @@ namespace Book_Store.Controllers
             ViewData["AutherNameList"] = new SelectList(db.Authors.ToList(), "AID", "FName");
             ViewData["CategoryNameList"] = new SelectList(db.Categories.ToList(), "CID", "CName");
             ViewData["PublisherNameList"] = new SelectList(db.publishers.ToList(), "PID", "PName");
+            var BookstatusList = new List<SelectListItem> { new SelectListItem { Text = "جديد", Value = "1" }, new SelectListItem { Text = "مستعمل", Value = "2" } };
+            ViewData["BookStatus"] = new SelectList(BookstatusList.ToList(), "Value", "text");
+
         }
 
         public decimal AddRate(int Rate, int BID)

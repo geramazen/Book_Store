@@ -85,6 +85,15 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.BookStaus, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-10">
+                    @Html.DropDownList("BookStatus", null, htmlAttributes: new { @class = "ddlist form-control " })
+                    @*@Html.DropDownListFor(model => model.BookStaus, ViewData["BookStatus"] as SelectList, "اختر حالة الكتاب", new { @class = "form-control ddlist" })*@
+                    @Html.ValidationMessageFor(model => model.BookStaus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
             @Html.HiddenFor(model => model.NumberOfRates, new { htmlAttributes = new { @class = "form-control" } })
             @Html.HiddenFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control" } })
             @Html.HiddenFor(model => model.EntryDate, new { htmlAttributes = new { @class = "form-control" } })
