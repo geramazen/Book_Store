@@ -42,8 +42,8 @@
         {
             <tr>
                 <td>
-                    <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
-                        @Html.DisplayFor(modelItem => item.CName) 
+                    <a href="@Url.Action("ViewBooks" , "Books" , new {CategoryName=item.CID,Message="قسم "+item.CName})">
+                        @Html.DisplayFor(modelItem => item.CName)
                     </a>
                 </td>
                 <td>

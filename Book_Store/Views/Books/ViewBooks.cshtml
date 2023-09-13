@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<Book_Store.Models.Book>
 @using PagedList.Mvc;
+@using PagedList;
 
 @{
     ViewBag.Title = "ViewBooks";
@@ -185,14 +186,14 @@
                                 </a>
                             </h5>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 text-right">
+                        <div class="row p-0 m-0">
+                            <div class="col-md-5 p-0 m-0 text-right">
                                 <a onclick="AddToCart(@item.ID)" role="button" class="btn btn-success product-buy-btn" style="cursor:cell">
                                     <i class="fa fa-cart-plus" aria-hidden="true"></i>
                                 </a>
                             </div>
-                            <div class="col-md-6 text-right">
-                                <div class="btn btn-primary" style="cursor:default"> <span>@item.Price</span> ج.م</div>
+                            <div class="col-md-7 p-0 m-0 text-right">
+                                <div class="btn btn-primary p-0 m-0" style="cursor:default"> <span>@item.Price</span> ج.م</div>
                             </div>
                         </div>
                         <br />
@@ -207,7 +208,17 @@
 </div>
 
 <div class="text-center">
-    @Html.PagedListPager(Model, Page => Url.Action("ViewBooks", new { Page }))
+    @Html.PagedListPager(Model, Page => Url.Action("ViewBooks", new {
+
+    Page,
+    Message = ViewContext.HttpContext.Request.QueryString["Message"],
+    OrderID = ViewContext.HttpContext.Request.QueryString["OrderID"],
+    BookName = ViewContext.HttpContext.Request.QueryString["BookName"],
+    PublisherName = ViewContext.HttpContext.Request.QueryString["PublisherName"],
+    CategoryName = ViewContext.HttpContext.Request.QueryString["CategoryName"],
+    AutherName = ViewContext.HttpContext.Request.QueryString["AutherName"],
+    Sort = ViewContext.HttpContext.Request.QueryString["Sort"]
+}))
 </div>
 
 

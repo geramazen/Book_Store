@@ -74,8 +74,10 @@ namespace Book_Store.Controllers
             ViewBag.AID = new SelectList(db.Authors, "AID", "FName");
             ViewBag.CID = new SelectList(db.Categories, "CID", "CName");
             ViewBag.PID = new SelectList(db.publishers, "PID", "PName");
-            Book book = new Book();
-            book.EntryDate = DateTime.Now.Date;
+            Book book = new Book
+            {
+                EntryDate = DateTime.Now.Date
+            };
             return View(book);
         }
 
@@ -354,7 +356,7 @@ namespace Book_Store.Controllers
                     var Discount = Coupon.percentage;
                     foreach (var Item in Books)
                     {
-                        Item.Price = (Item.Price - ((Discount / 100) * Item.Price));
+                        Item.Price -= (Discount / 100) * Item.Price;
                     }
                 }
             }

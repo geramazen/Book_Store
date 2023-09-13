@@ -39,7 +39,7 @@
         {
             <tr>
                 <td>
-                    <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
+                    <a href="@Url.Action("ViewBooks" , "Books" , new {PublisherName=item.PID,Message="دار النشر "+item.PName})">
                         @Html.DisplayFor(modelItem => item.PName)
                     </a>
                 </td>

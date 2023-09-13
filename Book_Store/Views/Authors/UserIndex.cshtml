@@ -30,7 +30,7 @@
                 إسم المصنف
             </th>
             <th>
-               عدد الكتب المتوفرة للمصنف
+                عدد الكتب المتوفرة للمصنف
             </th>
         </tr>
 
@@ -38,7 +38,7 @@
         {
             <tr>
                 <td>
-                    <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
+                    <a href="@Url.Action("ViewBooks" , "Books" , new {AutherName=item.AID,Message="المصنف "+item.FName})">
                         @Html.DisplayFor(modelItem => item.FName)
                     </a>
                 </td>

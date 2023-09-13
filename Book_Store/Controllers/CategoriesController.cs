@@ -14,7 +14,7 @@ namespace Book_Store.Controllers
 {
     public class CategoriesController : Controller
     {
-        private BookContext db = new BookContext();
+        private readonly BookContext db = new BookContext();
 
         // GET: Categories
         public ActionResult Index(int? page)
