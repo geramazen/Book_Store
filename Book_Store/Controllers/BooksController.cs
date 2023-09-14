@@ -333,6 +333,14 @@ namespace Book_Store.Controllers
 
         }
 
+        public ActionResult CopyPayed(int id)
+        {
+            var Book = db.Books.Where(c => c.ID == id).FirstOrDefault();
+            Book.AvailableCopies--;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateOrder(List<Book> Books, Order order)
