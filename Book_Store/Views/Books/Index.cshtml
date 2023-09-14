@@ -60,7 +60,7 @@
                 عنوان الكتاب
             </th>
             <th>
-                الوصف
+                عدد النسخ
             </th>
             <th>
                 صورة الغلاف
@@ -83,7 +83,7 @@
             @Html.DisplayFor(modelItem => item.title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.description)
+            @Html.DisplayFor(modelItem => item.AvailableCopies)
         </td>
         <td>
             <img src="@Url.Content(item.image)" width="50" height="70" />
