@@ -75,7 +75,7 @@ namespace Book_Store.Controllers
             ViewBag.CID = new SelectList(db.Categories, "CID", "CName");
             ViewBag.PID = new SelectList(db.publishers, "PID", "PName");
             var BookstatusList = new List<SelectListItem> { new SelectListItem { Text = "جديد", Value = "1" }, new SelectListItem { Text = "مستعمل", Value = "2" } };
-            ViewBag.BookStatus = new SelectList(BookstatusList.ToList(), "Value", "text");
+            ViewBag.BookStaus = new SelectList(BookstatusList.ToList(), "Value", "text");
             Book book = new Book
             {
                 EntryDate = DateTime.Now.Date
@@ -135,7 +135,7 @@ namespace Book_Store.Controllers
             ViewBag.CID = new SelectList(db.Categories, "CID", "CName", book.CID);
             ViewBag.PID = new SelectList(db.publishers, "PID", "PName", book.PID);
             var BookstatusList = new List<SelectListItem> { new SelectListItem { Text = "جديد", Value = "1", Selected = book.BookStaus == 1 ? true : false }, new SelectListItem { Text = "مستعمل", Value = "2", Selected = book.BookStaus == 2 ? true : false } };
-            ViewBag.BookStatus = new SelectList(BookstatusList.ToList(), "Value", "text");
+            ViewBag.BookStaus = new SelectList(BookstatusList.ToList(), "Value", "text", book.BookStaus);
             return View(book);
         }
 
