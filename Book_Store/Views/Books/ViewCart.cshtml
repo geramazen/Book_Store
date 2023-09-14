@@ -46,14 +46,12 @@
     <table class="table table-hover">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.description)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.image)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+
 
             <th>
                 @Html.DisplayNameFor(model => model.Price)
@@ -72,17 +70,15 @@
             <tr>
                 <td>
                     <a href="@Url.Action("Details" , "Books" , new {ID=item.ID})">
-                        @Html.DisplayFor(modelItem => item.title)
-                    </a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.description)
-                </td>
-                <td>
-                    <a href="@Url.Action("Details" , "Books" , new {ID=item.ID})">
                         <img src="@Url.Content(item.image)" width="50" height="70" />
                     </a>
                 </td>
+                <td>
+                    <a href="@Url.Action("Details" , "Books" , new {ID=item.ID})">
+                        @Html.DisplayFor(modelItem => item.title)
+                    </a>
+                </td>
+
 
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
