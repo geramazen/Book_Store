@@ -61,77 +61,14 @@
     <h3 style="color:antiquewhite; text-align:center">
         عدد المشاهدات: @Model.WatchersCount
     </h3>
-    <div class="row" style="height:60rem;">
+    <div class="row">
 
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 text-right" style="height:60rem;">
-           
-            <div class="caption">
-                <div style="height:90%;">
-                    <h2 style="font-family: 'Reem Kufi', sans-serif;">@Html.DisplayFor(model => model.title)</h2>
-                    <hr />
-                    <h4>
-                        المصنف:
-                        <a href="@Url.Action("AuthorBooks", "Authors", new { AID = Model.AID })">
-                            @Model.Author.FName
-                        </a>
-                    </h4>
-                    <h4>
-                        القسم:
-                        <a href="@Url.Action("CategoryBooks", "Categories", new { CID = Model.CID })">
-                            @Model.Category.CName
-                        </a>
-                    </h4>
-                    <h4>
-                        دار النشر:
-                        <a href="@Url.Action("PublisherBooks", "Publishers", new { PID = Model.PID })">
-                            @Model.Publisher.PName
-                        </a>
-                    </h4>
-                    <h4>عدد المجلدات:  @Html.DisplayFor(model => model.VolumesNum)</h4>
-                    <h4>@Html.DisplayFor(model => model.description)</h4>
-                    <h4>عدد النسخ المتوفرة:  @Html.DisplayFor(model => model.AvailableCopies)</h4>
-                    <h4>تاريخ الإضافة:   @Model.EntryDate.ToString("yyyy-MM-dd")</h4>
-                    <h4 style="display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 30px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">السعر:  @Html.DisplayFor(model => model.Price) ج.م</h4>
-                </div>
-
-                <hr /><br />
-
-                <div class="row">
-                    @if (Model.AvailableCopies != 0)
-                    {
-                        <div class="col-md-8  text-right">
-                            <p><a onclick="AddToCart(@Model.ID)" class="btn d-block btn-primary" role="button"><i class="fa fa-cart-plus" aria-hidden="true"></i>إضافة إلى سلة المشتريات</a></p>
-                        </div>
-                    }
-                    else
-                    {
-
-                        <button type="button" class="btn btn-primary col-md-8 text-right" data-toggle="modal" data-target="#exampleModal">
-                            أخبرني عند توفر الكتاب
-                        </button>
-
-
-                    }
-                    <div class="col-md-4">
-                        <p>
-                            <a href="https://wa.me/201122506393?text=مرحبا،%20أريد%20الإستفسار%20عن%20كتاب @Model.title" target="_blank">
-                                <i class="fa fa-whatsapp whatsdet Social"></i>
-                            </a>
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-        
-        </div>
-
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 text-left" style="height:60rem;">
-            <img src="@Url.Content(Model.image)" alt="..." style="height: 40rem; max-width: 100%; max-height: 100%; margin-top: 8rem">
+        <div class="col-6 col-md-6 text-right" style="width:85%">
+            <img src="@Url.Content(Model.image)" alt="..." style="height: 40rem; max-width: 100%; max-height: 100%; margin-top: 6rem">
             <br />
             <div class="text-left">
                 <h5 style="color:white; padding-left:22%;">عدد التقييمات: <span id="NRate"> @Html.DisplayFor(model => model.NumberOfRates)</span></h5>
-                <div class="rate" style="display:inline-block; padding-right:30%";">
+                <div class="rate" style="display:inline-block; padding-right:30%" ;">
                     <input type="radio" id="star5" name="rate" value="5" onchange="AddRate(this.value, @Model.ID)" />
                     <label for="star5" title="text">5 stars</label>
                     <input type="radio" id="star4" name="rate" value="4" onchange="AddRate(this.value, @Model.ID)" />
@@ -145,14 +82,74 @@
                 </div>
             </div>
         </div>
-    
+
+        <div class="col-6 col-md-6 text-right" style="width:100%">
+
+            <div class="caption">
+                <div>
+                    <h2 style="font-family: 'Reem Kufi', sans-serif;">@Html.DisplayFor(model => model.title)</h2>
+                    <hr />
+                    <h4>
+                        المصنف
+                        <a href="@Url.Action("ViewBooks" , "Books" , new {AutherName=Model.AID,Message="المصنف "+Model.Author.FName})">
+                            @Html.DisplayFor(m => m.Author.FName)
+                        </a>
+                    </h4>
+                    <h4>
+                        القسم
+                        <a href="@Url.Action("ViewBooks" , "Books" , new {CategoryName=Model.CID,Message="قسم "+Model.Category.CName})">
+                            @Html.DisplayFor(m => m.Category.CName)
+                        </a>
+                    </h4>
+                    <h4>
+                        دار النشر
+                        <a href="@Url.Action("ViewBooks" , "Books" , new {PublisherName=Model.PID,Message="دار النشر "+Model.Publisher.PName})">
+                            @Html.DisplayFor(m => m.Publisher.PName)
+                        </a>
+                    </h4>
+                    <h4>عدد المجلدات:  @Html.DisplayFor(model => model.VolumesNum)</h4>
+                    <h4>@Html.DisplayFor(model => model.description)</h4>
+                    <h4>عدد النسخ المتوفرة:  @Html.DisplayFor(model => model.AvailableCopies)</h4>
+                    <h4>تاريخ الإضافة:   @Model.EntryDate.ToString("yyyy-MM-dd")</h4>
+                    <h4 style="display: inline-block; margin-bottom: 0; font-weight: normal; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; background-color: brown; border: 1px solid transparent; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; border-radius: 30px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; ">السعر:  @Html.DisplayFor(model => model.Price) ج.م</h4>
+                </div>
+
+                <hr /><br />
+
+
+                @if (Model.AvailableCopies != 0)
+                {
+                    <a onclick="AddToCart(@Model.ID)" class="btn d-block btn-primary" role="button">
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>إضافة إلى سلة المشتريات
+                    </a>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        أخبرني عند توفر الكتاب
+                    </button>
+                }
+
+                <a href="https://wa.me/201122506393?text=مرحبا،%20أريد%20الإستفسار%20عن%20كتاب @Model.title" target="_blank">
+                    <i class="fa fa-whatsapp whatsdet Social"></i>
+                </a>
+
+
+            </div>
+
+        </div>
+
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+
+
+
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 </div>
 

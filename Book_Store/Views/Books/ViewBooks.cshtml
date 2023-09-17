@@ -55,11 +55,13 @@
     {
         @Html.AntiForgeryToken()
         <div class="row">
+            
             <div class="form-group col-md-4">
                 <div class="col-md-10">
                     @Html.DropDownList("CategoryName", ViewData["CategoryNameList"] as SelectList, "اختر القسم", new { @class = "ddlist chosen-select form-control" })
                 </div>
             </div>
+            
             <div class="form-group col-md-4">
                 <div class="col-md-10">
                     @Html.DropDownList("AutherName", ViewData["AutherNameList"] as SelectList, "اختر اسم المصنف", new { @class = "ddlist chosen-select form-control" })
@@ -74,12 +76,6 @@
         </div>
 
         <div class="row">
-
-            <div class="form-group col-md-4">
-                <div class="col-md-10">
-                    <button class="btn btn-primary" value="Search" type="submit">إبحث</button>
-                </div>
-            </div>
 
             <div class="form-group col-md-4">
                 <div class="col-md-10">
@@ -109,10 +105,17 @@
                 </div>
             </div>
 
+            <div class="form-group col-md-4">
+                <div class="col-md-10">
+                    <button class="btn btn-primary" value="Search" type="submit">إبحث</button>
+                </div>
+            </div>
 
         </div>
 
     }
+    <br />
+    <br />
 </div>
 
 @if (ViewBag.NoResult != null)
@@ -212,20 +215,20 @@
                             <h1 style="font-family: 'Reem Kufi', sans-serif;" class="text-center">@item.title</h1>
 
                             <h5>
-                                المصنف:
-                                <a href="@Url.Action("AuthorBooks" , "Authors" , new {AID=item.AID})">
+                                المصنف 
+                                <a href="@Url.Action("ViewBooks" , "Books" , new {AutherName=item.AID,Message="المصنف "+item.Author.FName})">
                                     @item.Author.FName
                                 </a>
                             </h5>
                             <h5>
-                                الناشر:
-                                <a href="@Url.Action("PublisherBooks" , "Publishers" , new {PID=item.PID})">
+                                دار النشر 
+                                <a href="@Url.Action("ViewBooks" , "Books" , new {PublisherName=item.PID,Message="دار النشر  "+item.Publisher.PName})">
                                     @item.Publisher.PName
                                 </a>
                             </h5>
                             <h5>
-                                القسم:
-                                <a href="@Url.Action("CategoryBooks" , "Categories" , new {CID=item.CID})">
+                                قسم
+                                <a href="@Url.Action("ViewBooks" , "Books" , new {CategoryName=item.CID,Message="قسم "+item.Category.CName})">
                                     @item.Category.CName
                                 </a>
                             </h5>
