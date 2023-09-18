@@ -167,7 +167,10 @@
                     </div>
                     <div class="form-group">
                         <label for="MobileNumber">رقم الهاتف</label>
-                        <input name="MobileNumber" type="tel" required class="form-control">
+                        <div class="input-group text-right" dir="ltr">
+                            <span class="input-group-addon" style="font-weight:bold">+20</span>
+                            <input name="MobileNumber" type="tel" required class="form-control">
+                        </div>
                         <small class="form-text text-muted">يفضل إدخال رقم الواتساب لنتمكن من التواصل معك عند توفر الكتاب</small>
                     </div>
                     <input hidden name="BID" value="@Model.ID" />
