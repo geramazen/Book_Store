@@ -6,6 +6,23 @@
 }
 
 <br />
+<div>
+    @using (Html.BeginForm("Index", "Categories", FormMethod.Get))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-primary" value="Search" type="submit">ابحث</button>
+            </div>
+            <div class="col-md-3">
+                @Html.Editor("Category", new { htmlAttributes = new { @class = "form-control", @placeholder = "أدخل اسم القسم" } })
+            </div>
+        </div>
+
+    }
+</div>
+
+<br />
 
 <p class="text-center">
     @Html.ActionLink("إضافة قسم جديد", "Create", null, htmlAttributes: new { @class = "btn btn-primary" })

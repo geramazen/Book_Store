@@ -17,11 +17,16 @@ namespace Book_Store.Controllers
         private readonly BookContext db = new BookContext();
 
         // GET: Categories
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page,string Category)
         {
             var recs = db.Categories.ToList();
+            if (Category != null)
+            {
+                recs = recs.Where(c => c.CName.Contains(Category)).ToList();
+            }
+
             int pageSize = 10;
-            int pageNumber = (page ?? 1);
+            int pageNumber = (page ?? 1);           
             return View(recs.ToPagedList(pageNumber, pageSize));
         }
 

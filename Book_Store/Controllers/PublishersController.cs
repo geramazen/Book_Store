@@ -16,9 +16,14 @@ namespace Book_Store.Controllers
         private readonly BookContext db = new BookContext();
 
         // GET: Publishers
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page,string Publisher)
         {
             var recs = db.publishers.ToList();
+            if (Publisher != null)
+            {
+                recs = recs.Where(c => c.PName.Contains(Publisher)).ToList();
+            }
+
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(recs.ToPagedList(pageNumber, pageSize));
