@@ -91,19 +91,19 @@
                     <hr />
                     <h4>
                         المصنف
-                        <a href="@Url.Action("ViewBooks" , "Books" , new {AutherName=Model.AID,Message="المصنف "+Model.Author.FName})">
+                        <a href="@Url.Action("ViewBooks" , "Books" , new {AutherName=Model.AID,Message=Model.Author.FName,Type ="Tittle"})">
                             @Html.DisplayFor(m => m.Author.FName)
                         </a>
                     </h4>
                     <h4>
                         القسم
-                        <a href="@Url.Action("ViewBooks" , "Books" , new {CategoryName=Model.CID,Message="قسم "+Model.Category.CName})">
+                        <a href="@Url.Action("ViewBooks" , "Books" , new {CategoryName=Model.CID,Message=Model.Category.CName,Type ="Tittle"})">
                             @Html.DisplayFor(m => m.Category.CName)
                         </a>
                     </h4>
                     <h4>
                         دار النشر
-                        <a href="@Url.Action("ViewBooks" , "Books" , new {PublisherName=Model.PID,Message="دار النشر "+Model.Publisher.PName})">
+                        <a href="@Url.Action("ViewBooks" , "Books" , new {PublisherName=Model.PID,Message=Model.Publisher.PName,Type ="Tittle"})">
                             @Html.DisplayFor(m => m.Publisher.PName)
                         </a>
                     </h4>
@@ -151,8 +151,6 @@
 <br />
 <br />
 
-</div>
-
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -165,11 +163,11 @@
                 <form method="post" action="~/NotifyOrders/Create">
                     <div class="form-group">
                         <label for="Name">الإسم</label>
-                        <input name="Name" type="text" class="form-control">
+                        <input required name="Name" type="text" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="MobileNumber">رقم الهاتف</label>
-                        <input name="MobileNumber" type="number" class="form-control">
+                        <input name="MobileNumber" type="tel" required class="form-control">
                         <small class="form-text text-muted">يفضل إدخال رقم الواتساب لنتمكن من التواصل معك عند توفر الكتاب</small>
                     </div>
                     <input hidden name="BID" value="@Model.ID" />

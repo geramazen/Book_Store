@@ -234,9 +234,20 @@ textarea {
     text-align: center;
     font-size: 2rem;
 }
-
 .whatsdet {
     background-color: #25d366;
+}
+
+.notifywhats {
+    background-color: #25d366;
+    width: 2rem;
+    height: 2rem;
+    bottom: 1rem;
+    right: 1rem;
+    color: #FFF;
+    border-radius: 45%;
+    text-align: center;
+    font-size: 2rem;
 }
 
 .facedet {

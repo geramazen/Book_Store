@@ -191,11 +191,15 @@ namespace Book_Store.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult ViewBooks(string Message, string OrderID, int? page, string BookName, int? PublisherName, int? CategoryName, int? AutherName, int? Sort)
+        public ActionResult ViewBooks(string Message, string OrderID, int? page, string BookName, int? PublisherName, int? CategoryName, int? AutherName, int? Sort ,string Type)
         {
             SetDropDown();
             if (Message != null)
             {
+                if(Type == "Tittle")
+                {
+                    ViewBag.Tittle = "True";
+                }
                 ViewBag.Message = Message;
                 ViewBag.OrderID = OrderID;
             }

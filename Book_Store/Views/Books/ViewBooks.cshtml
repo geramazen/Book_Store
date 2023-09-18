@@ -39,29 +39,36 @@
 
 @if (ViewBag.message != null)
 {
-    <div class="alert alert-success text-center" role="alert">
-        <h2> @ViewBag.Message</h2>
-        @if (ViewBag.OrderID != null)
-        {
-            <h2>
-                كود الطلب: @ViewBag.OrderID <br />
-            </h2>
-        }
-    </div>
+    if (ViewBag.Tittle == "True")
+    {
+        <h1 style="color: white; font-family: 'Lateef', serif; text-align: center"> @ViewBag.Message</h1>
+        <hr />
+    }
+    else
+    {
+        <div class="alert alert-success text-center" role="alert">
+            <h2> @ViewBag.Message</h2>
+            @if (ViewBag.OrderID != null)
+            {
+                <h2>
+                    كود الطلب: @ViewBag.OrderID <br />
+                </h2>
+            }
+        </div>
+    }
 }
-
 <div class="container">
     @using (Html.BeginForm("ViewBooks", "Books", FormMethod.Get))
     {
         @Html.AntiForgeryToken()
         <div class="row">
-            
+
             <div class="form-group col-md-4">
                 <div class="col-md-10">
                     @Html.DropDownList("CategoryName", ViewData["CategoryNameList"] as SelectList, "اختر القسم", new { @class = "ddlist chosen-select form-control" })
                 </div>
             </div>
-            
+
             <div class="form-group col-md-4">
                 <div class="col-md-10">
                     @Html.DropDownList("AutherName", ViewData["AutherNameList"] as SelectList, "اختر اسم المصنف", new { @class = "ddlist chosen-select form-control" })
@@ -215,20 +222,20 @@
                             <h1 style="font-family: 'Reem Kufi', sans-serif;" class="text-center">@item.title</h1>
 
                             <h5>
-                                المصنف 
-                                <a href="@Url.Action("ViewBooks" , "Books" , new {AutherName=item.AID,Message="المصنف "+item.Author.FName})">
+                                المصنف
+                                <a href="@Url.Action("ViewBooks" , "Books" , new {AutherName=item.AID,Message=item.Author.FName,Type ="Tittle"})">
                                     @item.Author.FName
                                 </a>
                             </h5>
                             <h5>
-                                دار النشر 
-                                <a href="@Url.Action("ViewBooks" , "Books" , new {PublisherName=item.PID,Message="دار النشر  "+item.Publisher.PName})">
+                                دار النشر
+                                <a href="@Url.Action("ViewBooks" , "Books" , new {PublisherName=item.PID,Message=item.Publisher.PName,Type ="Tittle"})">
                                     @item.Publisher.PName
                                 </a>
                             </h5>
                             <h5>
                                 قسم
-                                <a href="@Url.Action("ViewBooks" , "Books" , new {CategoryName=item.CID,Message="قسم "+item.Category.CName})">
+                                <a href="@Url.Action("ViewBooks" , "Books" , new {CategoryName=item.CID,Message=item.Category.CName,Type ="Tittle"})">
                                     @item.Category.CName
                                 </a>
                             </h5>
