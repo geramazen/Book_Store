@@ -16,11 +16,15 @@ namespace Book_Store.Controllers
         private readonly BookContext db = new BookContext();
 
         // GET: Authors
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string Author)
         {
             var recs = db.Authors.ToList();
             int pageSize = 10;
             int pageNumber = (page ?? 1);
+            if (Author != null)
+            {
+                recs = recs.Where(c => c.FName.Contains(Author)).ToList();
+            }
             return View(recs.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult UserIndex(int? page, string Author)
