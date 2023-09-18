@@ -129,9 +129,12 @@
                         </div>
                     </div>
                 </td>
+                @if (item.AvailableCopies > 0)
+                {
                 <td>
-                    <a style="color:white" href="@Url.Action("CopyPayed" , "Books" , new {id=item.ID})" class="btn btn-success">تم بيع نسخة</a>
+                    <a style="color:white" href="@Url.Action("CopyPayed", "Books", new { id = item.ID })" class="btn btn-success">تم بيع نسخة</a>
                 </td>
+                }
             </tr>
         }
 
