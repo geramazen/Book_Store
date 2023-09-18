@@ -223,19 +223,19 @@
 
                             <h5>
                                 المصنف
-                                <a href="@Url.Action("ViewBooks" , "Books" , new {AutherName=item.AID,Message=item.Author.FName,Type ="Tittle"})">
+                                <a href="@Url.Action("ViewBooks" , "Books" , new {AutherName=item.AID,Message="المصنف "+item.Author.FName,Type ="Tittle"})">
                                     @item.Author.FName
                                 </a>
                             </h5>
                             <h5>
                                 دار النشر
-                                <a href="@Url.Action("ViewBooks" , "Books" , new {PublisherName=item.PID,Message=item.Publisher.PName,Type ="Tittle"})">
+                                <a href="@Url.Action("ViewBooks" , "Books" , new {PublisherName=item.PID,Message="دار النشر "+item.Publisher.PName,Type ="Tittle"})">
                                     @item.Publisher.PName
                                 </a>
                             </h5>
                             <h5>
                                 قسم
-                                <a href="@Url.Action("ViewBooks" , "Books" , new {CategoryName=item.CID,Message=item.Category.CName,Type ="Tittle"})">
+                                <a href="@Url.Action("ViewBooks" , "Books" , new {CategoryName=item.CID,Message="قسم "+item.Category.CName,Type ="Tittle"})">
                                     @item.Category.CName
                                 </a>
                             </h5>

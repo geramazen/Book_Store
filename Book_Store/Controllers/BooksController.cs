@@ -203,7 +203,7 @@ namespace Book_Store.Controllers
                 ViewBag.Message = Message;
                 ViewBag.OrderID = OrderID;
             }
-            var recs = db.Books.ToList();
+            var recs = db.Books.OrderByDescending(c => c.WatchersCount).ToList();
 
             if (BookName != null || PublisherName != null || CategoryName != null || AutherName != null)
             {
@@ -245,6 +245,7 @@ namespace Book_Store.Controllers
                     recs = recs.OrderByDescending(c => c.WatchersCount).ToList();
                 }
             }
+
             int pageSize = 12;
             int pageNumber = (page ?? 1);
 

@@ -91,19 +91,19 @@
                     <hr />
                     <h4>
                         المصنف
-                        <a href="@Url.Action("ViewBooks" , "Books" , new {AutherName=Model.AID,Message=Model.Author.FName,Type ="Tittle"})">
+                        <a href="@Url.Action("ViewBooks" , "Books" , new {AutherName=Model.AID,Message="المصنف "+Model.Author.FName,Type ="Tittle"})">
                             @Html.DisplayFor(m => m.Author.FName)
                         </a>
                     </h4>
                     <h4>
                         القسم
-                        <a href="@Url.Action("ViewBooks" , "Books" , new {CategoryName=Model.CID,Message=Model.Category.CName,Type ="Tittle"})">
+                        <a href="@Url.Action("ViewBooks" , "Books" , new {CategoryName=Model.CID,Message="قسم "+Model.Category.CName,Type ="Tittle"})">
                             @Html.DisplayFor(m => m.Category.CName)
                         </a>
                     </h4>
                     <h4>
                         دار النشر
-                        <a href="@Url.Action("ViewBooks" , "Books" , new {PublisherName=Model.PID,Message=Model.Publisher.PName,Type ="Tittle"})">
+                        <a href="@Url.Action("ViewBooks" , "Books" , new {PublisherName=Model.PID,Message="دار النشر "+Model.Publisher.PName,Type ="Tittle"})">
                             @Html.DisplayFor(m => m.Publisher.PName)
                         </a>
                     </h4>
