@@ -117,7 +117,7 @@
                                             <div class="form-group">
                                                 <label for="Name">عدد النسخ</label>
                                                 <input required name="NumOfCopies" type="number" class="form-control">
-                                                <input hidden name="BID" type="number" value="@item.ID" />
+                                                <input hidden name="BID" type="number" value="@item.ID" onload="this.value = @item.ID" />
                                             </div>
                                             <button type="submit" class="btn btn-primary">إضافة النسخ</button>
                                         </form>

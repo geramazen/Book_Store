@@ -17,8 +17,8 @@ namespace Book_Store.Helpers
         {
             //Session["UserName"] = rec.Name;
             //Session["UserID"] = rec.ID;
-
-            if (pv.IsAdmin())
+            var user = filterContext.HttpContext.Session["UserName"];
+            if (user!=null&&user.ToString()== "Admin")
             {
                 base.OnActionExecuting(filterContext);
                 return;
