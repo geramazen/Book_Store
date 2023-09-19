@@ -59,6 +59,7 @@ namespace Book_Store.Controllers
         [HttpPost]
         public ActionResult Create(NotifyOrder notifyOrder)
         {
+            notifyOrder.MobileNumber = int.Parse(notifyOrder.MobileNumber).ToString();
             if (ModelState.IsValid)
             {
                 db.NotifyOrders.Add(notifyOrder);
