@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Book_Store.Controllers
 {
+    [Helpers.AdminAccess]
     public class HomeController : Controller
     {
         public ActionResult Index()

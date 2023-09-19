@@ -16,6 +16,7 @@ namespace Book_Store.Controllers
         private readonly BookContext db = new BookContext();
 
         // GET: Publishers
+        [Helpers.AdminAccess]
         public ActionResult Index(int? page,string Publisher)
         {
             var recs = db.publishers.ToList();
@@ -44,6 +45,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Publishers/Details/5
+        [Helpers.AdminAccess]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -59,6 +61,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Publishers/Create
+        [Helpers.AdminAccess]
         public ActionResult Create()
         {
             return View();
@@ -69,6 +72,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Create([Bind(Include = "PID,PName")] Publisher publisher)
         {
             if (ModelState.IsValid)
@@ -82,6 +86,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Publishers/Edit/5
+        [Helpers.AdminAccess]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -101,6 +106,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Edit([Bind(Include = "PID,PName")] Publisher publisher)
         {
             if (ModelState.IsValid)
@@ -113,6 +119,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Publishers/Delete/5
+        [Helpers.AdminAccess]
         public ActionResult Delete(int? id)
         {
             Publisher publisher = db.publishers.Find(id);
@@ -133,12 +140,12 @@ namespace Book_Store.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult PublisherBooks(int? page, int PID)
-        {
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            var Books = db.Books.Where(b => b.PID == PID).ToList();
-            return View(Books.ToPagedList(pageNumber, pageSize));
-        }
+        //public ActionResult PublisherBooks(int? page, int PID)
+        //{
+        //    int pageSize = 10;
+        //    int pageNumber = (page ?? 1);
+        //    var Books = db.Books.Where(b => b.PID == PID).ToList();
+        //    return View(Books.ToPagedList(pageNumber, pageSize));
+        //}
     }
 }

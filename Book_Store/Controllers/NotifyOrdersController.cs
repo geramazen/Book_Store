@@ -16,6 +16,7 @@ namespace Book_Store.Controllers
         private BookContext db = new BookContext();
 
         // GET: NotifyOrders
+        [Helpers.AdminAccess]
         public ActionResult Index(int? page)
         {
             var recs = db.NotifyOrders.Where(c => c.Status == 0).ToList();
@@ -24,6 +25,8 @@ namespace Book_Store.Controllers
 
             return View(recs.ToPagedList(pageNumber, pageSize));
         }
+
+        [Helpers.AdminAccess]
         public ActionResult Notified(int ID)
         {
             var Nofify = db.NotifyOrders.Where(c => c.ID == ID).FirstOrDefault();
@@ -32,6 +35,7 @@ namespace Book_Store.Controllers
             return RedirectToAction("Index");
         }
 
+        [Helpers.AdminAccess]
         // GET: NotifyOrders/Details/5
         public ActionResult Details(int? id)
         {

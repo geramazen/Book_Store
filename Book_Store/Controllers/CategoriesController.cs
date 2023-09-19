@@ -17,6 +17,7 @@ namespace Book_Store.Controllers
         private readonly BookContext db = new BookContext();
 
         // GET: Categories
+        [Helpers.AdminAccess]
         public ActionResult Index(int? page,string Category)
         {
             var recs = db.Categories.ToList();
@@ -45,6 +46,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Categories/Details/5
+        [Helpers.AdminAccess]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -60,6 +62,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Categories/Create
+        [Helpers.AdminAccess]
         public ActionResult Create()
         {
             return View();
@@ -70,6 +73,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Create([Bind(Include = "CID,CName")] Category category)
         {
             if (ModelState.IsValid)
@@ -83,6 +87,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Helpers.AdminAccess]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -102,6 +107,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Edit([Bind(Include = "CID,CName")] Category category)
         {
             if (ModelState.IsValid)
@@ -114,6 +120,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Helpers.AdminAccess]
         public ActionResult Delete(int? id)
         {
             Category category = db.Categories.Find(id);
@@ -134,12 +141,12 @@ namespace Book_Store.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult CategoryBooks(int? page, int CID)
-        {
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            var Books = db.Books.Where(b => b.CID == CID).ToList();
-            return View(Books.ToPagedList(pageNumber, pageSize));
-        }
+        //public ActionResult CategoryBooks(int? page, int CID)
+        //{
+        //    int pageSize = 10;
+        //    int pageNumber = (page ?? 1);
+        //    var Books = db.Books.Where(b => b.CID == CID).ToList();
+        //    return View(Books.ToPagedList(pageNumber, pageSize));
+        //}
     }
 }

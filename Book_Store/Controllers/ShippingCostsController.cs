@@ -21,6 +21,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: ShippingCosts/Details/5
+        [Helpers.AdminAccess]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +37,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: ShippingCosts/Create
+        [Helpers.AdminAccess]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +48,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Create([Bind(Include = "ID,Cost")] ShippingCost shippingCost)
         {
             if (ModelState.IsValid)
@@ -59,6 +62,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: ShippingCosts/Edit/5
+        [Helpers.AdminAccess]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +82,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Edit([Bind(Include = "ID,Cost")] ShippingCost shippingCost)
         {
             if (ModelState.IsValid)
@@ -90,6 +95,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: ShippingCosts/Delete/5
+        [Helpers.AdminAccess]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +113,7 @@ namespace Book_Store.Controllers
         // POST: ShippingCosts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult DeleteConfirmed(int id)
         {
             ShippingCost shippingCost = db.shippingCosts.Find(id);

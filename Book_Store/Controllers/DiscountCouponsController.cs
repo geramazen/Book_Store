@@ -16,6 +16,7 @@ namespace Book_Store.Controllers
         private BookContext db = new BookContext();
 
         // GET: DiscountCoupons
+        [Helpers.AdminAccess]
         public ActionResult Index(int? page)
         {
             var recs = db.DiscountCoupons.ToList();
@@ -26,6 +27,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: DiscountCoupons/Details/5
+        [Helpers.AdminAccess]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,6 +43,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: DiscountCoupons/Create
+        [Helpers.AdminAccess]
         public ActionResult Create()
         {
             return View();
@@ -51,6 +54,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Create([Bind(Include = "ID,Name,percentage")] DiscountCoupon discountCoupon)
         {
             if (ModelState.IsValid)
@@ -64,6 +68,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: DiscountCoupons/Edit/5
+        [Helpers.AdminAccess]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,6 +88,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Edit([Bind(Include = "ID,Name,percentage")] DiscountCoupon discountCoupon)
         {
             if (ModelState.IsValid)
@@ -95,6 +101,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: DiscountCoupons/Delete/5
+        [Helpers.AdminAccess]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,6 +119,7 @@ namespace Book_Store.Controllers
         // POST: DiscountCoupons/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult DeleteConfirmed(int id)
         {
             DiscountCoupon discountCoupon = db.DiscountCoupons.Find(id);
@@ -120,6 +128,7 @@ namespace Book_Store.Controllers
             return RedirectToAction("Index");
         }
 
+        
         public JsonResult CheckCoupon(string DiscountCoupon)
         {
             var Coupon = db.DiscountCoupons.Where(c => c.Name == DiscountCoupon).FirstOrDefault();

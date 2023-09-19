@@ -16,6 +16,7 @@ namespace Book_Store.Controllers
         private readonly BookContext db = new BookContext();
 
         // GET: Authors
+        [Helpers.AdminAccess]
         public ActionResult Index(int? page, string Author)
         {
             var recs = db.Authors.ToList();
@@ -42,6 +43,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Authors/Details/5
+        [Helpers.AdminAccess]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -57,6 +59,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Authors/Create
+        [Helpers.AdminAccess]
         public ActionResult Create()
         {
             return View();
@@ -67,6 +70,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Create([Bind(Include = "AID,FName,LName")] Author author)
         {
             if (ModelState.IsValid)
@@ -80,6 +84,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Authors/Edit/5
+        [Helpers.AdminAccess]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,6 +104,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Edit([Bind(Include = "AID,FName,LName")] Author author)
         {
             if (ModelState.IsValid)
@@ -128,6 +134,7 @@ namespace Book_Store.Controllers
         // POST: Authors/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Delete/*Confirmed*/(int id)
         {
             Author author = db.Authors.Find(id);
@@ -148,28 +155,28 @@ namespace Book_Store.Controllers
             base.Dispose(disposing);
         }
 
-        // GET: Authors/Edit/5
-        public ActionResult AllWork(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var books = db.Books.Where(b => b.AID == id).ToList();
-            if (books == null)
-            {
-                return HttpNotFound();
-            }
-            return View("../Books/ViewBooks", books);
-        }
+        //// GET: Authors/Edit/5
+        //public ActionResult AllWork(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    var books = db.Books.Where(b => b.AID == id).ToList();
+        //    if (books == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View("../Books/ViewBooks", books);
+        //}
 
 
-        public ActionResult AuthorBooks(int? page ,int AID)
-        {
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            var Books = db.Books.Where(b => b.AID == AID).ToList();
-            return View(Books.ToPagedList(pageNumber, pageSize));
-        }
+        //public ActionResult AuthorBooks(int? page ,int AID)
+        //{
+        //    int pageSize = 10;
+        //    int pageNumber = (page ?? 1);
+        //    var Books = db.Books.Where(b => b.AID == AID).ToList();
+        //    return View(Books.ToPagedList(pageNumber, pageSize));
+        //}
     }
 }

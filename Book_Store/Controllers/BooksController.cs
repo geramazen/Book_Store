@@ -18,6 +18,7 @@ namespace Book_Store.Controllers
         public static List<Book> UserCart = new List<Book>();
 
         // GET: Books
+        [Helpers.AdminAccess]
         public ActionResult Index(int? page, string BookName, int? PublisherName, int? CategoryName, int? AutherName)
         {
             SetDropDown();
@@ -69,6 +70,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Books/Create
+        [Helpers.AdminAccess]
         public ActionResult Create()
         {
             ViewBag.AID = new SelectList(db.Authors, "AID", "FName");
@@ -88,6 +90,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Create(Book book, HttpPostedFileBase imgfile)
         {
             if (ModelState.IsValid)
@@ -120,6 +123,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Books/Edit/5
+        [Helpers.AdminAccess]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -142,6 +146,7 @@ namespace Book_Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Edit(Book book, HttpPostedFileBase imgfile)
         {
             //var model = db.Books.Where(b => b.ID == book.ID).FirstOrDefault();
@@ -174,6 +179,7 @@ namespace Book_Store.Controllers
 
 
         // POST: Books/Delete/5
+        [Helpers.AdminAccess]
         public ActionResult Delete(int id)
         {
             Book book = db.Books.Find(id);
@@ -338,6 +344,7 @@ namespace Book_Store.Controllers
 
         }
 
+        [Helpers.AdminAccess]
         public ActionResult CopyPayed(int id)
         {
             var Book = db.Books.Where(c => c.ID == id).FirstOrDefault();

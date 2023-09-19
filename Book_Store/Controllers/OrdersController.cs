@@ -16,6 +16,7 @@ namespace Book_Store.Controllers
         private BookContext db = new BookContext();
 
         // GET: Orders
+        [Helpers.AdminAccess]
         public ActionResult Index(int? page , int? ID, string Coupon)
         {
             var recs = db.Orders.OrderByDescending(c => c.ID).ToList();
@@ -76,6 +77,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Orders/Edit/5
+        [Helpers.AdminAccess]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,6 +97,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Helpers.AdminAccess]
         public ActionResult Edit([Bind(Include = "ID,Name,Adress,MobileNumber,Order_Status,OrderID")] Order order)
         {
             if (ModelState.IsValid)
@@ -141,19 +144,21 @@ namespace Book_Store.Controllers
             base.Dispose(disposing);
         }
 
-
+        [Helpers.AdminAccess]
         public ActionResult OrdersToConfirm()
         {
             var Orders = db.Orders.Where(c => c.Order_Status == 0).ToList();
             return View(Orders);
         }
 
+        [Helpers.AdminAccess]
         public ActionResult OrdersToShip()
         {
             var Orders = db.Orders.Where(c => c.Order_Status == 1).ToList();
             return View(Orders);
         }
 
+        [Helpers.AdminAccess]
         public ActionResult OrderShiped(int OrderID)
         {
             var AllOrders = db.Orders.Where(o => o.OrderID == OrderID).ToList();
@@ -165,6 +170,7 @@ namespace Book_Store.Controllers
             return RedirectToAction("ViewBooks", "Books");
         }
 
+        [Helpers.AdminAccess]
         public ActionResult ConfirmOrder(int OrderID)
         {
             var AllOrders = db.Orders.Where(o => o.OrderID == OrderID).ToList();
@@ -206,12 +212,16 @@ namespace Book_Store.Controllers
 
 
         }
+        
         [HttpGet]
+        [Helpers.AdminAccess]
         public ActionResult OrderFollowing()
         {
             ViewBag.NoOrders = "False";
             return View(db.Orders.ToList());
         }
+
+        
         [ActionName("OrderFollowing_Result")]
         public ActionResult OrderFollowing(string OrderStatusMessage, int OrderID)
         {

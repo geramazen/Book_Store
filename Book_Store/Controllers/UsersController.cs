@@ -27,6 +27,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Users/Details/5
+        [AdminAccess]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -42,6 +43,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Users/Create
+        [AdminAccess]
         public ActionResult Create()
         {
             return View();
@@ -52,6 +54,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AdminAccess]
         public ActionResult Create([Bind(Include = "ID,Name,EMAIL,Password,role,image")] User user)
         {
             if (ModelState.IsValid)
@@ -65,6 +68,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Users/Edit/5
+        [AdminAccess]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -84,6 +88,7 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AdminAccess]
         public ActionResult Edit([Bind(Include = "ID,Name,EMAIL,Password,role,image")] User user)
         {
             if (ModelState.IsValid)
@@ -96,6 +101,7 @@ namespace Book_Store.Controllers
         }
 
         // GET: Users/Delete/5
+        [AdminAccess]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,6 +119,7 @@ namespace Book_Store.Controllers
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AdminAccess]
         public ActionResult DeleteConfirmed(int id)
         {
             User user = db.Users.Find(id);
