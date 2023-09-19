@@ -451,5 +451,20 @@ namespace Book_Store.Controllers
 
             return Book.Rate.Value;
         }
+
+        [HttpPost]
+        public ActionResult AddCopies(AddCopiesData data)
+        {
+            var Book = db.Books.Where(c => c.ID == data.BID).FirstOrDefault();
+            Book.AvailableCopies = Book.AvailableCopies + data.NumOfCopies;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public class AddCopiesData
+        {
+            public int BID { get; set; }
+            public int NumOfCopies { get; set; }
+        }
     }
 }
