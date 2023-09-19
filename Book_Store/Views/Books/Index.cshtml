@@ -11,15 +11,15 @@
         padding: 0;
         margin: 0;
     }
-    td{
-        background-color:aliceblue;
+
+    td {
+        background-color: aliceblue;
     }
-    td > .btn {
-        padding: 2px;
-        vertical-align: auto;
-    }
-    
-    
+
+        td > .btn {
+            padding: 2px;
+            vertical-align: auto;
+        }
 </style>
 
 
@@ -89,57 +89,82 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    <img src="@Url.Content(item.image)" width="50" height="70" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author.FName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.CName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AvailableCopies)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    <a style="color:white" href="@Url.Action("edit" , "Books" , new {id=item.ID})" class="btn btn-primary">تعديل</a>
-
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirm_@item.ID">
-                        حذف
-                    </button>
-
-                    @if (item.AvailableCopies > 0)
-                    {
-                        <a style="color:white" href="@Url.Action("CopyPayed", "Books", new { id = item.ID })" class="btn btn-success">تم بيع نسخة</a>
-                    }
-                </td>
-                <div class="modal" tabindex="-1" role="dialog" id="deleteConfirm_@item.ID">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">يرجى الانتباه</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>هل تريد تاكيد حذف كتاب @item.title ؟</p>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="~/Books/Delete?id=@item.ID" class="btn btn-primary">تأكيد</a>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                <tr>
+                    <td>
+                        <img src="@Url.Content(item.image)" width="50" height="70" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author.FName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CName)
+                    </td>
+                    <td>
+                        <button type="button" class="btn-primary" data-toggle="modal" data-target="#AddCopy_@item.ID">
+                            @item.AvailableCopies
+                        </button>
+                        <div class="modal" tabindex="-1" role="dialog" id="AddCopy_@item.ID">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">إضافة نسخ لكتاب: @item.title</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" action="~/Books/AddCopies">
+                                            <div class="form-group">
+                                                <label for="Name">عدد النسخ</label>
+                                                <input required name="NumOfCopies" type="number" class="form-control">
+                                                <input hidden name="BID" type="number" value="@item.ID" />
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">إضافة النسخ</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </tr>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a style="color:white" href="@Url.Action("edit" , "Books" , new {id=item.ID})" class="btn btn-primary">تعديل</a>
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirm_@item.ID">
+                            حذف
+                        </button>
+                        <div class="modal" tabindex="-1" role="dialog" id="deleteConfirm_@item.ID">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">يرجى الانتباه</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>هل تريد تاكيد حذف كتاب @item.title ؟</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="~/Books/Delete?id=@item.ID" class="btn btn-primary">تأكيد</a>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (item.AvailableCopies > 0)
+                        {
+                            <a style="color:white" href="@Url.Action("CopyPayed", "Books", new { id = item.ID })" class="btn btn-success">تم بيع نسخة</a>
+                        }
+                    </td>
+
+                </tr>
             }
         </tbody>
     </table>
