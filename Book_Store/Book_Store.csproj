@@ -147,6 +147,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AdminAccess.cs" />
+    <Compile Include="Helpers\PVController.cs" />
     <Compile Include="Migrations\202308020837418_firstmigration.cs" />
     <Compile Include="Migrations\202308020837418_firstmigration.Designer.cs">
       <DependentUpon>202308020837418_firstmigration.cs</DependentUpon>
@@ -372,6 +374,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\" />
+    <Folder Include="Views\PV\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

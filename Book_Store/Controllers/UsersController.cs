@@ -1,4 +1,5 @@
-﻿using Book_Store.Models;
+﻿using Book_Store.Helpers;
+using Book_Store.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -11,6 +12,7 @@ namespace Book_Store.Controllers
         private BookContext db = new BookContext();
 
         // GET: Users
+        [AdminAccess]
         public ActionResult Index()
         {
             if (Session["UserType"] != null)
