@@ -4,8 +4,9 @@ body {
    font-family: 'Aref Ruqaa Ink', serif;
     background-color: whitesmoke;
     width: 100%;
-    /*letter-spacing: 0.1em;*/
 }
+
+
 
 .Fund {
     position: fixed;
@@ -178,10 +179,6 @@ textarea {
 
     .tablesStyle a {
         color: black;
-    }
-
-    .tablesStyle td {
-        border-radius: 10px;
     }
 
     .tablesStyle th {

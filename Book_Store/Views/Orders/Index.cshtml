@@ -26,62 +26,64 @@
 <br />
 <div class="tablesStyle">
     <table class="table table-hover">
-        <tr>
-            <th>
-                إسم العميل
-            </th>
-            <th>
-                عنوان العميل
-            </th>
-            <th>
-                رقم العميل
-            </th>
-            <th>
-                كود الطلب
-            </th>
-            <th>
-                حالة الطلب
-            </th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Adress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MobileNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderID)
-                </td>
-                <td>
-                    @if (item.Order_Status == 0)
-                    {
-                        <p>
-                            معلّق
-                        </p>
-                    }
-                    @if (item.Order_Status == 1)
-                    {
-                        <p>
-                            مؤكد
-                        </p>
-                    }
-                    @if (item.Order_Status == 2)
-                    {
-                        <p>
-                            شُحِن
-                        </p>
-                    }
-                </td>
+                <th>
+                    إسم العميل
+                </th>
+                <th>
+                    عنوان العميل
+                </th>
+                <th>
+                    رقم العميل
+                </th>
+                <th>
+                    كود الطلب
+                </th>
+                <th>
+                    حالة الطلب
+                </th>
             </tr>
-        }
-
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Adress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MobileNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderID)
+                    </td>
+                    <td>
+                        @if (item.Order_Status == 0)
+                        {
+                            <p>
+                                معلّق
+                            </p>
+                        }
+                        @if (item.Order_Status == 1)
+                        {
+                            <p>
+                                مؤكد
+                            </p>
+                        }
+                        @if (item.Order_Status == 2)
+                        {
+                            <p>
+                                شُحِن
+                            </p>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
 <div class="text-center">
