@@ -325,11 +325,18 @@ namespace Book_Store.Controllers
             }
             else
             {
-                Book Book = new Book();
-                foreach (var Item in UserBooks)
+                if (UserCart.Count() != 0)
                 {
-                    Book = db.Books.Where(c => c.ID == Item.ID).FirstOrDefault();
-                    Item.Price = Book.Price;
+                    Book Book = new Book();
+                    foreach (var Item in UserBooks)
+                    {
+                        Book = db.Books.Where(c => c.ID == Item.ID).FirstOrDefault();
+                        Item.Price = Book.Price;
+                    }
+                }
+                else
+                {
+                    UserBooks = new List<Book>();
                 }
             }
 
