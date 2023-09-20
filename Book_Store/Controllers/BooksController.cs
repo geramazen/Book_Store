@@ -551,17 +551,17 @@ namespace Book_Store.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddCopies(AddCopiesData data)
+        public ActionResult AddCopies(int BookID, int NumOfCopies)
         {
-            var Book = db.Books.Where(c => c.ID == data.BID).FirstOrDefault();
-            Book.AvailableCopies = Book.AvailableCopies + data.NumOfCopies;
+            var Book = db.Books.Where(c => c.ID == BookID).FirstOrDefault();
+            Book.AvailableCopies = Book.AvailableCopies + NumOfCopies;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public class AddCopiesData
         {
-            public int BID { get; set; }
+            public int BookID { get; set; }
             public int NumOfCopies { get; set; }
         }
     }

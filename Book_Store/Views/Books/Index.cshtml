@@ -114,10 +114,10 @@
                                     </div>
                                     <div class="modal-body">
                                         <form method="post" action="~/Books/AddCopies">
+                                            <input hidden name="BookID" value="@item.ID" />
                                             <div class="form-group">
-                                                <label for="Name">عدد النسخ</label>
-                                                <input required name="NumOfCopies" type="number" class="form-control">
-                                                <input hidden name="BID" type="number" value="@item.ID" onload="this.value = @item.ID" />
+                                                <label for="NumOfCopies">عدد النسخ</label>
+                                                <input required name="NumOfCopies" id="NumOfCopies" type="number" class="form-control">
                                             </div>
                                             <button type="submit" class="btn btn-primary">إضافة النسخ</button>
                                         </form>
@@ -179,10 +179,10 @@
 
 
 
-<script>
+@*<script>
     $("Input").val(null);
     $("Select").val(null);
-</script>
+</script>*@
 
 <script>
     $(document).ready(function () {
