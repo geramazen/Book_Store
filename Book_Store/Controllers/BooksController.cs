@@ -15,6 +15,8 @@ namespace Book_Store.Controllers
     public class BooksController : Controller
     {
         private readonly BookContext db = new BookContext();
+        //static Guid myuid = Guid.NewGuid();
+        //string myuidAsString = myuid.ToString();
         public static List<Book> UserCart = new List<Book>();
 
         // GET: Books
@@ -197,12 +199,12 @@ namespace Book_Store.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult ViewBooks(string Message, string OrderID, int? page, string BookName, int? PublisherName, int? CategoryName, int? AutherName, int? Sort ,string Type)
+        public ActionResult ViewBooks(string Message, string OrderID, int? page, string BookName, int? PublisherName, int? CategoryName, int? AutherName, int? Sort, string Type)
         {
             SetDropDown();
             if (Message != null)
             {
-                if(Type == "Tittle")
+                if (Type == "Tittle")
                 {
                     ViewBag.Tittle = "True";
                 }
@@ -266,16 +268,21 @@ namespace Book_Store.Controllers
 
         public JsonResult AddToCart(int id)
         {
+            if (Session["UserCart"] == null)
+            {
+                Session["UserCart"] = new List<Book>();
+            }
+            var UserBooks = (List<Book>)Session["UserCart"];
             Book book = db.Books.Find(id);
 
-            var AvlCop = UserCart.Where(c => c.ID == id).Count();
+            var AvlCop = UserBooks.Where(c => c.ID == id).Count();
 
             if (AvlCop >= book.AvailableCopies)
             {
                 return Json(new { status = false, message = "لقد تجاوزت عدد النسخ المتوفرة من هذا الكتاب" }, JsonRequestBehavior.AllowGet);
             }
 
-            UserCart.Add(new Book
+            UserBooks.Add(new Book
             {
                 ID = book.ID,
                 title = book.title,
@@ -285,12 +292,13 @@ namespace Book_Store.Controllers
                 Price = book.Price,
                 Publisher = book.Publisher
             });
-            Session["Cart"] = UserCart.Count();
+            Session["Cart"] = UserBooks.Count();
             return Json(new { status = true }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ViewCart(string Message, string copoun)
         {
+            var UserBooks = (List<Book>)Session["UserCart"];
             if (Message != null)
             {
                 ViewBag.Message = Message;
@@ -307,7 +315,7 @@ namespace Book_Store.Controllers
                 else
                 {
                     var Discount = Cop.percentage;
-                    foreach (var Item in UserCart)
+                    foreach (var Item in UserBooks)
                     {
                         Book = db.Books.Where(c => c.ID == Item.ID).FirstOrDefault();
                         Item.Price = (Book.Price - ((Discount / 100) * Book.Price));
@@ -318,28 +326,29 @@ namespace Book_Store.Controllers
             else
             {
                 Book Book = new Book();
-                foreach (var Item in UserCart)
+                foreach (var Item in UserBooks)
                 {
                     Book = db.Books.Where(c => c.ID == Item.ID).FirstOrDefault();
                     Item.Price = Book.Price;
                 }
             }
 
-            var books = UserCart;
+            var books = UserBooks;
             return View(books.ToList());
         }
 
         public ActionResult UserConfirmOrder(Order order)
         {
-            var Books = UserCart;
-            return RedirectToAction("Create", "Orders", new { Books, order });
+            var UserBooks = (List<Book>)Session["UserCart"];
+            //var Books = UserCart;
+            return RedirectToAction("Create", "Orders", new { UserBooks, order });
         }
 
         public ActionResult DeleteFromCart(int id)
         {
-            //var todelete = UserCart.Where(c => c.ID == id).FirstOrDefault();
-            UserCart.RemoveAt(id);
-            Session["Cart"] = UserCart.Count();
+            var UserBooks = (List<Book>)Session["UserCart"];
+            UserBooks.RemoveAt(id);
+            Session["Cart"] = UserBooks.Count();
             return RedirectToAction("ViewCart", new { Message = "تم الحذف من السلة" });
 
         }
@@ -357,9 +366,10 @@ namespace Book_Store.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateOrder(List<Book> Books, Order order)
         {
+            var UserBooks = (List<Book>)Session["UserCart"];
             DiscountCoupon Coupon = new DiscountCoupon();
             Book book = new Book();
-            Books = UserCart;
+            Books = UserBooks;
 
             foreach (var item in Books)
             {
@@ -409,7 +419,7 @@ namespace Book_Store.Controllers
             }
             db.SaveChanges();
             Session["Cart"] = 0;
-            UserCart.Clear();
+            UserBooks.Clear();
             return RedirectToAction("ViewBooks", "Books", new { Message = "تم إرسال طلبك", OrderID = OrderId.ToString() });
         }
 
