@@ -122,6 +122,7 @@
                     <a onclick="AddToCart(@Model.ID)" class="btn d-block btn-primary" role="button">
                         <i class="fa fa-cart-plus" aria-hidden="true"></i>إضافة إلى سلة المشتريات
                     </a>
+                    <a href="@Url.Action("Create", "Orders", new { BID = Model.ID })" class="btn btn-primary">شراء الآن</a>
                 }
                 else
                 {

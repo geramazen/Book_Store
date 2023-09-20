@@ -43,7 +43,6 @@ namespace Book_Store.Controllers
         }
 
         // GET: Users/Create
-        [AdminAccess]
         public ActionResult Create()
         {
             return View();
@@ -54,7 +53,6 @@ namespace Book_Store.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AdminAccess]
         public ActionResult Create([Bind(Include = "ID,Name,EMAIL,Password,role,image")] User user)
         {
             if (ModelState.IsValid)

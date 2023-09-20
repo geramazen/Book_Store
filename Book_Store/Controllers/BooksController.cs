@@ -325,7 +325,7 @@ namespace Book_Store.Controllers
             }
             else
             {
-                if (UserCart.Count() != 0)
+                if (UserBooks != null)
                 {
                     Book Book = new Book();
                     foreach (var Item in UserBooks)
@@ -354,7 +354,8 @@ namespace Book_Store.Controllers
         public ActionResult DeleteFromCart(int id)
         {
             var UserBooks = (List<Book>)Session["UserCart"];
-            UserBooks.RemoveAt(id);
+            var Book = UserBooks.Where(c => c.ID == id).FirstOrDefault();
+            UserBooks.Remove(Book);
             Session["Cart"] = UserBooks.Count();
             return RedirectToAction("ViewCart", new { Message = "تم الحذف من السلة" });
 
@@ -370,10 +371,19 @@ namespace Book_Store.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult CreateOrder(List<Book> Books, Order order)
         {
             var UserBooks = (List<Book>)Session["UserCart"];
+            if (UserBooks == null)
+            {
+                UserBooks = new List<Book>();
+            }
+            if (UserBooks.Count() == 0)
+            {
+                var BID = int.Parse(Session["BID"].ToString());
+                Session["Order"] = order;
+                return RedirectToAction("BuyNow", new { BID = BID });
+            }
             DiscountCoupon Coupon = new DiscountCoupon();
             Book book = new Book();
             Books = UserBooks;
@@ -405,7 +415,14 @@ namespace Book_Store.Controllers
             foreach (var item in Books)
             {
                 book = db.Books.Where(b => b.ID == item.ID).FirstOrDefault();
-                book.AvailableCopies--;
+                if (book.AvailableCopies != 0)
+                {
+                    book.AvailableCopies--;
+                }
+                else
+                {
+                    return RedirectToAction("ViewBooks", "Books", new { Message = "عذرا، لقد نفذت النسخ المتوفرة من كتاب " + item.title });
+                }
                 Order DBorder = new Order
                 {
                     Adress = order.Adress,
@@ -430,6 +447,63 @@ namespace Book_Store.Controllers
             return RedirectToAction("ViewBooks", "Books", new { Message = "تم إرسال طلبك", OrderID = OrderId.ToString() });
         }
 
+        public ActionResult BuyNow(int BID)
+        {
+            var order = (Order)Session["Order"];
+            DiscountCoupon Coupon = new DiscountCoupon();
+            var OrderId = 1;
+            if (db.Orders.Count() != 0)
+            {
+                OrderId = db.Orders.Select(c => c.OrderID).Max() + 1;
+            }
+
+            var book = db.Books.Where(b => b.ID == BID).FirstOrDefault();
+            if (book.AvailableCopies != 0)
+            {
+                book.AvailableCopies--;
+            }
+            else
+            {
+                return RedirectToAction("ViewBooks", "Books", new { Message = "عذرا، لقد نفذت النسخ المتوفرة من كتاب " + book.title });
+            }
+
+            var Price = book.Price;
+
+            if (order.DiscountCoupon != null)
+            {
+                Coupon = db.DiscountCoupons.Where(c => c.Name == order.DiscountCoupon).FirstOrDefault();
+                if (Coupon != null)
+                {
+                    var Discount = Coupon.percentage;
+                    Price -= (Discount / 100) * book.Price;
+
+                }
+            }
+
+            Order DBorder = new Order
+            {
+                Adress = order.Adress,
+                Amount = Price,
+                BookName = book.title,
+                OrderID = OrderId,
+                MobileNumber = order.MobileNumber,
+                Name = order.Name,
+                Order_Status = 0,
+                PublisherName = book.Publisher.PName,
+                OrderDate = DateTime.Now.Date
+            };
+            if (Coupon != null)
+            {
+                DBorder.DiscountCoupon = Coupon.Name;
+            }
+            db.Orders.Add(DBorder);
+            db.SaveChanges();
+            return RedirectToAction("ViewBooks", "Books", new
+            {
+                Message = "تم إرسال طلبك",
+                OrderID = OrderId.ToString()
+            });
+        }
         public void SetDropDown()
         {
             ViewData["AutherNameList"] = new SelectList(db.Authors.ToList(), "AID", "FName");

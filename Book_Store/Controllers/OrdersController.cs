@@ -42,8 +42,12 @@ namespace Book_Store.Controllers
         }
 
         // GET: Orders/Create
-        public ActionResult Create()
+        public ActionResult Create(int? BID)
         {
+            if(BID != null)
+            {
+                Session["BID"] = BID; 
+            }
             return View();
         }
 
@@ -214,7 +218,6 @@ namespace Book_Store.Controllers
         }
         
         [HttpGet]
-        [Helpers.AdminAccess]
         public ActionResult OrderFollowing()
         {
             ViewBag.NoOrders = "False";
