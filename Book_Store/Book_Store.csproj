@@ -237,6 +237,10 @@
     <Compile Include="Migrations\202309131317095_NotifyOrderUpdated.Designer.cs">
       <DependentUpon>202309131317095_NotifyOrderUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202309241147376_UpdateUser.cs" />
+    <Compile Include="Migrations\202309241147376_UpdateUser.Designer.cs">
+      <DependentUpon>202309241147376_UpdateUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
@@ -459,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309131317095_NotifyOrderUpdated.resx">
       <DependentUpon>202309131317095_NotifyOrderUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309241147376_UpdateUser.resx">
+      <DependentUpon>202309241147376_UpdateUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
