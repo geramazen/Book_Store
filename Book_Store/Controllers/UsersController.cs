@@ -171,22 +171,22 @@ namespace Book_Store.Controllers
         {          
             if (db.Users.Any(x => x.EMAIL == user.EMAIL))
             {
-                ModelState.AddModelError("Email","This Email Is Already Registered!, Login Instead.");
+                ModelState.AddModelError("EMAIL", "لديك حساب بالفعل");
             }
 
             if (db.Users.Any(x => x.UserName == user.UserName))
             {
-                ModelState.AddModelError("UserName", "This UserName Is Already used!, Try Another UserName.");
+                ModelState.AddModelError("UserName", "مستخدم من قيل, حاول باسم مختلف");
             }
 
             if (db.Users.Any(x => x.Phone == user.Phone))
             {
-                ModelState.AddModelError("Phone", "This Phone Is Already Registered!, Login Instead.");
+                ModelState.AddModelError("Phone", "لديك حساب بالفعل");
             }
 
             if (user.UserName.Length<6 || user.Password.Length < 6)
             {
-                ModelState.AddModelError("Length", "UserName and Password Must Contain More Than or Equal to 6 Characters");
+                ModelState.AddModelError("Length", "يجب الا تقل كلمة السر عن 6 احرف");
             }
 
             if (ModelState.IsValid)
@@ -208,8 +208,16 @@ namespace Book_Store.Controllers
         [HttpPost, ActionName("Login")]
         public ActionResult Login_post(User user)
         {
-            var rec = db.Users.Where(x => x.UserName == user.UserName && x.Password == user.Password).FirstOrDefault();
-            if(rec != null)
+            var rec = db.Users.Where(x => x.UserName == user.UserName).FirstOrDefault();
+            if (rec == null)
+            {
+                ModelState.AddModelError("UserName", "اسم المستخدم غير موجود");
+            }else if(rec.Password != user.Password)
+            {
+                ModelState.AddModelError("Password", "كلمة السر غير صحيحة");
+            }
+
+            if(ModelState.IsValid)
             {
                 Session["UserName"] = rec.UserName;
                 Session["UserID"] = rec.ID;
@@ -219,9 +227,9 @@ namespace Book_Store.Controllers
             }
             else
             {
-                ViewBag.error = "invalid user";
+                ViewBag.error = "تحقق من البيانات و اعد المحاولة  ";
+               
                 return View(user);
-
             }
         }
 

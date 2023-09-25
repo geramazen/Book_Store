@@ -15,8 +15,8 @@
         <div class="form-group">
             @*@Html.LabelFor(model => model.EMAIL, htmlAttributes: new { @class = "control-label " })*@
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "الإسم" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "اسم المستخدم" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -34,7 +34,7 @@
             <div class=" col-md-10">
                 <input type="submit" value="تسجيل دخول" class="btn btn-primary" />
                 <br /><br />
-                <p class="text-danger"> @ViewBag.error</p>
+                <p class="text-bg-info"> @ViewBag.error</p>
             </div>
         </div>
     </div>
