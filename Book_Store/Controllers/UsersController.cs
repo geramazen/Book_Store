@@ -23,7 +23,7 @@ namespace Book_Store.Controllers
             {
                 return RedirectToAction("Login");
             }
-            
+
         }
 
         // GET: Users/Details/5
@@ -168,7 +168,7 @@ namespace Book_Store.Controllers
         [ValidateAntiForgeryToken]
         [ActionName("Registar")]
         public ActionResult Registar_Post([Bind(Include = "Name,EMAIL,ConfEmail,Password,ConfPassword")] User user)
-        {          
+        {
             if (db.Users.Any(x => x.EMAIL == user.EMAIL))
             {
                 ModelState.AddModelError("EMAIL", "لديك حساب بالفعل");
@@ -184,13 +184,13 @@ namespace Book_Store.Controllers
                 ModelState.AddModelError("Phone", "لديك حساب بالفعل");
             }
 
-            if (user.UserName.Length<6 || user.Password.Length < 6)
+            if (user.UserName.Length < 6 || user.Password.Length < 6)
             {
                 ModelState.AddModelError("Length", "يجب الا تقل كلمة السر عن 6 احرف");
             }
 
             if (ModelState.IsValid)
-            {              
+            {
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("index");
@@ -212,25 +212,29 @@ namespace Book_Store.Controllers
             if (rec == null)
             {
                 ModelState.AddModelError("UserName", "اسم المستخدم غير موجود");
-            }else if(rec.Password != user.Password)
-            {
-                ModelState.AddModelError("Password", "كلمة السر غير صحيحة");
-            }
-
-            if(ModelState.IsValid)
-            {
-                Session["UserName"] = rec.UserName;
-                Session["UserID"] = rec.ID;
-                Session["Cart"] = 0;
-                
-                return RedirectToAction("ViewBooks", "Books");
-            }
-            else
-            {
                 ViewBag.error = "تحقق من البيانات و اعد المحاولة  ";
-               
                 return View(user);
             }
+            else if (rec.Password != user.Password)
+            {
+                ModelState.AddModelError("Password", "كلمة السر غير صحيحة");
+                ViewBag.error = "تحقق من البيانات و اعد المحاولة  ";
+                return View(user);
+            }
+
+            //if(ModelState.IsValid)
+            //{
+            Session["UserName"] = rec.UserName;
+            Session["UserID"] = rec.ID;
+            Session["Cart"] = 0;
+
+            return RedirectToAction("ViewBooks", "Books");
+            //}
+            //else
+            //{
+            //    ViewBag.error = "تحقق من البيانات و اعد المحاولة  ";         
+            //    return View(user);
+            //}
         }
 
         public ActionResult Logout()
@@ -241,7 +245,7 @@ namespace Book_Store.Controllers
 
             return RedirectToAction("Login");
         }
-   
+
         //public ActionResult MakeAdmin(int? id)
         //{
         //    User user = db.Users.Find(id);

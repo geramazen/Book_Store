@@ -3,6 +3,13 @@
 @{
     ViewBag.Title = "Login";
 }
+
+<style>
+    .text-danger {
+        color: greenyellow;
+    }
+</style>
+
 <br />
 @using (Html.BeginForm())
 {
@@ -34,7 +41,7 @@
             <div class=" col-md-10">
                 <input type="submit" value="تسجيل دخول" class="btn btn-primary" />
                 <br /><br />
-                <p class="text-bg-info"> @ViewBag.error</p>
+                <p style="color:greenyellow;font-size:14px"> @ViewBag.error</p>
             </div>
         </div>
     </div>
