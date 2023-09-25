@@ -57,22 +57,22 @@ namespace Book_Store.Controllers
         {
             if (db.Users.Any(x => x.EMAIL == user.EMAIL))
             {
-                ModelState.AddModelError("Email", "This Email Is Already Registered!, Login Instead.");
+                ModelState.AddModelError("EMAIL", "لديك حساب بالفعل");
             }
 
             if (db.Users.Any(x => x.UserName == user.UserName))
             {
-                ModelState.AddModelError("UserName", "This UserName Is Already used!, Try Another UserName.");
+                ModelState.AddModelError("UserName", "مستخدم من قيل, حاول باسم مختلف");
             }
 
             if (db.Users.Any(x => x.Phone == user.Phone))
             {
-                ModelState.AddModelError("Phone", "This Phone Is Already Registered!, Login Instead.");
+                ModelState.AddModelError("Phone", "لديك حساب بالفعل");
             }
 
             if (user.UserName.Length < 6 || user.Password.Length < 6)
             {
-                ModelState.AddModelError("Length", "UserName and Password Must Contain More Than or Equal to 6 Characters");
+                ModelState.AddModelError("Length", "يجب الا تقل كلمة السر و اسم المستخدم عن 6 احرف");
             }
 
             if (ModelState.IsValid)
