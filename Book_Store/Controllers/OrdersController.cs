@@ -55,11 +55,18 @@ namespace Book_Store.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(List<Book> Books, Order order)
         {
+            var userid = -1;
+            if (Session["UserID"] != null)
+            {
+                userid = int.Parse(Session["UserID"].ToString());
+            }
+
             var OrderId = 1;
             if (db.Orders.Count() != 0)
             {
                 OrderId = db.Orders.Select(c => c.OrderID).Max() + 1;
             }
+
             foreach (var item in Books)
             {
                 Order DBorder = new Order
@@ -71,7 +78,9 @@ namespace Book_Store.Controllers
                     MobileNumber = order.MobileNumber,
                     Name = order.Name,
                     Order_Status = 0,
-                    PublisherName = item.Publisher.PName
+                    PublisherName = item.Publisher.PName,
+                    OrderDate = DateTime.Today,
+                    UserID = userid,
                 };
                 db.Orders.Add(DBorder);
             }

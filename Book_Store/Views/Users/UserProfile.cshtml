@@ -1,0 +1,115 @@
+﻿@model Book_Store.Models.UserProfileVM
+
+@{
+    ViewBag.Title = "بياناتي";
+    var orderstatus = new List<string>
+    {
+        "انتظار","تم التاكيد","تم الشحن"
+    };
+}
+
+
+
+<div class="row" style="color:aliceblue">
+    <div class="col-md-6  pre-scrollable" style="height:300px">
+        <table class="table">
+            <thead style="background-color:Highlight">
+                <tr>
+                    <th>
+                        كود الطلب
+                    </th>
+                    <th>
+                        الكتاب
+                    </th>
+                    <th>
+                        السعر
+                    </th>
+                    <th>
+                        تاريخ الطلب
+                    </th>
+                    <th>
+                        حالة الطلب
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.userOrders)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                          @item.OrderDate.Value.ToLongDateString()
+                        </td>
+                        <td>
+                            @orderstatus[item.Order_Status]
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <dl class="col-md-4 dl-horizontal" style="font-size:16px; color:mintcream;">
+        <dt>
+            @Html.DisplayFor(model => model.user.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.user.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayFor(model => model.user.EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.user.EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayFor(model => model.user.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.user.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayFor(model => model.user.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.user.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayFor(model => model.user.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.user.UserName)
+        </dd>
+
+        <dt>
+            ******
+        </dt>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.user.Password)
+        </dd>
+
+    </dl>
+</div>
+<br />
+<br />
+<br />

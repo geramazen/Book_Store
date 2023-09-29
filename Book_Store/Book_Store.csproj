@@ -241,6 +241,10 @@
     <Compile Include="Migrations\202309241147376_UpdateUser.Designer.cs">
       <DependentUpon>202309241147376_UpdateUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202309290054518_orderuserid.cs" />
+    <Compile Include="Migrations\202309290054518_orderuserid.Designer.cs">
+      <DependentUpon>202309290054518_orderuserid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
@@ -252,6 +256,7 @@
     <Compile Include="Models\Publisher.cs" />
     <Compile Include="Models\ShippingCost.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserProfileVM.cs" />
     <Compile Include="Models\UsersRate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -374,6 +379,7 @@
     <Content Include="Views\NotifyOrders\Details.cshtml" />
     <Content Include="Views\NotifyOrders\Edit.cshtml" />
     <Content Include="Views\NotifyOrders\Index.cshtml" />
+    <Content Include="Views\Users\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -466,6 +472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309241147376_UpdateUser.resx">
       <DependentUpon>202309241147376_UpdateUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309290054518_orderuserid.resx">
+      <DependentUpon>202309290054518_orderuserid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

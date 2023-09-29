@@ -246,14 +246,26 @@ namespace Book_Store.Controllers
             return RedirectToAction("Login");
         }
 
-        //public ActionResult MakeAdmin(int? id)
-        //{
-        //    User user = db.Users.Find(id);
-        //    var Admin = "Admin";
-        //    user.role = Admin;
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+        public ActionResult UserProfile()
+        {
+            if (Session["UserID"] != null)
+            {
+                var id = int.Parse(Session["UserID"].ToString());
+                var user = db.Users.Where(x => x.ID == id).FirstOrDefault();
+                var Orders = db.Orders.Where(o => o.UserID != null && o.UserID == id).ToList();
+                var model = new UserProfileVM
+                {
+                    user = user,
+                    userOrders = Orders
+                };
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+
+        }
 
 
     }

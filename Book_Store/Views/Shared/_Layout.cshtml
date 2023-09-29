@@ -102,10 +102,14 @@
 
                     @if (Session["UserName"] != null)
                     {
-
                         <li>
 
                             <a href=@Url.Action("Logout" , "Users")>تسجيل خروج</a>
+
+                        </li>
+                        <li>
+
+                            <a href=@Url.Action("UserProfile" , "Users")> <span class="glyphicon glyphicon-user"> </span></a>
 
                         </li>
                     }

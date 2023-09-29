@@ -28,5 +28,6 @@ namespace Book_Store.Models
         public int OrderID { get; set; }
         public string DiscountCoupon { get; set; }
         public DateTime? OrderDate { get; set; }
+        public int? UserID { get; set; }
     }
 }

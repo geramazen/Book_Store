@@ -373,6 +373,12 @@ namespace Book_Store.Controllers
         [HttpPost]
         public ActionResult CreateOrder(List<Book> Books, Order order)
         {
+            var userid = -1;
+            if (Session["UserID"] != null)
+            {
+                userid = int.Parse(Session["UserID"].ToString());
+            }
+
             var UserBooks = (List<Book>)Session["UserCart"];
             if (UserBooks == null)
             {
@@ -433,8 +439,10 @@ namespace Book_Store.Controllers
                     Name = order.Name,
                     Order_Status = 0,
                     PublisherName = item.Publisher.PName,
-                    OrderDate = DateTime.Now.Date
+                    OrderDate = DateTime.Today,
+                    UserID=userid,                  
                 };
+
                 if (Coupon != null)
                 {
                     DBorder.DiscountCoupon = Coupon.Name;
